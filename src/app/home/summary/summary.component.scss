@@ -1,0 +1,16 @@
+.explenation{
+    font-size: 0.8rem;
+    padding: 10px;
+    
+}
+.summary-container{
+    display: flex
+}
+
+
+@media(max-width: 768px) {
+    .summary-container{
+        flex-direction: column;
+    }
+  }
+  

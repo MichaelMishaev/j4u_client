@@ -1,0 +1,22 @@
+.btns-container{
+    display: flex;
+    margin-bottom: 5px;
+    input{
+        width: 50%
+    }
+    i{
+        padding: 10px;
+    }
+
+}
+.action-btns{
+    button{
+        min-width: 95px;
+        margin-bottom: 3px;
+    }
+}
+/deep/
+.fonticon-wrap{
+    margin: -34px;
+    margin-top: 15px;
+}

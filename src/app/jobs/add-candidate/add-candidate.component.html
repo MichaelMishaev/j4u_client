@@ -1,0 +1,56 @@
+
+  
+  <div class="row" class="add-candidate-modal" >
+      <h3>{{job.Title}}</h3>
+        <div class="form-group">
+
+
+        <label [translate]="'Select candidate from list'"></label>
+
+          <div class="ng-autocomplete" style="z-index:5">
+            <div style="display: flex; justify-content: space-between">
+              <!-- <p-autoComplete field="name"  [inputStyleClass]="'form-control'" [(ngModel)]="candidateForJob" [suggestions]="candidatesForJobs" (completeMethod)="search($event)"> -->
+
+                <ng-template #rt let-r="result" let-t="term">
+                  <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r.country" width="16"> {{ r.name}}
+                </ng-template>
+                <div class="form-group">
+                <input type="text" class="form-control mb-3"  [(ngModel)]="candidateForJob" [ngbTypeahead]="searchFlags" [resultTemplate]="rt" [inputFormatter]="formatter1"
+                       placeholder="{{'Search for candidate' | translate}}" />
+                </div>
+
+              <a (click)="activeModal.close('success');" [translate]="'Back'" class="btn btn-hero-primary btn-demo" ></a>
+          </div>
+
+          </div>
+        </div>
+        <label [translate]="'Questions to filter candidate'">
+        </label>
+        <form [formGroup]="jobQuestions" (ngSubmit)="submitAddCandidate()">
+          <div *ngFor="let question of jobsQuestionsArr; let i = index" >
+
+            <label>{{question}}</label>
+
+            <div class="input-group" >
+            <input type="text" formControlName="{{i}}"  placeholder="{{'Answer' | translate}}" class="form-control"/>
+            </div>
+
+          </div>
+          <br>
+          <div class="input-group">
+          <textarea form rows="5"  formControlName="agentRemarks" placeholder="{{'Agent remarks' | translate}}" class="form-control"></textarea>
+            </div>
+            <br>
+            <div class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" formControlName="confirmCandidate" class="custom-control-input" checked id="customcheckbox1">
+              <label class="custom-control-label" for="customcheckbox1" [translate]="'I approve I went through the job requirements with the user'" ></label>
+            </div>
+            <br>
+
+            <div style="display: flex;justify-content: center;">
+            <button [disabled]="!jobQuestions.valid || !jobQuestions.get('confirmCandidate').value
+             || !candidateForJob" type="submit"  class="btn btn-raised btn-round btn-info">{{'Add candidate' | translate}}</button>
+            </div>
+
+        </form>
+  </div>

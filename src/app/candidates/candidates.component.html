@@ -1,0 +1,19 @@
+
+<div class="card">
+    <div class="card-header">
+    <h4 class="card-title" [translate]="'Your candidates'"></h4>
+    <div class="col-lg-1">
+      <button id="btnStartTour" [translate]="'tour'" class="btn btn-primary btn-raised"
+       (click)="startTour()"></button>
+  </div>
+    </div>
+    <div class="card-content">
+      <div class="card-body">
+        <div class="table-responsive">
+            <ng2-smart-table *ngIf="renderTable" [settings]="settings" [source]="source"
+            (createConfirm)="onCreateConfirm($event)" (editConfirm)="onSaveConfirm($event)">
+            </ng2-smart-table>
+                    </div>
+      </div>
+    </div>
+  </div>

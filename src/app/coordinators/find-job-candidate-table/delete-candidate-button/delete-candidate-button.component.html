@@ -1,0 +1,24 @@
+
+
+<ng-container *ngIf="rowData.IsFromPool">
+    <button type="button" (click)="openModal(dialog)" class="btn btn-primary">מאגר - למחיקה</button>
+  
+    <ng-template #dialog let-row let-ref="dialogRef">
+  
+    <div class="ui-helper-clearfix remarks-div">
+      <label style="color:white;padding:5px">האם אתה בטוח שברצונך למחוק את {{rowData.candidateName}} מהמאגר?</label>
+  
+      <div class="remark-buttons">
+      <button type="button" (click)="updateCandidate();activeModal.close('success')" class="btn btn-primary">עדכן</button>
+      <button type="button" (click)="activeModal.close('success')" class="btn btn-primary">בטל</button>
+      </div>
+  
+  
+    </div>
+    </ng-template>
+  
+  </ng-container>
+  <ng-container *ngIf="!rowData.IsFromPool">
+  <label>רגיל</label>
+  </ng-container>
+  

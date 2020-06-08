@@ -1,0 +1,38 @@
+
+  <div class="row" *ngIf="showDropdowns">
+    <div class="col-lg-3">
+      <label translate="{{dropDownTitles[1]}}"></label>
+
+      <ngx-select-dropdown id="first-dropdown"  (change)="areasChanged($event)" [config]="config" [options]="allAreas"
+      [(ngModel)]="dataModelAreas" [multiple]="true" ></ngx-select-dropdown>
+   </div>
+    <div class="col-lg-3">
+        <label translate="{{dropDownTitles[0]}}"></label>
+        <ngx-select-dropdown (change)="locationsChanged($event)" [config]="config" [options]="allLocations"
+        [(ngModel)]="dataModelLocations" [multiple]="true" ></ngx-select-dropdown>
+     </div>
+     <div class="col-lg-3">
+        <label translate="{{dropDownTitles[2]}}"></label>
+
+        <ngx-select-dropdown (change)="categoriesChanged($event)" [config]="config" [options]="allCategories"
+        [(ngModel)]="dataModelCategories" [multiple]="true" ></ngx-select-dropdown>
+     </div>
+     <div class="col-lg-2 clear-filters">
+         <div class="fonticon-container">
+            <div class="fonticon-wrap" (click)="clearFilter()">
+                <i class="fa fa-trash-o">{{'clear' | translate}}</i>
+            </div>
+         </div>
+     </div>
+     <div class="col-lg-1">
+         <button id="btnStartTour" [translate]="'tour'" class="btn btn-primary btn-raised" (click)="startTour()"></button>
+     </div>
+
+  </div>
+
+
+<app-jobs-cards [isLoggedIn]="true" [filteredJobs]="filteredJobs"></app-jobs-cards>
+
+
+
+

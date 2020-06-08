@@ -1,0 +1,95 @@
+<div class="modal-lg" style="padding: 10%;">
+  <div class="row" class="add-candidate-modal">
+
+        <div class="form-group">
+            <h2>הוספת משרה</h2>
+            <div style="display: flex; justify-content: space-between">
+                <a (click)="dialogService.dismissAll()" [translate]="'Back'" class="btn btn-primary btn-raised mr-2" ></a>
+            </div>
+            <br>
+        </div>
+        <form [formGroup]="newJobFormGroup" (ngSubmit)="submitAddJob()">
+            <ngx-select-dropdown *ngIf="job.isInUpdate" style="width:100%" formControlName="Status"  [config]="config" [options]="jobOpenOptions"
+            ></ngx-select-dropdown>
+            <br>
+            <ngx-select-dropdown style="width:100%" formControlName="UserId"  [config]="userManagerConfig" [options]="userManagers"
+            ></ngx-select-dropdown>
+<br>
+    <div class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+      <input type="checkbox" formControlName="IsImportant"  class="custom-control-input" checked id="IsImportant">
+      <label class="custom-control-label" for="IsImportant">  משרה חמה</label>
+    </div>
+          <div class="input-group" >
+            <input type="text" formControlName="Title"  placeholder="כותרת משרה" class="form-control"/>
+          </div>
+          <div class="input-group" >
+            <input type="text" formControlName="CompanyDescription"  placeholder="שם החברה" class="form-control"/>
+          </div>
+          <div class="input-group" >
+            <textarea type="text" formControlName="Description"  placeholder="פירוט משרה" class="form-control"></textarea>
+          </div>
+          <div class="input-group" >
+              <textarea type="text" formControlName="AgentDescription"  placeholder="מידע לסוכנים" class="form-control"></textarea>
+            </div>
+          <div class="input-group" >
+            <input type="number" formControlName="Commission"  placeholder="עמלה" class="form-control"/>
+          </div>
+
+          <div class="input-group" >
+            <input type="text" formControlName="Period"  placeholder="תקופת ניסיון" class="form-control"/>
+          </div>
+          <div class="input-group" >
+            <input type="text" formControlName="PaymentPeriod"  placeholder="תשלום אחרי תקופת ניסיון" class="form-control"/>
+          </div>
+
+
+          <div class="input-group" >
+            <ngx-select-dropdown formControlName="JobType" [multiple]="true" style="width:100%" [config]="jobTypeConfig" [options]="lookupJobTypes"
+            ></ngx-select-dropdown>
+          </div>
+          <div class="input-group" >
+              <ngx-select-dropdown (change)="addJobAreaChanged($event)" formControlName="Area" style="width:100%" [config]="areaConfig" [options]="lookupAreas"
+             ></ngx-select-dropdown>
+             </div>
+          <div class="input-group" *ngIf="showNewJobCity">
+              <ngx-select-dropdown formControlName="City"   style="width:100%" [config]="cityConfig" [options]="filteredLookupCities"
+             ></ngx-select-dropdown>
+          </div>
+
+          <div class="input-group" >
+              <ngx-select-dropdown style="width:100%" formControlName="Category"  [config]="categoryConfig" [options]="lookupCategories"
+            ></ngx-select-dropdown>
+          </div>
+          <!-- <div class="input-group" *ngIf="showNewJobSubCategory">
+              <ngx-select-dropdown style="width:100%" formControlName="SubCategory"  [config]="subCategoryConfig" [options]="filteredLookupSubCategory"
+            ></ngx-select-dropdown>
+          </div> -->
+          <br>
+          <label>שאלות למועמדים</label>
+
+    <div formArrayName="questions" style="padding:13px;"
+              *ngFor="let item of questionsFormArray.controls; let i = index;">
+              <div [formGroupName]="i">
+                  <textarea type="text" formControlName="question"  placeholder="שאלה" class="form-control"></textarea>
+                </div>
+
+            </div>
+            <div class="display-flex">
+
+                <button type="button" (click)="addItem()" class="btn btn-primary btn-raised btn-round" >
+                   <i class="ft-plus"></i>
+                </button>
+                <button *ngIf="questions && questions.length > 1" type="button" (click)="removeItem()" class="btn btn-primary btn-raised btn-round" >
+                    <i class="ft-minus"></i>
+                </button>
+            </div>
+            <br>
+            <br>
+
+            <div style="display: flex;justify-content: center;">
+                <button *ngIf="job.isInUpdate" [disabled]="!newJobFormGroup.valid" type="submit" class="btn btn-primary btn-raised mr-2" >עדכון משרה</button>
+                <button *ngIf="!job.isInUpdate" [disabled]="!newJobFormGroup.valid" type="submit" class="btn btn-primary btn-raised mr-2" >הוספת משרה</button>
+            </div>
+        </form>
+  </div>
+</div>

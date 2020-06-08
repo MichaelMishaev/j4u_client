@@ -1,0 +1,263 @@
+
+
+   <div class="btns-container">
+    <input class="form-control" [(ngModel)]="searchInput" (keyup)="filterRes()"
+           [placeholder]="'Search by name or job id' | translate"/>
+    <i [translate]="'Clear'" style="cursor: pointer" class="fa fa-eraser" (click)="clearFilter()">  </i>
+ </div>
+
+
+<p-table  [virtualScroll]="true"  [lazy]="true" *ngIf="isPageAllowed;else noRes" [columns]="cols" [value]="filteredTableData" dataKey="JobId">
+<ng-template pTemplate="header" let-columns>
+    <tr>
+        <th style="width: 3em"></th>
+
+        <th *ngFor="let col of columns"  [pSortableColumn]="col.field">
+            {{col.header}}
+
+        </th>
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+    <tr >
+        <td>
+            <a [id]="rowData['JobId']" href="#" [pRowToggler]="rowData">
+                <i [ngClass]="expanded ? 'ft-chevron-down' : 'ft-chevron-right'"></i>
+            </a>
+        </td>
+        <td *ngFor="let col of columns" >
+            <ng-container *ngIf="col.field !== 'coardinatorName'">
+
+
+                <span style="cursor:pointer" *ngIf="col.field === 'Title'"
+                      [ngbTooltip]="rowData.Description"
+                      ngbTooltipPlacement="top" ngbTooltipStatus="primary">
+                    {{rowData[col.field]}}
+                </span>
+                <ng-container *ngIf="col.field !== 'Title'" >
+                    {{rowData[col.field]}}
+                </ng-container>
+
+            </ng-container>
+            <ng-container *ngIf="col.field === 'coardinatorName' && user.userType === 3">
+
+                <select (change)="jobUserChanged($event,rowData)" class="form-control coordinators-select">
+                    <option value="" [selected]="!rowData[col.field]" >ללא רכז</option>
+                    <option [selected]="o.fullName == rowData[col.field]" *ngFor="let o of coardinatorsList">{{o.fullName}}</option>
+                  </select>
+            </ng-container>
+
+        </td>
+    </tr>
+</ng-template>
+<ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+     <tr>
+        <td [attr.colspan]="columns.length + 1">
+            <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+                <div class="ui-g-12 ui-md-12">
+
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th [translate]="'CV'" width="4%" scope="col"></th>
+                            <th width="19%" [translate]="'Agent details'" scope="col"></th>
+                            <th width="18%" [translate]="'Candidate details'" scope="col"></th>
+                            <th width="17%" scope="col">
+                                <div style="margin-bottom: 10px;" [translate]="'Candidate status'"></div>
+                                <label for="relevant-status" [translate]="'Only relevant'"></label>
+                                <input name="relavant-status" type="checkbox" (change)="relevantCheckboxChanged($event,rowData)" />
+                            </th>
+                            <th width="17%" scope="col" [translate]="'Agent remarks'"></th>
+                            <th width="17%" scope="col" [translate]="'Internal details'"></th>
+                            <th width="8%" scope="col">פעולות</th>
+                          </tr>
+                        </thead>
+                        <tbody #body>
+
+                                <tr *ngFor="let rd of rowData.data" [ngClass]="rd.IsRead ? 'active' : 'off'">
+                                  <ng-container *ngIf="rd.fullName" >
+                                      <th scope="row" [id]="rd.jobCandidateId">
+                                          <ng-container *ngIf="rd.HasCV">
+                                              <download-cv [fileExtension]="rd.FileExtension" [id]="rd.OriginalCandidateId || rd.CandidateId" (cvDownloaded)="onCvDownloaded(rd.jobCandidateId)"></download-cv>
+                                          </ng-container>
+                                          <ng-container *ngIf="!rd.HasCV">
+                                             חסר
+                                          </ng-container>
+                                        </th>
+                                        <td style="word-break: break-all">{{rd.fullName}} <br> {{rd.email}}  <br> {{rd.phoneNumber}}</td>
+                                        <td style="word-break: break-all">{{rd.FirstName}} {{rd.LastName}} <br>
+                                           {{rd.CandidateEmail}}  <br> {{rd.CandidatePhoneNumber}}
+                                          <button style="margin-top:5px" *ngIf="rd.IsKnown" (click)="openIsKnownModal(knownCandidateDialog,rd.CandidateId)" class="btn gradient-pomegranate">מועמד מוכר</button>
+                                        </td>
+                                        <td>
+                                            <ngx-select-dropdown
+                                              [config]="statusConfig"
+                                              [options]="statusOptions"
+                                              [(ngModel)]="rd.Status" >
+
+                                            </ngx-select-dropdown>
+                                        </td>
+                                        <td>
+                                            <textarea [(ngModel)]="rd.StatusDescription" rows="5" placeholder="כתוב הערה" class="form-control remarks-textarea">
+                                                {{rd.StatusDescription}}
+                                            </textarea>
+                                        </td>
+                                        <td>
+                                            <textarea [(ngModel)]="rd.InternalRemarks" rows="5" placeholder="כתוב הערה" class="form-control remarks-textarea">
+                                                {{rd.InternalRemarks}}
+                                            </textarea>
+                                        </td>
+                                        <td class="action-btns">
+                                            <div>
+                                                <button [translate]="'Save'" [disabled]="rd.prevStatus === rd.Status && rd.prevStatusDescription === rd.StatusDescription
+                                                                   && rd.prevInternalRemarks === rd.InternalRemarks"
+                                                        (click)="saveRow(rd,startDateDialog)" class="btn gradient-crystal-clear">
+                                                    
+                                             </button>
+                                             </div>
+                                          <div>
+                                              <button [translate]="'Questions'" (click)="showQuestions(questionsDialog, rd)" class="btn gradient-crystal-clear">
+                                                  
+                                                 </button>
+                                          </div>
+                                          <div>
+                                              <button [translate]="'History'" (click)="showHistory(historyDialog, rd.jobCandidateId)" class="btn gradient-crystal-clear">
+                                                  
+                                             </button>
+                                          </div>
+                                        </td>
+                                  </ng-container>
+
+                                </tr>
+
+                          </tbody>
+                     </table>
+                </div>
+            </div>
+        </td>
+    </tr>
+</ng-template>
+</p-table>
+
+
+<ng-template #questionsDialog let-ref="dialogRef" class="modal-lg">
+  <div style="text-align: center" class="questions-wrapper">
+    <i class="ft-x" (click)="closeModal()"></i>
+
+          <table class="table">
+              <thead>
+                <tr>
+                  <th width="50%" [translate]="'question'" scope="col"></th>
+                  <th width="50%" [translate]="'Answer'"  scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let questionsAndAnswers of questions.tableData">
+                      <th scope="row"> {{questionsAndAnswers.q}}</th>
+                      <td scope="row"> {{questionsAndAnswers.a}}</td>
+                  </tr>
+                  <tr *ngIf="questions.agentRemarks">
+                      <th scope="row">הערות סוכן </th>
+                      <td scope="row"> {{questions.agentRemarks}}</td>
+                  </tr>
+                </tbody>
+              </table>
+  </div>
+</ng-template>
+
+<ng-template #historyDialog let-ref="dialogRef" class="modal-lg">
+  <div style="text-align: center" class="questions-wrapper">
+    <i class="ft-x" (click)="closeModal()"></i>
+
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" [translate]="'Date'"></th>
+              <th scope="col" [translate]="'Status'"></th>
+              <th  scope="col" [translate]="'Agent remarks'"></th>
+              <th  scope="col" [translate]="'Internal remarks'"></th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let row of historyData">
+                  <th scope="row"> {{row.CreatedAt | date:'short'}}</th>
+                  <th scope="row"> {{row.Status | translate}}</th>
+                  <td scope="row"> {{row.StatusDescription}}</td>
+                  <td scope="row"> {{row.InternalRemarks}}</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</ng-template>
+
+
+<ng-template #knownCandidateDialog let-known let-ref="dialogRef" class="modal-lg">
+<div style="text-align: center" class="questions-wrapper">
+  <i class="ft-x" (click)="closeModal()"></i>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" [translate]="'Date'"></th>
+            <th scope="col" [translate]="'Candidate name'"></th>
+            <th scope="col" [translate]="'Status'"></th>
+            <th scope="col" [translate]="'Agent remarks'"></th>
+            <th scope="col" [translate]="'Internal remarks'"> </th>
+            <th scope="col" [translate]="'Agent name'"></th>
+            <th scope="col" [translate]="'Job id'"></th>
+            <th scope="col" [translate]="'job title'"></th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of known">
+                <th scope="row"> {{row.CreateDate | date:'short'}}</th>
+                <th scope="row"> {{row.CandidateName}}</th>
+                <th scope="row"> {{row.Status | translate}}</th>
+                <td scope="row"> {{row.StatusDescription}}</td>
+                <td scope="row"> {{row.InternalRemarks}}</td>
+                <td scope="row"> {{row.AgentFullName}}</td>
+                <td scope="row"> {{row.JobID}}</td>
+                <td scope="row"> {{row.jobTitle}}</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</ng-template>
+
+<ng-template #startDateDialog let-rowData let-ref="dialogRef" class="modal-lg">
+<div style="text-align: center" class="questions-wrapper">
+  <i class="ft-x" (click)="closeModal()"></i>
+
+  <label [translate]="'Start working date'"></label>
+  <br>
+  <div class="input-group">
+    <input
+      readonly
+      class="form-control"
+      [placeholder]="'date'"
+      name="date"
+      [(ngModel)]="startWorkDate"
+      ngbDatepicker
+      #datePicker="ngbDatepicker">
+      <div class="input-group-append">
+        <div class="input-group-text" (click)="datePicker.toggle()" >
+          <i class="fa fa-calendar"></i>
+        </div>
+      </div>
+  </div>
+  <br>
+  <br>
+  <button (click)="updateJobCandidateStatus(rowData);"
+   class="btn gradient-crystal-clear">
+     שמור
+  </button>
+</div>
+</ng-template>
+
+
+<ng-template #noRes >
+  <div style="text-align: center">
+    <h2 [translate]="'This page is only allowed for coordinators'"></h2>
+  </div>
+
+</ng-template>

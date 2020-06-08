@@ -1,0 +1,17 @@
+
+
+<div *ngIf="isPageAllowed;else noRes">
+    <ng-container *ngFor="let source of sources">
+        <h4>{{source?.data[0].Recrutment_AgentName}}</h4>
+          <ng2-smart-table [settings]="settings" [source]="source">
+          </ng2-smart-table>
+          <br><br><br>
+      </ng-container>
+  
+  </div>
+  <ng-template #noRes >
+  <div style="text-align: center">
+    <h2 [translate]="'This page is only allowed for coordinators'"></h2>
+    </div>
+  </ng-template>
+  

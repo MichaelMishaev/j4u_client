@@ -1,0 +1,84 @@
+<!--Login Page Starts-->
+  <!-- Navigation -->
+
+  <section id="login">
+    <div class="container-fluid">
+      <div class="navbar-brand js-scroll-trigger logo-wrapper">
+          <a [translate]="'Help'" class="btn btn-raised gradient-purple-bliss white js-scroll-trigger help-btn"></a>
+        <img width="80px" height="80px" class="left-auto" src="/assets/img/logo.png">
+        <div class="align-self-baseline left-auto">
+          <div style="flex-direction: column; display: flex;">
+              <a [translate]="'Login'" class="btn btn-raised gradient-purple-bliss white js-scroll-trigger" (click)="openLogin()"></a>
+              <a [translate]="'Register'" class="btn btn-raised gradient-purple-bliss white js-scroll-trigger" (click)="goToRegister()"></a>
+          </div>
+          <!-- <p [translate]="'Start finding jobs and earn money today, its so simple!'" class="text-white-75 font-weight-light"></p> -->
+         
+        </div>
+      </div>
+              <div class="row full-height-vh m-0">
+                  <header class="masthead">
+                      <div class="container h-100">
+                        <div class="row h-100 align-items-center justify-content-center text-center">
+                          <div class="col-lg-10 align-self-end">
+                            <h1 [translate]="'The best site to find jobs'" class="text-uppercase text-white font-weight-bold"></h1>
+                            <hr class="divider my-4">
+                          </div>
+                         
+                        </div>
+                      </div>
+                    </header>
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <app-jobs-cards (addJobLoggedOut)="openRegisterPage($event)" [isLoggedIn]="false" [filteredJobs]="jobs"></app-jobs-cards>
+                </div>
+              </div>
+        
+        <ng-template #loginModal let-ref="dialogRef">
+            <div class="card">
+                <app-login-card></app-login-card>
+            </div>
+        </ng-template>
+        
+        <ng-template #registerFirst let-ref="dialogRef">
+        
+            <div class="row ui-helper-clearfix register-first-container" style="padding: 15px;">
+    
+
+              <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                      <div class="card-content">
+                        <div class="card-body">
+                          <img class="card-img img-fluid mb-3" src="assets/img/photos/08.jpg" alt="Card image cap">
+                          <h4 class="card-title" [translate]="'Looking for someone else?'"></h4>
+                          <p class="card-text" [translate]="'Register as an agent and start earning for each friend!'">
+                          </p>                         
+                          <a  [translate]="'Register'" (click)="goToRegister()" class="btn btn-raised btn-success"></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                      <div class="card">
+                        <div class="card-content">
+                          <div class="card-body">
+                            <img class="card-img img-fluid mb-3" src="assets/img/photos/08.jpg" alt="Card image cap">
+                            <h4 class="card-title" [translate]="'Looking for yourself?'"></h4>
+                            <p class="card-text" [translate]="'You can use the quick apply to apply for that job'">
+                            </p>
+                            <a  (click)="openQuickApply()" [translate]="'Apply'"  class="btn btn-raised btn-success"></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="close-modal-wrapper" (click)="dialogService.dismissAll()">
+                        <i class="ft-x"></i>
+                    </div>
+            </div>
+        </ng-template>
+        <ng-template #quickApply let-ref="dialogRef">
+          <app-archwizard [desiredJob]="desiredJob"></app-archwizard>
+        </ng-template>
+    </div>
+  </section>
+
+<!--Login Page Ends-->

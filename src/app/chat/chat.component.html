@@ -1,0 +1,78 @@
+<div class="chat-application">
+  <div #contentOverlay class="content-overlay" (click)="onContentOverlay()"></div>
+  
+  <div class="chat-name p-2 bg-white">
+    <div class="media">
+      <span class="chat-app-sidebar-toggle ft-align-justify font-large-1 mr-2 d-none d-block d-sm-block d-md-none" (click)="onSidebarToggle()"></span>
+      <div class="media-body text-left">
+        <img [src]="[activeChatUserImg]" width="37" class="rounded-circle mr-1" alt="avatar" />
+        <span>{{ activeChatUser }}</span>
+        <i class="ft-more-vertical float-right mt-1"></i>
+      </div>
+    </div>
+  </div>
+  <section class="chat-app-window" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+    <div class="badge badge-dark mb-1">Chat History</div>
+    <div class="chats">
+      <div class="chats">
+        <div [ngClass]="[chat.chatClass]" *ngFor="let chat of chat">
+          <div class="chat-avatar">
+            <a class="avatar" data-toggle="tooltip" data-placement="[chat.avatar]" title="" data-original-title="">
+              <img [src]="[chat.imagePath]" class="width-50" alt="avatar" />
+            </a>
+          </div>
+          <div class="chat-body">
+            <div class="chat-content" *ngFor="let message of chat.messages">
+              <p *ngIf="chat.messageType === 'text'">{{ message }}</p>
+              <vg-player *ngIf="chat.messageType === 'audio'">
+                <audio [vgMedia]="media1" #media1 id="singleAudio" preload="auto" controls>
+                  <source [src]="message" type="audio/mp3">
+                </audio>
+              </vg-player>
+              <vg-player *ngIf="chat.messageType === 'video'" style="height: 250px; width: 250px">
+                <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                  <source [src]="message" type="video/mp4">
+                </video>
+              </vg-player>
+            </div>
+          </div>
+          <p class="time" *ngIf="chat.time !='' ">{{chat.time}}</p>
+        </div>
+
+        <div class="chat" *ngIf="messages.length > 0">
+          <div class="chat-avatar">
+            <a class="avatar" data-toggle="tooltip" data-placement="right" title="" data-original-title="">
+              <img src="assets/img/portrait/small/avatar-s-1.png" class="width-50" alt="avatar" />
+            </a>
+          </div>
+          <div class="chat-body">
+            <div class="chat-content" *ngFor="let message of filterMessages">
+              <p>{{ message }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section class="chat-app-form bg-blue-grey bg-lighten-5">
+    <form class="chat-app-input row mt-2">
+      <fieldset class="form-group position-relative has-icon-left col-lg-10 col-8 m-0 px-3">
+        <div class="form-control-position">
+          <i class="icon-emoticon-smile"></i>
+        </div>
+        <input type="text" class="form-control" id="iconLeft4" placeholder="Type your message"  (keydown.enter)="onAddMessage();$event.preventDefault()"
+        #messageInput>
+        <div class="form-control-position control-position-right">
+          <i class="ft-image mr-1"></i>
+        </div>
+      </fieldset>
+      <fieldset class="form-group position-relative has-icon-left col-lg-2 col-4 m-0">
+        <button type="button" class="btn btn-raised btn-primary px-4" (click)="onAddMessage()">
+          <i class="fa fa-paper-plane-o d-block d-xl-inline-block d-lg-none p-0"></i>
+          <span class="d-none d-lg-inline-block ml-1">Send</span>
+        </button>
+      </fieldset>
+    </form>
+  </section>
+</div>

@@ -1,0 +1,80 @@
+
+<div class="summary-container">
+  <div class="col-xl-6 col-lg-6 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 [translate]="'Personal board'"></h4>
+        </div>
+        <div class="card-body">
+          <div>
+            <tag-input [secondaryPlaceholder]="'Add comment'"
+              (onSelect)="onSelect($event)" [modelAsStrings]="true">
+            </tag-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="px-3 py-3">
+              <div class="media">
+                <div class="media-body text-left">
+                  <h3 class="mb-1 success">15</h3>
+                  <span [translate]="'Submitted Candidates'"></span>
+                </div>
+                <div class="media-right align-self-center">
+                  <i class="icon-user success font-large-2 float-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="col-xl-3 col-lg-3 col-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="px-3 py-3">
+              <div class="media">
+                <div class="media-body text-left">
+                  <h3 class="mb-1 success">2000</h3>
+                  <span [translate]="'Bonus(leads)'"></span>
+                  <a href="#" class="explenation" [translate]="'Explenation'"></a>
+
+                </div>
+                <div class="media-right align-self-center">
+                  <i class="icon-cup success font-large-2 float-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div class="chat-application">
+    <div #contentOverlay class="content-overlay" ></div>
+    <section class="chat-app-window" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <div class="chats">
+        <div class="chats">
+            <div class="chat" >
+                <div class="chat-avatar">
+                  <a class="avatar" data-toggle="tooltip" data-placement="right" title="" data-original-title="">
+                    <img src="assets/img/portrait/small/avatar-s-1.png" class="width-50" alt="avatar" />
+                  </a>
+                </div>
+                <div class="chat-body">
+                  <div class="chat-content" *ngFor="let message of filterMessages">
+                    <p>{{ message }}</p>
+                  </div>
+                </div>
+              </div>
+            
+            
+        </div>
+      </div>
+    </section>
+</div>
+
+
+

@@ -1,0 +1,129 @@
+<div class="card-content">
+    <div class="card-body login-img">
+        <div class="bg-white px-4 pt-3">
+          <h4 [translate]="'Login'" class="card-title mb-2"></h4>
+          <p [translate]="'Welcome back, please login to your account.'" class="card-text mb-3">
+            
+          </p>
+          <input nbInput
+           fullWidth
+           [(ngModel)]="user.email"
+           #email="ngModel"
+           name="email"
+           id="input-email"
+           placeholder="{{'email' | translate}}"
+           pattern=".+@.+\..+"
+           class="form-control mb-3"
+           autofocus
+           [required]="getConfigValue('forms.validation.email.required')"
+           [attr.aria-invalid]="email.invalid && email.touched ? true : null">
+        <!-- <ng-container *ngIf="email.invalid && email.touched">
+          <p class="caption status-danger" [translate]="'email is mandatory'" *ngIf="email.errors?.required">
+          </p>
+          <p [translate]="'email is invalid'" class="caption status-danger" *ngIf="email.errors?.pattern">
+          </p>
+        </ng-container> -->
+          <input
+          nbInput
+          fullWidth
+          [(ngModel)]="user.password"
+          #password="ngModel"
+          name="password"
+          class="form-control mb-3"
+          type="password"
+          placeholder="{{'password' | translate}}"
+          id="input-password"
+          [required]="getConfigValue('forms.validation.password.required')"
+          [minlength]="getConfigValue('forms.validation.password.minLength')"
+          [maxlength]="getConfigValue('forms.validation.password.maxLength')"
+          [attr.aria-invalid]="password.invalid && password.touched ? true : null"
+          />
+          <ng-container  *ngIf="password.invalid && password.touched ">
+            <p [translate]="'password is mandatory'" class="caption status-danger" *ngIf="password.errors?.required">
+            </p>
+            <p class="caption status-danger" *ngIf="password.errors?.minlength || password.errors?.maxlength">
+              {{'Password should contain' | translate}}
+              {{'from' | translate}} {{ getConfigValue('forms.validation.password.minLength') }}
+              {{ 'to' | translate}} {{ getConfigValue('forms.validation.password.maxLength') }}
+              {{'characters' | translate}}
+            </p>
+          </ng-container>
+          <ng-container *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert" style="text-align: right">
+            <p class="alert-title"><b [translate]="'oops'"></b></p>
+            <ul class="alert-message-list">
+              <li *ngFor="let error of errors" class="alert-message danger">{{ error }}</li>
+            </ul>
+          </ng-container>
+  
+          <ng-container *ngIf="showMessages.success && messages?.length && !submitted" outline="success" role="alert">
+            <p class="alert-title"><b [translate]="'great'"></b></p>
+            <ul class="alert-message-list">
+              <li *ngFor="let message of messages" class="alert-message">{{ message }}</li>
+            </ul>
+          </ng-container>
+          <div class="d-flex justify-content-between mt-2">
+            <div class="remember-me">
+              <div
+                class="custom-control custom-checkbox custom-control-inline mb-3"
+              >
+                <input
+                  type="checkbox"
+                  id="customCheckboxInline1"
+                  name="customCheckboxInline1"
+                  class="custom-control-input"
+                />
+                <label [translate]="'Remember Me'"
+                  class="custom-control-label"
+                  for="customCheckboxInline1"
+                >
+                  
+                </label>
+              </div>
+            </div>
+            <div class="forgot-password-option">
+              <a [translate]="'Forgot Password ?'"
+                (click)="onForgotPassword()"
+                class="text-decoration-none text-primary"
+                ></a
+              >
+            </div>
+          </div>
+          <div class="fg-actions d-flex justify-content-between">
+            <div class="login-btn">
+              <button class="btn btn-outline-primary">
+                <a [translate]="'Register'"
+                (click)="goToRegister()"
+                  class="text-decoration-none"
+                  ></a
+                >
+              </button>
+            </div>
+            <div class="recover-pass">
+              <button class="btn btn-primary">
+                <a [translate]="'Login'"
+                  (click)="login('email')"
+                  class="text-decoration-none text-white"
+                  ></a
+                >
+              </button>
+            </div>
+          </div>
+          <hr class="m-0" />
+          <!-- <div class="d-flex justify-content-between mt-3">
+            <div class="option-login">
+              <h6 class="text-decoration-none text-primary">
+                Or Login With
+              </h6>
+            </div>
+            <div class="social-login-options">
+              <a class="btn btn-social-icon mr-2 btn-facebook">
+                <span class="fa fa-facebook"></span>
+              </a>
+              <a class="btn btn-social-icon mr-2 btn-twitter">
+                <span class="fa fa-twitter"></span>
+              </a>
+            </div>
+          </div> -->
+        </div>
+    </div>
+  </div>

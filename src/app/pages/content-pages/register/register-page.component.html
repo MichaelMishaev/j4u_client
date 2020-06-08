@@ -1,0 +1,188 @@
+<!--Registration Page Starts-->
+<section id="regestration">
+  <div class="container-fluid">
+    <div class="row full-height-vh m-0">
+      <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body register-img">
+              <div class="row m-0">
+                <div class="col-lg-6 d-none d-lg-block py-2 px-3 text-center">
+                  <img
+                    src="../../assets/img/gallery/register.png"
+                    alt=""
+                    class="img-fluid mt-3 pl-3"
+                    width="400"
+                    height="230"
+                  />
+                </div>
+                <div class="col-lg-6 col-md-12 pt-3 px-4 bg-white">
+                  <h4 [translate]="'Create Account'" class="card-title mb-2"></h4>
+                  <p class="card-text mb-3" [translate]="'Fill the below form to create a new account.'">
+                    
+                  </p>
+                  <ng-container *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
+                    <p class="alert-title"><b [translate]="'Oops'"></b></p>
+                    <ul class="alert-message-list">
+                      <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+                    </ul>
+                  </ng-container>
+              
+                  <ng-container *ngIf="showMessages.success && messages?.length && !submitted" outline="success" role="alert">
+                    <p class="alert-title"><b [translate]="'Well done'"></b></p>
+                    <ul class="alert-message-list">
+                      <li *ngFor="let message of messages" class="alert-message">{{ message }}</li>
+                    </ul>
+                  </ng-container>
+                  <input 
+                        [(ngModel)]="user.fullName"
+                        #fullName="ngModel"
+                        id="input-name"
+                        name="fullName"
+                        placeholder="{{'Full Name' | translate}}"
+                        autofocus
+                        fullWidth
+                        fieldSize="large"
+                        class="form-control mb-3"
+                        [required]="true"
+                        [minlength]="getConfigValue('forms.validation.fullName.minLength')"
+                        [maxlength]="getConfigValue('forms.validation.fullName.maxLength')"
+                        [attr.aria-invalid]="fullName.invalid && fullName.touched ? true : null">
+                  <ng-container *ngIf="fullName.invalid && fullName.touched">
+                    <p [translate]="'Full name is required'" class="caption status-danger" *ngIf="fullName.errors?.required">
+                        
+                    </p>
+                    <p class="caption status-danger" *ngIf="fullName.errors?.minlength || fullName.errors?.maxlength">
+                      {{'Full name should contains' | translate}}
+                      {{'from' | translate}} {{getConfigValue('forms.validation.fullName.minLength')}}
+                      {{'to' | translate}} {{getConfigValue('forms.validation.fullName.maxLength')}}
+                      {{'characters' | translate}}
+                    </p>
+                  </ng-container>
+                <input 
+                        [(ngModel)]="user.email"
+                        #email="ngModel"
+                        id="input-email"
+                        name="email"
+                        placeholder="{{'email' | translate}}"
+                        pattern=".+@.+..+"
+                        fullWidth
+                        fieldSize="large"
+                        class="form-control mb-3"
+                        [required]="getConfigValue('forms.validation.email.required')"
+                        [attr.aria-invalid]="email.invalid && email.touched ? true : null">
+                      <ng-container *ngIf="email.invalid && email.touched">
+                        <p [translate]="'Email is required'" class="caption status-danger" *ngIf="email.errors?.required">
+                          
+                        </p>
+                        <p [translate]="'Email is invalid'" class="caption status-danger" *ngIf="email.errors?.pattern">
+                        </p>
+                      </ng-container>
+                  <input
+                          [(ngModel)]="user.password"
+                          #password="ngModel"
+                          type="password"
+                          id="input-password"
+                          name="password"
+                          placeholder="{{'password' | translate}}"
+                          fullWidth
+                          fieldSize="large"
+                          class="form-control mb-3"
+                          [required]="true"
+                          [minlength]="getConfigValue('forms.validation.password.minLength')"
+                          [maxlength]="getConfigValue('forms.validation.password.maxLength')"
+                          [attr.aria-invalid]="password.invalid && password.touched ? true : null">
+                  <ng-container *ngIf="password.invalid && password.touched">
+                    <p [translate]="'Password is required'" class="caption status-danger" *ngIf="password.errors?.required">
+                        
+                      </p>
+                    <p class="caption status-danger" *ngIf="password.errors?.minlength || password.errors?.maxlength">
+                      {{'password must include' | translate}} {{ getConfigValue('forms.validation.password.minLength') }}
+                      {{'Till' | translate}} {{ getConfigValue('forms.validation.password.maxLength') }}
+                      {{'Chars' | translate}}
+                    </p>
+                  </ng-container>
+                  <input 
+                          [(ngModel)]="user.confirmPassword"
+                          #rePass="ngModel"
+                          type="password"
+                          id="input-re-password"
+                          name="rePass"
+                          placeholder="{{'Confirm password' | translate}}"
+                          fullWidth
+                          fieldSize="large"
+                          class="form-control mb-3"
+                          [required]="getConfigValue('forms.validation.password.required')"
+                          [attr.aria-invalid]="rePass.invalid && rePass.touched ? true : null">
+                  <ng-container *ngIf="rePass.invalid && rePass.touched">
+                    <p [translate]="'Confirm Password is required'" class="caption status-danger" *ngIf="rePass.errors?.required">
+                      
+
+                    </p>
+                    <p [translate]="'Passwords not match'" class="caption status-danger" *ngIf="password.value != rePass.value && !rePass.errors?.required">
+                      
+                    </p>
+                  </ng-container>
+                  <input
+                        [(ngModel)]="user.phoneNumber"
+                        #phoneNumber="ngModel"
+                        type="text"
+                        id="input-phoneNumber"
+                        name="phoneNumber"
+                        placeholder="{{'Phone Number' | translate}}"
+                        fullWidth
+                        fieldSize="large"
+                        class="form-control mb-3"
+                        [required]="true"
+                        [minlength]="9"
+                        [maxlength]="10"
+                        [attr.aria-invalid]="phoneNumber.invalid && phoneNumber.touched ? true : null">
+                <ng-container *ngIf="phoneNumber.invalid && phoneNumber.touched">
+                  <p [translate]="'Phone number is required'" class="caption status-danger" *ngIf="phoneNumber.errors?.required">
+                    
+                  </p>
+                </ng-container>
+                  <div
+                    class="custom-control custom-checkbox custom-control-inline mb-3">
+                    <input
+                      type="checkbox"
+                      id="customCheckboxInline1"
+                      name="customCheckboxInline1"
+                      class="custom-control-input"
+                      checked
+                    />
+                    <label
+                      class="custom-control-label"
+                      for="customCheckboxInline1"
+                    >
+                      {{'I accept the' | translate}} 
+              <a href="/assets/data/contract2.pdf" target="_blank">{{'terms and conditions' | translate}}</a>.
+                    </label>
+                  </div>
+                  <div class="fg-actions d-flex justify-content-between">
+                    <div class="login-btn">
+                      <button class="btn btn-outline-primary">
+                        <a [translate]="'Back To Login'" class="text-decoration-none"
+                          (click)="goToLogin()">
+                          
+                        </a>
+                      </button>
+                    </div>
+                    <div class="recover-pass">
+                      <button class="btn btn-primary">
+                        <a [translate]="'Register'" (click)="register()" class="text-decoration-none text-white">
+                          
+                        </a>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Registration Page Ends-->

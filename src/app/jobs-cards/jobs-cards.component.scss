@@ -1,0 +1,30 @@
+.flex-space-between{
+    display: flex;
+    justify-content: space-around;
+}
+.card-title{
+    font-size: 0.8rem !important;
+}
+.card-text{
+    font-size: 0.9rem;
+}
+.card-wrapper{
+    flex: 0 0 16%;margin: 5px;
+}
+.card-wrapper-wide{
+    flex: 0 0 12%;margin: 5px;
+}
+.mt-10{
+    margin-top: 10px;
+}
+.copy-jobs{
+}
+
+
+@media (max-width:540px) {
+   .card-wrapper,.card-wrapper-wide{
+     flex: 1 0 45%;margin: 5px;
+
+   }
+  
+}

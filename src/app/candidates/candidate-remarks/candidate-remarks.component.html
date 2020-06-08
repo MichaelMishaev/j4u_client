@@ -1,0 +1,17 @@
+<button type="button" [translate]="'Remarks'" (click)="openModal(dialog)" class="btn btn-raised btn-primary"></button>
+
+<ng-template #dialog let-ref="dialogRef">
+
+<div class="ui-helper-clearfix remarks-div">
+  <label style="padding:5px" [translate]="'Remarks'"></label>
+  <textarea style="padding:5px" [(ngModel)]="rowData.UserRemark" rows="7" 
+   [placeholder]="'Write your remark' | translate" class="form-control remarks-textarea border-primary">
+  </textarea>
+  <div class="remark-buttons">
+  <button type="button" [translate]="'Update'" (click)="updateCandidate();" class="btn btn-raised btn-primary"></button>
+  <button type="button" (click)="closeModal()" [translate]="'Cancel'" class="btn btn-raised btn-primary"></button>
+  </div>
+
+
+</div>
+</ng-template>

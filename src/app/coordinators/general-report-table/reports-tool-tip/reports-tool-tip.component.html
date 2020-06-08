@@ -1,0 +1,9 @@
+<span *ngIf="isExist" style="cursor:pointer"
+      [ngbTooltip]="rowData.InternalRemarks" 
+ngbTooltipPlacement="top" ngbTooltipStatus="primary">
+  {{rowData.Status_Name}}
+</span>
+<span *ngIf="!isExist">
+    {{rowData.Status_Name}}
+
+</span>
