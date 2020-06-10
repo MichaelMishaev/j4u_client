@@ -10,29 +10,10 @@
                 <th class="text-right">Rate</th>
                 <th class="text-right">Hours</th>
                 <th class="text-right">Amount</th>
+                <th class="text-right" [translate]="'Update'"></th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>
-                  <p>Create PSD for mobile APP</p>
-                  <p class="text-muted">Simply dummy text of the printing and typesetting industry.</p>
-                </td>
-                <td class="text-right">$ 20.00/hr</td>
-                <td class="text-right">120</td>
-                <td class="text-right">$ 2400.00</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>
-                  <p>iOS Application Development</p>
-                  <p class="text-muted">Pellentesque maximus feugiat lorem at cursus.</p>
-                </td>
-                <td class="text-right">$ 25.00/hr</td>
-                <td class="text-right">260</td>
-                <td class="text-right">$ 6500.00</td>
-              </tr>
               <tr>
                 <th scope="row">3</th>
                 <td>
@@ -42,6 +23,11 @@
                 <td class="text-right">$ 20.00/hr</td>
                 <td class="text-right">300</td>
                 <td class="text-right">$ 6000.00</td>
+                <td>
+                  <button type="button" class="btn btn-outline-secondary" (click)="openModal(dialog)">OK</button>
+
+                </td>
+                
               </tr>
             </tbody>
           </table>
@@ -49,3 +35,71 @@
       </div>
     </div>
   </div>
+
+
+    
+    <ng-template #dialog let-jobs let-ref="dialogRef">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Project Info</h4>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+
+            <div class="card-text">
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+
+            <form class="form">
+              <div class="form-body">
+                <h4 class="form-section mt-3"><i class="ft-user"></i> Personal Info</h4>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="projectinput1" class="sr-only">First Name</label>
+                      <input type="text" id="projectinput1" class="form-control" placeholder="First Name" name="fname">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="projectinput2" class="sr-only">Last Name</label>
+                      <input type="text" id="projectinput2" class="form-control" placeholder="Last Name" name="lname">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="projectinput3" class="sr-only">E-mail</label>
+                      <input type="text" id="projectinput3" class="form-control" placeholder="E-mail" name="email">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="projectinput4" class="sr-only">Contact Number</label>
+                      <input type="text" id="projectinput4" class="form-control" placeholder="Phone" name="phone">
+                    </div>
+                  </div>
+                </div>
+
+              
+
+                <div class="form-group">
+                  <label for="projectinput8" class="sr-only">About Project</label>
+                  <textarea id="projectinput8" rows="5" class="form-control" name="comment" placeholder="About Project"></textarea>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="btn btn-raised btn-warning mr-1">
+                  <i class="ft-x"></i> Cancel
+                </button>
+                <button type="button" class="btn btn-raised btn-primary">
+                  <i class="ft-check"></i> Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </ng-template>
