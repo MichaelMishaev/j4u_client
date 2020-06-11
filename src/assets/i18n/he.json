@@ -71,7 +71,8 @@
     "Download visa":"Скачать визу",
     "Watch jobs":"посмотреть вакансии",
     "Write your remark": "Напишите ваше замечание",
-    "Update": "Обновить",
+    "Update": "עדכון",
+
     "Cancel": "отменить",
     "Saved successfully": "Успешно сохранено",
     "Applied jobs":"Прикладные вакансии",
@@ -86,7 +87,7 @@
     "Updated successfully":"Успешно Обновлено",
   "Applied candidates page":"Applied candidates page",
     "Needs treatment?":"Needs treatment?",
-    "Candidate Name":"имя соискателя",
+    "Candidate Name":"שם המועמד",
     "Commission":"комиссия",
     "Updated at":"Обновлено в",
     "Deleted successfully": "Успешно удален",
@@ -185,7 +186,7 @@
 		"Domina Arad and Dead sea":"Domina Arad and Dead sea",
 		"Eilat and Arava":"Eilat and Arava",
 		
-	"jobStatus":"jobStatus"		,
+	"jobStatus":"סטאסטוס משרה"		,
 		"New":"новый соискатель",
 		"Not suitable":"не подходит",
 		"Missing details":"нет достаточно данных",
@@ -206,6 +207,9 @@
 		"Full time job":"Работа на полную ставку",
 		"Partial job":"Работа на пол ставки",
     "Weekend":"Работа на выходных",
-  "For any questions please call":"По любым вопросам звоните 0509311004",
-  "Help":"Помощь"
+    "For any questions please call":"По любым вопросам звоните 0509311004",
+    "Help":"Помощь",
+  "Incorrect candidates":"Incorrect candidates",
+    "Amendment remarks": "מהות תיקון",
+    "Job title": "שם משרה"
 }

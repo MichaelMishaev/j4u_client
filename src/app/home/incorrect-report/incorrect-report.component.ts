@@ -13,6 +13,8 @@ export class IncorrectReportComponent implements OnInit {
   ngOnInit() {
   }
 
+ // headers = ["עדכון המועמד","מהות תיקון","סטטוס משרה","שם משרה","שם מועמד"];,""
+   TEMProws = ["מחמוד","משרה דפוקה","פתוח","סטאטוס יפה"];
   openModal(dialog){
      this.dialogService.open(dialog, {size:'lg'});
   }

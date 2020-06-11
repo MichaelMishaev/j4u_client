@@ -5,26 +5,20 @@
           <table class="table">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Item &amp; Description</th>
-                <th class="text-right">Rate</th>
-                <th class="text-right">Hours</th>
-                <th class="text-right">Amount</th>
+                <th class="text-right" [translate]="'Candidate Name'"></th> 
+                <th class="text-right" [translate]="'Job title'"></th> 
+                <th class="text-right" [translate]="'jobStatus'"></th>
+                <th class="text-right" [translate]="'Amendment remarks'"></th> 
                 <th class="text-right" [translate]="'Update'"></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">3</th>
-                <td>
-                  <p>WordPress Template Development</p>
-                  <p class="text-muted">Vestibulum euismod est eu elit convallis.</p>
+                <td class="text-right"  *ngFor="let row of TEMProws">
+                  <p>{{row}}</p>
                 </td>
-                <td class="text-right">$ 20.00/hr</td>
-                <td class="text-right">300</td>
-                <td class="text-right">$ 6000.00</td>
                 <td>
-                  <button type="button" class="btn btn-outline-secondary" (click)="openModal(dialog)">OK</button>
+                  <button type="button" class="btn btn-outline-secondary text-right" (click)="openModal(dialog)">OK</button>
 
                 </td>
                 
