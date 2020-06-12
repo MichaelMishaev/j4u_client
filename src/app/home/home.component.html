@@ -1,5 +1,4 @@
-<!--User Profile Starts-->
-<!--Basic User Details Starts-->
+
 <section id="user-profile">
   <div class="row">
     <div class="col-12">
@@ -77,8 +76,8 @@
             <div class="col-lg-5 col-md-5">
               <ul class="profile-menu no-list-style">
                 <li>
-                  <a [translate]="'Completed Report'" (click)="showPage('CompletedReport')"
-                    [ngClass]="currentPage === 'CompletedReport' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'"></a>
+                  <a [translate]="'Chat with coordinator'" (click)="showPage('chat')"
+                    [ngClass]="currentPage === 'chat' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'"></a>
                 </li>
                 <li>
                   <a (click)="showPage('FindJobCandidate')"
@@ -111,7 +110,8 @@
 <!--User GeneralReport section ends-->
 
 <!--User's friend section starts-->
-<section id="CompletedReport" *ngIf="currentPage === 'CompletedReport'">
+<section id="chat" *ngIf="currentPage === 'chat'">
+  <app-user-chat></app-user-chat>
 </section>
 <!--User's friend section starts-->
 

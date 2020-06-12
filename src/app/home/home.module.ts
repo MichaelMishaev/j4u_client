@@ -6,14 +6,18 @@ import { SharedModule } from 'app/shared/shared.module';
 import { SummaryComponent } from './summary/summary.component';
 import { TagInputModule } from 'ngx-chips';
 import { IncorrectReportComponent } from './incorrect-report/incorrect-report.component';
+import { ChatComponent } from './chat/chat.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { SearchPipe } from 'app/shared/pipes/search.pipe';
 
 @NgModule({
-  declarations: [ HomeComponent, SummaryComponent, IncorrectReportComponent],
+  declarations: [ HomeComponent, SummaryComponent, IncorrectReportComponent, ChatComponent, SearchPipe],
   imports: [
     CommonModule,
     SharedModule,
     HomeRoutingModule,
-    TagInputModule
+    TagInputModule,
+    PerfectScrollbarModule
   ],
   entryComponents: []
 })
