@@ -9,9 +9,10 @@ import { IncorrectReportComponent } from './incorrect-report/incorrect-report.co
 import { ChatComponent } from './chat/chat.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { SearchPipe } from 'app/shared/pipes/search.pipe';
+import { UpdatesComponent } from './updates/updates.component';
 
 @NgModule({
-  declarations: [ HomeComponent, SummaryComponent, IncorrectReportComponent, ChatComponent, SearchPipe],
+  declarations: [ HomeComponent, SummaryComponent, UpdatesComponent, IncorrectReportComponent, ChatComponent, SearchPipe],
   imports: [
     CommonModule,
     SharedModule,

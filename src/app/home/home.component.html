@@ -80,8 +80,8 @@
                     [ngClass]="currentPage === 'chat' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'"></a>
                 </li>
                 <li>
-                  <a (click)="showPage('FindJobCandidate')"
-                    [ngClass]="currentPage === 'FindJobCandidate' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">FindJobCandidate</a>
+                  <a (click)="showPage('updates')"
+                    [ngClass]="currentPage === 'updates' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">Updates</a>
                 </li>
               </ul>
             </div>
@@ -116,7 +116,8 @@
 <!--User's friend section starts-->
 
 <!--User's uploaded FindJobCandidate section starts-->
-<section id="FindJobCandidate" *ngIf="currentPage === 'FindJobCandidate'">
+<section id="updates" *ngIf="currentPage === 'updates'">
+  <app-updates></app-updates>
 </section>
 <!--User's uploaded FindJobCandidate section starts-->
 <!--User Profile Starts-->
