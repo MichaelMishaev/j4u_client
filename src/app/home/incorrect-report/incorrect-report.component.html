@@ -13,13 +13,23 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="text-right"  *ngFor="let row of TEMProws">
-                  <p>{{row}}</p>
+              <tr *ngFor="let row of data">
+                <td class="text-right">
+                  {{row.CandidateName}}
+                </td>
+                <td class="text-right">
+                    {{row.Title}}
+                </td>
+                <td class="text-right">
+                    {{row.Status}}
+                </td>
+                <td class="text-right">
+                    {{row.StatusDescription}}
                 </td>
                 <td>
-                  <button type="button" class="btn btn-outline-secondary text-right" (click)="openModal(dialog)">OK</button>
-
+                  <button [translate]="'Update'" type="button" class="btn btn-outline-secondary text-right" (click)="openModal(dialog)">
+                    
+                  </button>
                 </td>
                 
               </tr>

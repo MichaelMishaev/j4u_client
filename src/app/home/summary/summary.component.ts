@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from 'app/shared/api/api.service';
 import { UserService } from 'app/shared/user/user.service';
+import { data } from 'app/shared/data/smart-data-table';
 
 @Component({
   selector: 'app-summary',
@@ -14,7 +15,7 @@ export class SummaryComponent implements OnInit {
   hasInvalidRows: boolean
   bonusAmount: number;
   allCandidatesCount: number;
-  rejectedCandidatesCount: number;
+  @Input() data: any;
   ngOnInit() {
     this.initUserStatusMessages();
     this.initCards();
@@ -26,11 +27,8 @@ export class SummaryComponent implements OnInit {
     });
   }
   initCards(){
-    this.apiService.getJobCandidateByUser(this.userService.getCurrentUser().id).subscribe((res:any[]) =>{
-      this.allCandidatesCount = res.length;
-      this.rejectedCandidatesCount = res.filter(x=>x.IsInternalReject === 1).length;
-      this.hasInvalidRows = this.jobCandidateByUser.filter(x=>x.IsInternalReject === 1).length > 0;
-    });
+    this.allCandidatesCount = data.length;
+    this.hasInvalidRows = this.jobCandidateByUser.filter(x=>x.IsInternalReject === 1).length > 0;
     this.apiService.getBonusesByUser(this.userService.getCurrentUser().id).subscribe((res:any[]) =>{
       this.bonusAmount = res.reduce((sum, current) => sum + current.BonusAmount, 0)
     });

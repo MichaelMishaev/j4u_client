@@ -97,7 +97,7 @@
 <section *ngIf="currentPage === 'home'" id="home">
   <div class="row" style="margin-bottom: 5px">
     <div class="col-12">
-      <app-summary></app-summary>
+      <app-summary [data]="jobCandidateByUser"></app-summary>
     </div>
   </div>
 </section>
@@ -105,7 +105,7 @@
 
 <!--User GeneralReport section starts-->
 <section *ngIf="currentPage === 'incorrectReport'">
-  <app-incorrect-report></app-incorrect-report>
+  <app-incorrect-report [data]="jobCandidateByUser"></app-incorrect-report>
 </section>
 <!--User GeneralReport section ends-->
 

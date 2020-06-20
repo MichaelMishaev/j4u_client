@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,13 +8,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class IncorrectReportComponent implements OnInit {
 
+  @Input() data: any;
   constructor(private dialogService: NgbModal) { }
 
   ngOnInit() {
   }
 
- // headers = ["עדכון המועמד","מהות תיקון","סטטוס משרה","שם משרה","שם מועמד"];,""
-   TEMProws = ["מחמוד","משרה דפוקה","פתוח","סטאטוס יפה"];
   openModal(dialog){
      this.dialogService.open(dialog, {size:'lg'});
   }
