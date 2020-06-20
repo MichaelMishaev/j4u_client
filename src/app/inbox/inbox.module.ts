@@ -10,7 +10,7 @@ import { InboxRoutingModule } from "./inbox-routing.module";
 
 import { InboxComponent } from "./inbox.component";
 
-import { SearchPipe } from 'app/shared/pipes/search.pipe';
+// import { SearchPipe } from 'app/shared/pipes/search.pipe';
 
 
 @NgModule({
@@ -24,7 +24,7 @@ import { SearchPipe } from 'app/shared/pipes/search.pipe';
     ],
     declarations: [
         InboxComponent,
-        SearchPipe
+        //SearchPipe
     ]
 })
 export class InboxModule { }

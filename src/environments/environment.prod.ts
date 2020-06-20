@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseApiUrl : 'https://jobs4home.net:3000',
+  baseApiUrl : 'http://3.127.25.25:3001',
   defaultLang: "en"
 };

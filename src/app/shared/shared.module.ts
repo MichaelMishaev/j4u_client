@@ -31,6 +31,7 @@ import { JobDetailsComponent } from 'app/jobs/job-details/job-details.component'
 import { DownloadCvComponent } from 'app/candidates/download-cv/download-cv.component';
 import { AddJobComponent } from 'app/jobs/add-job/add-job.component';
 import { AddCandidateComponent } from 'app/jobs/add-candidate/add-candidate.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 
 @NgModule({
@@ -67,7 +68,7 @@ import { AddCandidateComponent } from 'app/jobs/add-candidate/add-candidate.comp
         UiSwitchModule,
         TableModule,
         SelectDropDownModule,
-        
+        DeviceDetectorModule 
 
     ],
     entryComponents:[JobDetailsComponent, DownloadCvComponent,AddJobComponent,AddCandidateComponent],

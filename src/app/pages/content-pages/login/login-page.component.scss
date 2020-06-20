@@ -1,130 +1,237 @@
-// Login Page
-@import "bootstrap/scss/bootstrap.scss";
-#login {
-  background-image: url('../../../../assets/img/gallery/light-bg.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  
-  :after {
-    content: "";
-    background: url('../../../../assets/img/gallery/light-bg.jpg');
-    opacity: 0.5;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;   
-  }
-  .register-first-container{
-    display: flex;
-    justify-content: space-around;
-    padding: 5%;
-  }
-  // Base styling for the navbar
-  #mainNav {
-    box-shadow: $box-shadow;
-    background-color: $white;
-    transition: background-color 0.2s ease;
-    .navbar-brand {
-      font-family: $font-family-sans-serif;
-      font-weight: $font-weight-bold;
-      color: $gray-900;
-    }
-    .navbar-nav {
-      .nav-item {
-        .nav-link {
-          color: $gray-600;
-          font-family: $font-family-sans-serif;
-          font-weight: $font-weight-bold;
-          font-size: 0.9rem;
-          padding: 0.75rem 0;
-          &:hover,
-          &:active {
-            color: $primary;
-          }
-          &.active {
-            color: $primary !important;
-          }
-        }
-      }
-    }
-    @include media-breakpoint-up(lg) {
-      // Base styling for the navbar - screen sizes greater than the large breakpoint
-      box-shadow: none;
-      background-color: transparent;
-      .navbar-brand {
-        color: fade-out($white, .3);
-        &:hover {
-          color: $white;
-        }
-      }
-      .navbar-nav {
-        .nav-item {
-          .nav-link {
-            color: fade-out($white, .3);
-            padding: 0 1rem;
-            &:hover {
-              color: $white;
-            }
-          }
-          &:last-child {
-            .nav-link {
-              padding-right: 0;
-            }
-          }
-        }
-      }
-      // Navbar styling applied when the page is scrolled
-      &.navbar-scrolled {
-        box-shadow: $box-shadow;
-        background-color: $white;
-        .navbar-brand {
-          color: $gray-900;
-          &:hover {
-            color: $primary;
-          }
-        }
-        .navbar-nav {
-          .nav-item {
-            .nav-link {
-              color: $gray-900;
-              &:hover {
-                color: $primary;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  .masthead{
-    width: 100%;
-  }
+
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+.main-text{
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+h2 {
+  font-weight: 700;
 }
 
-.close-modal-wrapper{
-  position: absolute;right: 0;margin-top: -8px;
+img {
+  display: block;
+  width: 160px;
+  height: 160px;
 }
 
-@media (max-width:540px) {
-  #login {
-    .card-img{
-      display: none;
-    }
-    .masthead{
-      padding-top: 25%;
-    }
-  }
- 
+a,
+button {
+  cursor: pointer;
 }
-.logo-wrapper{
+
+.jumbotron {
+  margin-bottom: 0 !important;
+}
+
+.atlas-cta {
+  border-radius: 22px !important;
+  padding: 12px 30px !important;
+  font-weight: 700;
+  transition: .3s ease-in-out !important;
+  width: 200px;
+
+}
+
+.atlas-cta:hover {
+  text-decoration: none;
+  transform: translateY(-5px);
+}
+
+.atlas-cta-wide {
+  width: 100%;
+}
+
+.cta-green {
+  background: #00FFAD;
+  color: #192440;
+
+}
+
+.cta-green:hover {
+  color: #ffffff;
+  background: #00e69c;
+}
+
+.cta-blue {
+  background: #192440;
+  color: #ffffff;
+}
+
+.cta-blue:hover {
+  color: #ffffff;
+  background: #121a2e;
+}
+
+.cta-ghost {
+  border: 2px solid #192440 !important;
+  color: #192440;
+}
+
+.cta-ghost:hover {
+  color: #ffffff;
+  background: #121a2e;
+}
+
+#banner {
+  background-size: cover;
+}
+
+/********** banner **********/
+#banner header {
+  overflow: hidden;
+}
+/********** feature (skew background) **********/
+.feature img {
+  width: 100%;
+  max-width: 480px;
+}
+
+#feature-first {
+  background: linear-gradient(168deg, #ffffff 55%, #00FFAD 0);
+}
+
+#feature-last {
+  background: #00FFAD;
+}
+
+/********** price table **********/
+#price-table {
+  padding-top: 4rem !important;
+  padding-bottom: 4rem !important;
+}
+
+#price-table__premium {
+  background: #192440;
+  color: #ffffff;
+}
+
+#price-table ul li {
+  padding: 5px 0;
+}
+
+/********** contact **********/
+#contact {
+  background-size: cover;
+}
+
+#contact ul li {
+  padding: 3px 0;
+}
+
+#contact form {
+  color: #00FFAD;
+}
+
+#contact form input,
+#contact form textarea {
+  background: transparent;
+  border: 1px solid #00FFAD;
+  color: #ffffff;
+}
+
+/********** copyright **********/
+#copyright {
+  background: #192440;
+  padding: 2rem 3rem;
+}
+
+#copyright #social-media a {
+  width: 40px;
+  height: 40px;
+  border-radius: 99%;
+  background: #ffffff;
+  transition: .4s ease;
+}
+
+#copyright #social-media a i {
+  color: #192440;
+  font-size: 1.2rem;
+  line-height: 40px;
+}
+
+#copyright #social-media a:hover {
+  background: #00FFAD;
+}
+
+#copyright #social-media a:hover i {
+  color: #ffffff;
+}
+.align-right{
+  text-align: right !important;
+}
+.align-center{
+  text-align: center !important;
+}
+.flex-center{
   display: flex;
-  .left-auto{
-    margin-left: auto
+    justify-content: center;
+}
+.btn{
+  cursor: pointer !important;
+}
+.look-for-workers{
+  @media (max-width: 575px) {
+    margin-left: auto;
+
+    margin-top: -20px;
+    button{
+      width: 140px;
+      padding: 12px 0px !important;
+    }
+  }
+
+}
+/********** RWD **********/
+@media (max-width: 575px) {
+  #banner h1 {
+      font-size: 3.6rem;
+  }
+  .contact-us-container{
+    flex-flow: column-reverse;
   }
 }
-.help-btn{
-  height: 50%;
-  margin-top: 1%;
+.clients{
+  img{
+    max-height: 50px;
+  }
+}
+
+.socials {
+  display: flex;
+  font-size: 2rem;
+
+  a {
+    padding: 0.4rem;
+    transition: color ease-out 0.1s;
+    zoom: 1.5;
+    color: white;
+    &:hover {
+      color: nb-theme(color-fg-heading);
+    }
+    @include media-breakpoint-down(sm) {
+      zoom: 1;
+    }
+    img{
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+/deep/
+body{
+  font-size: 1.2rem !important;
+}
+.main-buttons-container{
+  display: flex;
+  margin-right: 0;
+  justify-content: space-around;
+  @media (min-width: 575px) {
+    margin-left: 15%;
+  }
+}
+
+h2{
+  font-size: 2rem !important;
 }

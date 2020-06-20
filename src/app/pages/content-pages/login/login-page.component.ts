@@ -1,7 +1,10 @@
 import { Component, TemplateRef, ViewChild, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'app/shared/api/api.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { NbSpinnerService } from '@nebular/theme';
+import * as AOS from 'aos';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
     selector: 'app-login-page',
@@ -11,48 +14,43 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class LoginPageComponent implements OnInit {
 
-    jobs:any[];
-    desiredJob: any;
-    @ViewChild('registerFirst', {static: false}) registerFirst: TemplateRef<any>;
-    @ViewChild('quickApply', {static: false}) quickApply: TemplateRef<any>;
-    @ViewChild('loginModal', {static: false}) loginModal: TemplateRef<any>;
-    constructor(private route: ActivatedRoute,public dialogService: NgbModal,private router: Router, private apiService: ApiService) {      
-    }
+  contactForm:FormGroup;
+  isContactFormSent = false;
+  isMobile = false;
+  @ViewChild('loginModal', {static: false}) loginModal: TemplateRef<any>;
+  constructor(private spinner$: NbSpinnerService,private api: ApiService, private deviceService: DeviceDetectorService,
+              private formBuilder: FormBuilder, private dialogService: NgbModal) { }
 
-    ngOnInit(){
-      this.apiService.getJobsBase().subscribe((res: any[]) => {
-        this.jobs = res;
-      })
-      if(window.localStorage.getItem("openLogin")){
-          setTimeout(() => {
-            window.localStorage.removeItem("openLogin")
-            this.openLogin()
+  ngOnInit() {
+    this.isMobile = this.deviceService.isMobile();
 
-          }, 1);
+    AOS.init();
+    this.spinner$.load();
+    this.contactForm = this.formBuilder.group({
+      CustomerName : new FormControl('',[Validators.required]),
+      Email : new FormControl('',[Validators.required, Validators.email]),
+      Message : new FormControl('',[Validators.required]),
+      PhoneNumber : new FormControl('',[Validators.required]),
+      CompanyName : new FormControl('',[]),
+    })
+  }
+  submitContactForm(){
+    if(this.contactForm.invalid){
+      alert('יש להזין את כל השדות וכתובת מייל חוקית');
+      return;
+    }
+    this.api.addContactForm(this.contactForm.value).subscribe(res=>{
+      this.isContactFormSent = true;
+    })
+  }
+  openEmployerForm(dialog){
 
-      }
-
-       
-    }
-    openRegisterPage(jobId){
-      this.desiredJob = this.jobs.find(x=>x.ID === jobId);
-      this.dialogService.open(this.registerFirst);
-    }
-    openQuickApply(){
-      this.dialogService.open(this.quickApply, {backdrop:'static'});
-    }
-    openLogin(){
-      this.dialogService.open(this.loginModal);
-    }
-    goToLogin(){
-      this.dialogService.dismissAll()
-      window.scrollTo(0,0)
-    }
-    goToRegister(){
-      this.dialogService.dismissAll();
-      this.router.navigate(['/pages/register'])
-
-    }
-
-    
+    this.dialogService.open(dialog, { size: 'lg'});
+  }
+  scrollToBottom(){
+    window.scrollTo(0,document.body.scrollHeight)
+  }
+  openLogin(){
+    this.dialogService.open(this.loginModal);
+  }
 }

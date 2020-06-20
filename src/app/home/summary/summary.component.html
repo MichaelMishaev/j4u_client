@@ -20,7 +20,7 @@
             <div class="px-3 py-3">
               <div class="media">
                 <div class="media-body text-left">
-                  <h3 class="mb-1 success">15</h3>
+                  <h3 class="mb-1 success">{{allCandidatesCount}}</h3>
                   <span [translate]="'Submitted Candidates'"></span>
                 </div>
                 <div class="media-right align-self-center">
@@ -37,7 +37,7 @@
             <div class="px-3 py-3">
               <div class="media">
                 <div class="media-body text-left">
-                  <h3 class="mb-1 success">2000</h3>
+                  <h3 class="mb-1 success">{{bonusAmount}}</h3>
                   <span [translate]="'Bonus(leads)'"></span>
                   <a href="#" class="explenation" [translate]="'Explenation'"></a>
 
@@ -64,8 +64,11 @@
                   </a>
                 </div>
                 <div class="chat-body">
-                  <div class="chat-content" *ngFor="let message of filterMessages">
-                    <p>{{ message }}</p>
+                  <div class="chat-content" *ngFor="let m of filterMessages">
+                    הססטוס של מועמד {{m.CandidateName}}
+                     למשרה {{m.JobName}}
+                     :השתנה ל {{m.Status}}
+
                   </div>
                 </div>
               </div>

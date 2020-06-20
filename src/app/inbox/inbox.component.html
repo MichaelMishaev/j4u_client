@@ -58,7 +58,7 @@
             <div class="list-group">
               <div class="users-list-padding">
                 <a [ngClass]="!mail.isDefault ? 'list-group-item list-group-item-action no-border' : 'list-group-item list-group-item-action bg-blue-grey bg-lighten-5 border-right-primary border-right-2'"
-                  *ngFor="let mail of mail | search:'mailFrom,subject,body':searchQuery" (click)="DisplayMessage($event, [mail.mailId])">
+                  *ngFor="let mail of mail" (click)="DisplayMessage($event, [mail.mailId])">
                   <span class="media">
                     <span class="avatar avatar-md mr-2">
                       <span *ngIf="!mail.hasImage" class="media-object rounded-circle text-circle d-flex mr-2 ml-0 justify-content-center align-items-center + ' ' + {{mail.imageClass}}">{{
