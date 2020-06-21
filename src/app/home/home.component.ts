@@ -10,7 +10,7 @@ import { UserService } from 'app/shared/user/user.service';
 })
 export class HomeComponent implements OnInit {
   currentPage = 'home'
-  homeMessages = ["message 1 message 1 message 1", "message 2 message 2 message 2", "message 3 message 3 message 3"]
+  homeMessages = []
   constructor(private route: ActivatedRoute, private router:Router, private apiService: ApiService, private userService: UserService) { }
   currentUser = {}
   jobCandidateByUser = []
@@ -22,8 +22,10 @@ export class HomeComponent implements OnInit {
     });
     this.apiService.getJobCandidateByUser(this.userService.getCurrentUser().id).subscribe((res:any[]) =>{
       this.jobCandidateByUser = res;
-
     });
+    this.apiService.getGeneralMessages().subscribe((res: []) => {
+      this.homeMessages = res;
+    })
   }
 
   showPage(page: string) {

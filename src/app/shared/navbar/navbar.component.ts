@@ -7,6 +7,7 @@ import { NbAuthService, NbAuthResult, NbAuthJWTToken } from '@nebular/auth';
 import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
 import { NbSearchService } from '@nebular/theme';
+import { ApiService } from '../api/api.service';
 
 @Component({
   selector: "app-navbar",
@@ -20,12 +21,13 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   userType:any;
   public isCollapsed = true;
   layoutSub: Subscription;
+  notifications: any;
   @Output()
   toggleHideSidebar = new EventEmitter<Object>();
 
   public config: any = {};
 
-  constructor(public translate: TranslateService, private auth: NbAuthService, public userService: UserService,
+  constructor(public translate: TranslateService, private auth: NbAuthService, public userService: UserService, private apiService: ApiService,
      private layoutService: LayoutService,private searchService: NbSearchService,  private configService:ConfigService, private router: Router) {
 
 
@@ -51,6 +53,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     const u = this.userService.getCurrentUser()
     this.userType = u && u.userType
+    this.apiService.getjobCandidateHistoryByUser().subscribe(res=>{
+      this.notifications = res;
+    })
   }
 
   ngAfterViewInit() {

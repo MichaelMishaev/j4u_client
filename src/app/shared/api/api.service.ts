@@ -4,6 +4,7 @@ import * as io from 'socket.io-client';
 import { Observable, of } from 'rxjs';
 import { UserService } from '../user/user.service';
 import { environment } from 'environments/environment';
+import { tap } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class ApiService {
@@ -13,7 +14,7 @@ export class ApiService {
   private headers: HttpHeaders;
   private userId;
   public onlineUsersArr: any[] = [];
-
+  public jobCandidateHistory;
   constructor(private http: HttpClient,private userService:UserService){
     this.headers = new HttpHeaders();
     this.headers.append('Content-Type', 'application/json');
@@ -94,12 +95,17 @@ export class ApiService {
     });
   }
   getjobCandidateHistoryByUser(){
-    return this.http.get(this.baseUrl + 'jobCandidateHistoryByUser', {
+    if(this.jobCandidateHistory){
+      return of(this.jobCandidateHistory)
+    }
+    return  this.http.get(this.baseUrl + 'jobCandidateHistoryByUser', {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': 'Bearer ' +  JSON.parse(localStorage.auth_app_token).value
       })
-    });
+    }).pipe(
+      tap((res) => this.jobCandidateHistory = res),
+    );
   }
   getJobCandidateByUser(Id: any) {
     return this.http.get(this.baseUrl + 'jobCandidateByUser?u='+Id,{
