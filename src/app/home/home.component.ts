@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router:Router, private apiService: ApiService, private userService: UserService) { }
   currentUser = {}
   jobCandidateByUser = []
+  incorrectReportData = []
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if(params['p']){
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
     });
     this.apiService.getJobCandidateByUser(this.userService.getCurrentUser().id).subscribe((res:any[]) =>{
       this.jobCandidateByUser = res;
+      this.incorrectReportData = res.filter(x=>x.IsInternalReject === 1);
     });
     this.apiService.getGeneralMessages().subscribe((res: []) => {
       this.homeMessages = res;

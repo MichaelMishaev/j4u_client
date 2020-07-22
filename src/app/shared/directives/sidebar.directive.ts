@@ -98,7 +98,8 @@ export class SidebarDirective implements OnInit, AfterViewInit {
       this.hideSidebar();
     } else if (
       e.target.parentElement.classList.contains("nav-close") ||
-      e.target.classList.contains("nav-close")
+      e.target.classList.contains("nav-close") ||
+      window.innerWidth < 992 // also for mobile
     ) {
       this.toggleHideSidebar.emit(true);
     }

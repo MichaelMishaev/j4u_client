@@ -15,7 +15,7 @@
             </div>
            
             </div>
-            <a id="copy-clipboard"  *ngIf="isLoggedIn" href="javascript:void(0)"  (click)="copyJobDetails(job)" 
+            <a id="copy-clipboard"  *ngIf="isLoggedIn" href="javascript:void(0)"  (click)="copyJobDetails($event, job)" 
                class="btn btn-success mr-1 btn-fab copy-jobs">
               <i class="fa fa-copy"></i></a>
               <button *ngIf="isAllowedToEditJob" (click)="openAddJobModal(job)" class="btn btn-raised gradient-purple-bliss white">עדכון משרה</button>

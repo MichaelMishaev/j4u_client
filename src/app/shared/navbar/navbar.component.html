@@ -46,17 +46,9 @@
                                 <img src="./assets/img/flags/ru.png" alt="russian" class="langimg">
                                 <span>Russian</span>
                             </a> 
-                            <a class="dropdown-item py-1 lang" href="javascript:;" (click)="ChangeLanguage('pt')">
-                                <img src="./assets/img/flags/br.png" alt="Portuguese" class="langimg">
-                                <span>Portuguese</span>
-                            </a> 
                             <a class="dropdown-item py-1 lang" href="javascript:;" (click)="ChangeLanguage('he')">
                                 <img src="./assets/img/flags/he.png" alt="Hebrew" class="langimg">
                                 <span>Hebrew</span>
-                            </a> 
-                            <a class="dropdown-item py-1 lang" href="javascript:;" (click)="ChangeLanguage('de')">
-                                <img src="./assets/img/flags/de.png" alt="German" class="langimg">
-                                <span>German</span>
                             </a>                            
                         </div>
                     </li>
@@ -92,14 +84,6 @@
                             <a *ngIf="userType > 1" class="dropdown-item py-1" routerLink="/pages/profile">
                                 <i class="ft-edit mr-2"></i>
                                 <span [translate]="'Coordinators'"></span>
-                            </a>
-                            <a class="dropdown-item py-1" routerLink="/inbox">
-                                <i class="ft-mail mr-2"></i>
-                                <span>My Inbox</span>
-                            </a>
-                            <a class="dropdown-item py-1" href="javascript:;">
-                                <i class="ft-settings mr-2"></i>
-                                <span>Settings</span>
                             </a>
                             <div class="dropdown-divider"></div>
                             <a (click)="logout('email')" class="dropdown-item" href="javascript:;">

@@ -60,5 +60,11 @@
       }
     }
   }
-  
-  
+  .card-header{
+    display: flex;
+    height: 40px;
+  }
+  .candidate-name{
+    margin-left: 3px;
+    margin-right: 3px;
+  }

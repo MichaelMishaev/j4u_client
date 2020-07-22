@@ -60,7 +60,8 @@ export class JobsCardsComponent implements OnInit {
   emitAddJobLoggedOut(jobId){
     this.addJobLoggedOut.emit(jobId)
   }
-  copyJobDetails(job){
+  copyJobDetails(e,job){
+    e.stopImmediatePropagation()
     var text = `${job.Title} - ${job.ID}
 ${job.Description}
 Area: ${job.Locations}`

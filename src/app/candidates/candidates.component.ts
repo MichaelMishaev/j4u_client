@@ -9,6 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import * as hopscotch from 'hopscotch';
 import { NbSearchService } from '@nebular/theme';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-candidates',
@@ -22,7 +24,7 @@ export class CandidatesComponent implements OnInit {
       display: true,
       perPage: 50
     },
-    mode: 'inline',
+    mode: 'external',
     add: {
       confirmCreate:true,
       addButtonContent: '<div class="add-candidate-btn"><i class="ft-plus info font-medium-1 mr-2"></i></div>',
@@ -105,7 +107,10 @@ export class CandidatesComponent implements OnInit {
   uploadedFiles: any;
   allCandidates: any[];
   filteredCandidates: any[];
-  constructor(private api: ApiService,private searchService: NbSearchService, private translate: TranslateService, private toastr: ToastrService) { //private service: SmartTableData,
+  insertedCandidateId: any;
+  addCandidateForm: FormGroup;
+  constructor(private api: ApiService,public dialogService: NgbModal,
+          private searchService: NbSearchService, private translate: TranslateService, private toastr: ToastrService) { //private service: SmartTableData,
     
   }
   ngOnInit(): void {
@@ -135,28 +140,55 @@ export class CandidatesComponent implements OnInit {
       const t = data.term.toLowerCase();
       this.filteredCandidates = this.allCandidates.filter(x=>x.FirstName.toLowerCase().indexOf(t) > -1 || x.LastName.toLowerCase().indexOf(t) > -1 || x.Id == t || x.Email === t || x.PhoneNumber === t);
       this.source.load(this.filteredCandidates);
-    })  }
-  onCreateConfirm(e){
-    if(!this.isFieldsValid(e)){
-      return
+    }) 
+   }
+   onAddSelect(dialog,obj) { 
+    const data = obj ? obj.data : {}
+    this.addCandidateForm  = new FormGroup({
+  
+      'FirstName': new FormControl(data.FirstName || null, [Validators.required]),
+      'LastName': new FormControl(data.LastName || null, [Validators.required]),
+      'City': new FormControl(data.City || null, [Validators.required]),
+      'Email': new FormControl(data.Email || null, [Validators.required, Validators.email]),
+      'PhoneNumber': new FormControl(data.PhoneNumber || null, [Validators.required])
+     });
+     if(data){
+      this.insertedCandidateId= data.Id;
+      this.addCandidateForm['Id'] =  new FormControl(data.Id, [Validators.required]);
+      this.addCandidateForm['HasCv'] = new FormControl(data.HasCv);
+      this.addCandidateForm['FileExtension'] =  new FormControl(data.FileExtension);
+     }
+     const modal = this.dialogService.open(dialog, {size:'lg'});
     }
-    e.newData.PhoneNumber = e.newData.PhoneNumber.replace(/-/gi,'');
-
-    this.api.addCandidate(e.newData).subscribe((res:any) => {
-      if(res && res.code === 'ER_DUP_ENTRY'){
-        this.toastr.error(this.translate.instant("Cant add the same candidate twice"))
-      } else {
-        e.newData.Id = res.insertId;
-        e.confirm.resolve(e.newData);
+  
+    onCreateConfirm(e){
+      
+      if(!this.isFieldsValid()){
+        return
       }
-    })
+      const data = this.addCandidateForm.value
+      data.PhoneNumber = data.PhoneNumber.replace(/-/gi,'');
+
+      this.api.addCandidate(data).subscribe((res:any) => {
+        if(res && res.code === 'ER_DUP_ENTRY'){
+          this.toastr.error(this.translate.instant("Cant add the same candidate twice"))
+        } else {
+          data.Id = res.insertId;
+          this.insertedCandidateId = res.insertId;
+          this.filteredCandidates.unshift(data)
+          this.source.load(this.filteredCandidates);
+
+         // this.dialogService.dismissAll()
+        }
+      })
   }
   onSaveConfirm(e){
-    if(!this.isFieldsValid(e)){
+    if(!this.isFieldsValid()){
       return
     }
-    e.newData.PhoneNumber = e.newData.PhoneNumber.replace(/-/gi,'');
-    this.api.updateCandidate(e.newData).subscribe(() => {
+    const data = this.addCandidateForm.value
+    data.PhoneNumber = data.PhoneNumber.replace(/-/gi,'');
+    this.api.updateCandidate(data).subscribe(() => {
       e.confirm.resolve();
     })
   }
@@ -206,26 +238,26 @@ export class CandidatesComponent implements OnInit {
       }
     }
   }
- 
-  private isFieldsValid(e): boolean{
-    if(!e.newData.FirstName){
+
+  private isFieldsValid(): boolean{
+    if(!this.addCandidateForm.value.FirstName){
       this.toastr.error(this.translate.instant("First name is required"))
       return false;
     }
-    if(!e.newData.LastName){
+    if(!this.addCandidateForm.value.LastName){
       this.toastr.error(this.translate.instant("Last name is required"))
       return false;
     }
-    if(!e.newData.City){
+    if(!this.addCandidateForm.value.City){
       this.toastr.error(this.translate.instant("Address is required"))
       return false;
     }
-    if(!e.newData.PhoneNumber){
+    if(!this.addCandidateForm.value.PhoneNumber){
       this.toastr.error(this.translate.instant("Phone number is required"))
       return false;
     }
     var rgx = new RegExp("[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}")
-    if(e.newData.Email && !rgx.test(e.newData.Email)){
+    if(this.addCandidateForm.value.Email && !rgx.test(this.addCandidateForm.value.Email)){
       this.toastr.error(this.translate.instant("Email is invalid"))
       return false;
     }

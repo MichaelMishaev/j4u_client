@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, Input } from '@angular/core';
 import { ApiService } from 'app/shared/api/api.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'upload-cv',
@@ -17,7 +18,8 @@ export class UploadCvComponent implements OnInit{
   rowData: any;
 
 
-  constructor(private api: ApiService, private toastrService: ToastrService,private ref: ChangeDetectorRef){
+  constructor(private api: ApiService,public dialogService: NgbModal,
+     private toastrService: ToastrService,private ref: ChangeDetectorRef){
 
   }
   ngOnInit(): void {
@@ -43,7 +45,6 @@ export class UploadCvComponent implements OnInit{
          this.loading = false;
          this.uploaded = true;
          this.ref.detectChanges()
-
          if(this.rowData) // fast hack - if no rowData it means we are in quick apply
          {
           this.rowData.HasCV = 1;
@@ -51,6 +52,7 @@ export class UploadCvComponent implements OnInit{
 
           this.api.updateCandidate(this.rowData).subscribe(res=>{
            this.updateResult.emit({});
+           this.dialogService.dismissAll()
           });
          } else{
           this.updateResult.emit(fileExt);

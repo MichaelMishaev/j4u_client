@@ -1,0 +1,14 @@
+
+
+@media(max-width:540px) {
+    .messages-avatar{
+        display: none;
+    }
+    .chat-body {
+        margin-left: 0 !important;
+        margin-right: 10px !important;
+    }
+    .user-name{
+        flex: 0 0 33%;
+    }
+}

@@ -45,6 +45,7 @@ export class SidebarToggleDirective implements AfterViewInit {
 
   @HostListener("click", ["$event"])
   onClick(e: any) {
+    
     if (this.dataToggle === "expanded") {
       this.dataToggle = "collapsed";
       this.renderer.addClass(this.$wrapper, 'nav-collapsed');

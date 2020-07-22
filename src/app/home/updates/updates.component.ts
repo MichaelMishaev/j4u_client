@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'app/shared/api/api.service';
 
 @Component({
   selector: 'app-updates',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./updates.component.scss']
 })
 export class UpdatesComponent implements OnInit {
-
-  constructor() { }
+  updates: any[]
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
+    this.apiService.getjobCandidateHistoryByUser().subscribe((res: any)=>{
+      this.updates = res
+    });
   }
 
 }
