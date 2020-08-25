@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   currentPage = 'home'
   homeMessages = []
   constructor(private route: ActivatedRoute, private router:Router, private apiService: ApiService, private userService: UserService) { }
-  currentUser = {}
+  currentUser: any = {}
   jobCandidateByUser = []
   incorrectReportData = []
   ngOnInit() {
@@ -21,7 +21,8 @@ export class HomeComponent implements OnInit {
           this.currentPage = params['p'];    
       }
     });
-    this.apiService.getJobCandidateByUser(this.userService.getCurrentUser().id).subscribe((res:any[]) =>{
+    this.currentUser = this.userService.getCurrentUser()
+    this.apiService.getJobCandidateByUser(this.currentUser.id).subscribe((res:any[]) =>{
       this.jobCandidateByUser = res;
       this.incorrectReportData = res.filter(x=>x.IsInternalReject === 1);
     });

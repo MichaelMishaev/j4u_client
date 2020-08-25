@@ -19,11 +19,9 @@ export class AddCandidateComponent implements OnInit {
   jobQuestions:FormGroup;
   candidateForJob: any;
   jobsQuestionsArr: any[];
-  candidatesForJobs: any[] = [];
   sentSuccessfulyText = '';
   user: any;
   @Output() addCandidateCompleted = new EventEmitter<string>();
-  formatter1 = (result: { name: string,country:string }) => result.name;
   constructor(private apiService: ApiService, private userService: UserService,
               public activeModal: NgbActiveModal, private translate: TranslateService, 
               private toastr: ToastrService) { }
@@ -32,17 +30,10 @@ export class AddCandidateComponent implements OnInit {
     
     this.getJobQuestions();
     this.user = this.userService.getCurrentUser();
-    this.apiService.getCandidates().subscribe((data:any) => {
-      this.candidatesForJobs = 
-            data.map((i)=> {
-                  return {
-                    id: i.Id,
-                    name: i.FirstName + ' ' + i.LastName + ' - ' + i.Email,
-                    hasCv : i.HasCV === 1,
-                    country: '5/5c/Flag_of_Alabama.svg/45px-Flag_of_Alabama.svg.png'
-                  }}
-                );
-    });
+  
+  }
+  candidateSelected(c){
+    this.candidateForJob = c;
   }
   getJobQuestions(){
     let group={}
@@ -87,13 +78,6 @@ submitAddCandidate(){
   });
 }
 
-searchFlags = (text$: Observable<string>) =>
-
-text$.pipe(
-  debounceTime(200),
-  map(term => term === '' ? []
-    : this.candidatesForJobs.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-);
 
 
 }

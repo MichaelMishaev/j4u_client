@@ -64,11 +64,20 @@
                             <div class="noti-list" [perfectScrollbar]>
                                 
                                 <a *ngFor="let notification of notifications" class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
-                                    <i class="ft-bell danger float-left d-block font-large-1 mt-1 mr-2"></i>
-                                    <span class="noti-wrapper">
-                                    <span class="noti-title line-height-1 d-block text-bold-400 danger">{{notification.StatusDescription}}</span>
-                                    <span class="noti-text">{{notification.InternalRemarks}}</span>
-                                    </span>
+                                    <ng-container *ngIf="notification.Message; else statusNotification">
+                                        <i class="ft-message-square info float-left d-block font-large-1 mt-1 mr-2"></i>
+                                        <span class="noti-wrapper">
+                                        <span class="noti-text">{{notification.Message}}</span>
+                                        </span>
+                                    </ng-container>
+                                    <ng-template #statusNotification>
+                                        <i class="ft-bell danger float-left d-block font-large-1 mt-1 mr-2"></i>
+                                        <span class="noti-wrapper">
+                                        <span class="noti-title line-height-1 d-block text-bold-400 danger">{{notification.StatusDescription}}</span>
+                                        <span class="noti-text">{{notification.InternalRemarks}}</span>
+                                        </span>
+                                    </ng-template>
+                                 
                                 </a>
                              
                             </div>

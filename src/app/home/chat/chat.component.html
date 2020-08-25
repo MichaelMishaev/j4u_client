@@ -1,7 +1,7 @@
 <div>
   <div #contentOverlay class="app-content-overlay" [ngClass]="{show: isContentOverlay}" (click)="onContentOverlay()">
   </div>
-  <div [perfectScrollbar] #chatSidebar class="chat-sidebar d-md-block">
+  <!-- <div [perfectScrollbar] #chatSidebar class="chat-sidebar d-md-block">
     <span class="sidebar-close-icon d-md-none" (click)="isContentOverlay = false">
       <i class="ft-x"></i>
     </span>
@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> 
   <div class="chat-name p-2">
     <div class="media p-1 align-items-center">
       <span class="chat-app-sidebar-toggle ft-menu font-medium-4 mr-3 d-block d-md-none"
@@ -67,9 +67,9 @@
             <a href="javascript:;" class="dropdown-item">Add Shortcut</a>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
-  </div>
+  </div>-->
   <section class="chat-app-window position-relative" [perfectScrollbar] #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <div class="chats">
       <div class="chat" [ngClass]="{'chat-left': chat.isReceived}" *ngFor="let chat of chats">

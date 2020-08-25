@@ -62,9 +62,10 @@ export class JobsCardsComponent implements OnInit {
   }
   copyJobDetails(e,job){
     e.stopImmediatePropagation()
+   
     var text = `${job.Title} - ${job.ID}
-${job.Description}
-Area: ${job.Locations}`
+                ${job.Description}
+                ${this.translate.instant('Areas')}: ${job.Locations}`
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';

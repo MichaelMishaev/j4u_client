@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   userType:any;
   public isCollapsed = true;
   layoutSub: Subscription;
-  notifications: any;
+  notifications: any =[];
   @Output()
   toggleHideSidebar = new EventEmitter<Object>();
 
@@ -54,7 +54,14 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     const u = this.userService.getCurrentUser()
     this.userType = u && u.userType
     this.apiService.getjobCandidateHistoryByUser().subscribe(res=>{
-      this.notifications = res;
+      if(res.length){
+        this.notifications = this.notifications.concat(res);
+      }
+    })
+    this.apiService.getNotifications().subscribe((res:any[])=>{
+      if(res.length){
+        this.notifications = this.notifications.concat(res);
+      }
     })
   }
 

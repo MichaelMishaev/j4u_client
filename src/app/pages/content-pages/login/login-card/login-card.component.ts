@@ -59,7 +59,7 @@ export class LoginCardComponent {
           this.errors = [this.translate.instant("Invalid credentials, please try again")];
           return;
         }
-        const redirect = '/jobs';
+        const redirect = '/home';
         if (redirect) {
           setTimeout(() => {
             

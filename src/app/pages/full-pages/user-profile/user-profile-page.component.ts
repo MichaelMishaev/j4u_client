@@ -3,6 +3,8 @@ import { UserService } from 'app/shared/user/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddJobComponent } from 'app/jobs/add-job/add-job.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormActionsComponent } from 'app/forms/layouts/form-actions/form-actions.component';
+import { UserMessageComponent } from './user-message/user-message.component';
 
 @Component({
     selector: 'app-user-profile-page',
@@ -43,6 +45,8 @@ export class UserProfilePageComponent implements OnInit {
     openAddJob(job = {}){
         const modal = this.modalService.open(AddJobComponent)
         modal.componentInstance.job = job
-
+    }
+    openAddMessage(){
+        const modal = this.modalService.open(UserMessageComponent)
     }
 }

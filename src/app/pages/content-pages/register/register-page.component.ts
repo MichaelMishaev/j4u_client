@@ -51,7 +51,7 @@ export class RegisterPageComponent {
             }
           }
   
-          const redirect = '/jobs'
+          const redirect = '/home'
           if (redirect) {
   
             setTimeout(() => {

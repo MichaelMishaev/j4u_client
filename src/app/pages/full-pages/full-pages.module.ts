@@ -23,6 +23,7 @@ import { GeneralReportTableComponent } from 'app/coordinators/general-report-tab
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { CompletedReportTableComponent } from 'app/coordinators/completed-report-table/completed-report-table.component';
 import { FindJobCandidateTableComponent } from 'app/coordinators/find-job-candidate-table/find-job-candidate-table.component';
+import { UserMessageComponent } from './user-profile/user-message/user-message.component';
 
 
 @NgModule({
@@ -51,7 +52,9 @@ import { FindJobCandidateTableComponent } from 'app/coordinators/find-job-candid
         UserProfilePageComponent,
         SearchComponent,
         FaqComponent,
-        KnowledgeBaseComponent
-    ]
+        KnowledgeBaseComponent,
+        UserMessageComponent
+    ],
+    entryComponents:[UserMessageComponent]
 })
 export class FullPagesModule { }

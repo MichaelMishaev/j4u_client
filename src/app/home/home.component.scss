@@ -1,5 +1,8 @@
-
-
+.incorrect-badge {
+    margin-left: 2px;
+    margin-right: 2px;
+    align-self: center;
+}
 @media(max-width:540px) {
     .messages-avatar{
         display: none;

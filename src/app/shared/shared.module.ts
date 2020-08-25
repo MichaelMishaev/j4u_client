@@ -32,6 +32,7 @@ import { DownloadCvComponent } from 'app/candidates/download-cv/download-cv.comp
 import { AddJobComponent } from 'app/jobs/add-job/add-job.component';
 import { AddCandidateComponent } from 'app/jobs/add-candidate/add-candidate.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { CandidateAutoCompleteComponent } from 'app/jobs/add-candidate/candidate-auto-complete/candidate-auto-complete.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
         DownloadCvComponent,
         UploadCvComponent,
         AddCandidateComponent,
+        CandidateAutoCompleteComponent,
         NotificationSidebarComponent,
         ToggleFullscreenDirective,
         SidebarDirective,
@@ -71,7 +73,10 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
         DeviceDetectorModule 
 
     ],
-    entryComponents:[JobDetailsComponent, DownloadCvComponent,AddJobComponent,AddCandidateComponent],
+    entryComponents:[
+        JobDetailsComponent, DownloadCvComponent,AddJobComponent
+        ,AddCandidateComponent, CandidateAutoCompleteComponent
+    ],
     providers:[
         NgbActiveModal
     ],
@@ -93,7 +98,8 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
         SidebarLinkDirective,
         SidebarListDirective,
         SidebarAnchorToggleDirective,
-        SidebarToggleDirective
+        SidebarToggleDirective,
+        CandidateAutoCompleteComponent
        
     ]
 })

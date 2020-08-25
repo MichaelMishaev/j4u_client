@@ -15,7 +15,6 @@ export class IncorrectReportComponent implements OnInit {
   fixedStatusDescription: string;
   jobCandidateId: string;
   ngOnInit() {
-    debugger;
   }
 
   openModal(dialog, jobCandidateId){
@@ -23,7 +22,6 @@ export class IncorrectReportComponent implements OnInit {
      this.dialogService.open(dialog, {size:'lg'});
   }
   updateJobCandidateHistory(){
-debugger
     const model = {
       jobCandidateId: this.jobCandidateId,
       StatusDescription: this.fixedStatusDescription

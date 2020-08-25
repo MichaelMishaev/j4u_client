@@ -7,22 +7,7 @@
 
         <label [translate]="'Select candidate from list'"></label>
 
-          <div class="ng-autocomplete" style="z-index:5">
-            <div style="display: flex; justify-content: space-between">
-              <!-- <p-autoComplete field="name"  [inputStyleClass]="'form-control'" [(ngModel)]="candidateForJob" [suggestions]="candidatesForJobs" (completeMethod)="search($event)"> -->
-
-                <ng-template #rt let-r="result" let-t="term">
-                  <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r.country" width="16"> {{ r.name}}
-                </ng-template>
-                <div class="form-group">
-                <input type="text" class="form-control mb-3"  [(ngModel)]="candidateForJob" [ngbTypeahead]="searchFlags" [resultTemplate]="rt" [inputFormatter]="formatter1"
-                       placeholder="{{'Search for candidate' | translate}}" />
-                </div>
-
-              <a (click)="activeModal.close('success');" [translate]="'Back'" class="btn btn-hero-primary btn-demo" ></a>
-          </div>
-
-          </div>
+          <app-candidate-auto-complete (onCandidateSelected)="candidateSelected($event)"></app-candidate-auto-complete>
         </div>
         <label [translate]="'Questions to filter candidate'">
         </label>

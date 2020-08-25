@@ -25,7 +25,7 @@
           <div class="col-5 user-name">
             <div class="align-self-start halfway-fab pl-3 pchatt-2">
               <div class="text-left">
-                <h3 class="card-title white">User full name</h3>
+              <h3 class="card-title white">{{currentUser?.name}}</h3>
               </div>
             </div>
           </div>
@@ -50,15 +50,17 @@
                   <a [translate]="'Home'" (click)="showPage('home')"
                     [ngClass]="currentPage === 'home' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'"></a>
                 </li>
-                <li>
+                <li style="display: flex;">
                   <a [translate]="'Incorrect report'" (click)="showPage('incorrectReport')"
-                    [ngClass]="currentPage === 'incorrectReport' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'"></a>
+                    [ngClass]="currentPage === 'incorrectReport' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">
+                  </a>
+                  <span class="incorrect-badge badge bg-warning float-right">{{incorrectReportData.length}}
+                  </span>
                 </li>
               </ul>
             </div>
             <div class="col-lg-2 col-md-2 text-center">
-              <span class="font-medium-2 text-uppercase">User full name</span>
-              <p class="grey font-small-2">Ninja Developer</p>
+              <span class="font-medium-2 text-uppercase">{{currentUser?.name}}</span>
             </div>
             <div class="col-lg-5 col-md-5">
               <ul class="profile-menu no-list-style">

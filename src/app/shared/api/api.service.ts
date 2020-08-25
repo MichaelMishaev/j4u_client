@@ -86,6 +86,22 @@ export class ApiService {
       })
     });
   }
+  addGeneralMessage(body){
+    return this.http.post(this.baseUrl + 'generalMessages',body, {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' +  JSON.parse(localStorage.auth_app_token).value
+      })
+    });
+  }
+  addNotifications(body){
+    return this.http.post(this.baseUrl + 'notifications',body, {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' +  JSON.parse(localStorage.auth_app_token).value
+      })
+    });
+  }
   getUserMessages(){
     return this.http.get(this.baseUrl + 'userMessages', {
       headers: new HttpHeaders({
@@ -109,6 +125,14 @@ export class ApiService {
   }
   getJobCandidateByUser(Id: any) {
     return this.http.get(this.baseUrl + 'jobCandidateByUser?u='+Id,{
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' +  JSON.parse(localStorage.auth_app_token).value
+      })
+    });
+  }
+  getNotifications() {
+    return this.http.get(this.baseUrl + 'notifications',{
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': 'Bearer ' +  JSON.parse(localStorage.auth_app_token).value
@@ -177,6 +201,14 @@ export class ApiService {
       this.userId = u.id;
     }
     return this.http.get(this.baseUrl + 'candidates?u='+this.userId,{
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' +  JSON.parse(localStorage.auth_app_token).value
+      })
+    });
+  }
+  getUsersBase(){
+    return this.http.get(this.baseUrl + 'usersBase',{
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': 'Bearer ' +  JSON.parse(localStorage.auth_app_token).value
