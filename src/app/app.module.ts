@@ -51,6 +51,7 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule,
     CoordinatorsModule,
     HttpClientModule,
+    
     ToastrModule.forRoot(),
     NgbModule.forRoot(),
     NbAuthModule.forRoot({

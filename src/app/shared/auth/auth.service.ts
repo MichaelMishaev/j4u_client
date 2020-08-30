@@ -7,13 +7,13 @@ export class AuthService {
 
   constructor() {}
 
-  signupUser(email: string, password: string) {
-    //your code for signing up the new user
-  }
+  // signupUser(email: string, password: string) {
+  //   //your code for signing up the new user
+  // }
 
-  signinUser(email: string, password: string) {
-    //your code for checking credentials and getting tokens for for signing in user
-  }
+  // signinUser(email: string, password: string) {
+  //   //your code for checking credentials and getting tokens for for signing in user
+  // }
 
   logout() {   
     this.token = null;
@@ -24,7 +24,13 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    // here you can check if user is authenticated or not through his token 
-    return true;
+    const token = localStorage.auth_app_token
+    return token && !this.tokenExpired(token)
   }
+
+  private tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
+  
 }
