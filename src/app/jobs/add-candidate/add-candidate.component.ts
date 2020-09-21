@@ -52,10 +52,10 @@ submitAddCandidate(){
       this.toastr.error(this.translate.instant('All fields are required'))
     return;
   }
-  // if(!this.candidateForJob.HasCv){
-  //   this.toastr.error(this.translate.instant('Have to add cv before sbumitting a candidate'))
-  //   return;
-  // }
+  if(!this.candidateForJob.hasCv){
+    this.toastr.error(this.translate.instant('Have to add cv before sbumitting a candidate'))
+    return;
+  }
   delete this.jobQuestions.value.confirmCandidate; //removes the confirm checkbox
   const model = {
     JobId: this.job.ID,

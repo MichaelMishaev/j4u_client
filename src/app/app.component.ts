@@ -21,6 +21,8 @@ export class AppComponent implements OnInit, OnDestroy {
         localStorage.setItem('selected_lang', lang );
         this.translate.setDefaultLang(lang);
         this.translate.use(lang);
+      
+        document.body.dir = lang === 'he' ? 'rtl' : 'ltr';
         this.subscription = this.router.events
         .pipe(
             filter(event => event instanceof NavigationEnd)

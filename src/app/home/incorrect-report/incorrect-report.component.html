@@ -60,11 +60,10 @@
                 </div>
               </div>
               <div>
-                <button type="button" class="btn btn-raised btn-warning mr-1">
-                  <i class="ft-x"></i> Cancel
+                <button (click)="cancel()" type="button" [translate]="'Cancel'" class="btn btn-raised btn-warning mr-1">
                 </button>
-                <button type="button" class="btn btn-raised btn-primary">
-                  <i class="ft-check" (click)="updateJobCandidateHistory()"></i> Save
+                <button (click)="updateJobCandidateHistory()" type="button" [translate]="'Save'" 
+                  class="btn btn-raised btn-primary">
                 </button>
               </div>
             </form>

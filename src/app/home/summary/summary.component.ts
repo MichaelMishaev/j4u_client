@@ -23,7 +23,7 @@ export class SummaryComponent implements OnInit {
   initUserStatusMessages(){
 
     this.apiService.getjobCandidateHistoryByUser().subscribe((res: any)=>{
-      this.filterMessages = res;
+      this.filterMessages = res.sort((a,b)=>{return new Date(b.CreatedAt).getTime()- new Date(a.CreatedAt).getTime()});
     });
   }
   initCards(){

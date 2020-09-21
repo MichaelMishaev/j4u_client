@@ -48,7 +48,7 @@ export class ArchwizardComponent implements OnInit {
       'PhoneNumber': new FormControl(null, [Validators.required]),
       'HasCV': new FormControl(0),
       'Country': new FormControl(null, [Validators.required]),
-      'VisaDueDate': new FormControl(null, [Validators.required])
+      'CVDueDate': new FormControl(null, [Validators.required])
         //todo handle
 
      });
@@ -58,7 +58,7 @@ export class ArchwizardComponent implements OnInit {
    
     const obj = {...this.candidateDetails.value}
     obj.Country = this.candidateDetails.get('Country').value.name || ''
-    obj.VisaDueDate = this.parserFormatter.format(obj.VisaDueDate);
+    obj.CVDueDate = this.parserFormatter.format(obj.CVDueDate);
     this.apiService.addExternalCandidate(obj, 1).subscribe((res:any) => {
       if(res && res.code === 'ER_DUP_ENTRY'){
         this.toastr.error("That candidate is allready been added by you")

@@ -90,21 +90,11 @@
           </div>
           <div class="fg-actions d-flex justify-content-between">
             <div class="login-btn">
-              <button class="btn btn-outline-primary">
-                <a [translate]="'Register'"
-                (click)="goToRegister()"
-                  class="text-decoration-none"
-                  ></a
-                >
+              <button class="btn btn-outline-primary" [translate]="'Register'" (click)="goToRegister()">
               </button>
             </div>
             <div class="recover-pass">
-              <button class="btn btn-primary">
-                <a [translate]="'Login'"
-                  (click)="login('email')"
-                  class="text-decoration-none text-white"
-                  ></a
-                >
+              <button class="btn btn-primary" [translate]="'Login'"  (click)="login('email')">
               </button>
             </div>
           </div>

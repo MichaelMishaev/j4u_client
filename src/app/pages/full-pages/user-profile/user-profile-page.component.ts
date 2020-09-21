@@ -43,7 +43,10 @@ export class UserProfilePageComponent implements OnInit {
     }
 
     openAddJob(job = {}){
-        const modal = this.modalService.open(AddJobComponent)
+        const modal = this.modalService.open(AddJobComponent, {
+            backdrop : 'static',
+            keyboard : false
+          })
         modal.componentInstance.job = job
     }
     openAddMessage(){

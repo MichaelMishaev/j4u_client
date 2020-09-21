@@ -98,12 +98,12 @@
                             <div class='col-12'>
                                     <div class="input-group">
                                             <label style="margin-right: 10px;margin-top: 7px;"
-                                                 class="form-control-label" for="visaDueDate"
-                                            [translate]="'Visa due date'"></label>
+                                                 class="form-control-label" for="CVDueDate"
+                                            [translate]="'CV due date'"></label>
                                             <input (click)="datePicker.toggle()"
                                               class="form-control"
-                                              name="visaDueDate"
-                                              formControlName="VisaDueDate"
+                                              name="CVDueDate"
+                                              formControlName="CVDueDate"
                                               ngbDatepicker
                                               #datePicker="ngbDatepicker">
                                               <div class="input-group-append">
@@ -149,11 +149,11 @@
 
 
                     </aw-wizard-step>
-                    <aw-wizard-step [stepTitle]="'Visa upload'">
+                    <aw-wizard-step [stepTitle]="'CV upload'">
                         <div class='col-12 candidate-details'>
                                 <div class="form-group">
-                                    <label class="form-control-label upload-visa-label" for="uploadCv"
-                                        [translate]="'Upload visa'"></label>
+                                    <label class="form-control-label upload-CV-label" for="uploadCv"
+                                        [translate]="'Upload CV'"></label>
                                     <upload-cv *ngIf="insertedCandidateId" class="upload-cv"
                                         (updateResult)="onCvUploaded($event)" [id]="insertedCandidateId"></upload-cv>
                                 </div>

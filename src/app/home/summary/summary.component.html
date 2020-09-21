@@ -67,10 +67,14 @@
                 </div>
                 <div class="chat-body">
                   <div class="chat-content" *ngFor="let m of filterMessages">
-                    הססטוס של מועמד {{m.CandidateName}}
-                     למשרה {{m.JobName}}
-                     :השתנה ל {{m.Status}}
-
+                    <div>
+                      {{m.CreatedAt | date}}
+                    </div>
+                    <div>
+                      הססטוס של מועמד {{m.CandidateName}}
+                      למשרה {{m.JobName}}
+                      השתנה ל {{m.Status}}
+                    </div>
                   </div>
                 </div>
               </div>

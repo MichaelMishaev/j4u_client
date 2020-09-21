@@ -56,7 +56,7 @@ export class GeneralReportTableComponent implements OnInit {
         filter: false,
         valuePrepareFunction: (date) => {
           if (date) {
-          return new DatePipe('en-US').transform(date, 'dd/MM/yyyy hh:mm');
+          return new DatePipe('en-US').transform(date, 'dd/MM/yyyy HH:mm');
           }
           return null;
           },

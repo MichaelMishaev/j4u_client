@@ -190,7 +190,9 @@ export class CoordinatorsTableComponent implements OnInit {
 
   filterRes(){
     if(this.searchInput.length > 1){
-      this.filteredTableData = this.tableData.filter(x=>x.ExternalJobId == this.searchInput || x.Title.indexOf(this.searchInput) > -1)
+      this.filteredTableData = this.tableData.filter(x=>x.ExternalJobId == this.searchInput 
+        || x.Title.indexOf(this.searchInput) > -1
+        || x.CompanyDescription.indexOf(this.searchInput) > -1)
 
     }
   }

@@ -35,7 +35,7 @@
         [placeholder]="'Email' | translate" class="form-control"/>
         <ng-container *ngIf="insertedCandidateId" >
             <div [translate]="'Upload cv'"></div>
-            <upload-cv class="upload-cv" [id]="insertedCandidateId"></upload-cv>
+            <upload-cv (updateResult)="onCvUploaded($event)" class="upload-cv" [id]="insertedCandidateId"></upload-cv>
         </ng-container>
         <button type="submit" class="btn btn-raised btn-primary px-4" [translate]="'Add'"></button>
       </form>

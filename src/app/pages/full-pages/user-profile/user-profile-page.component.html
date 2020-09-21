@@ -16,7 +16,7 @@
                     <div class="col-2">
                         <div class="align-self-center halfway-fab text-center">
                             <a class="profile-image">
-                                <img src="assets/img/portrait/avatars/avatar-08.png" class="rounded-circle img-border gradient-summer width-100" alt="Card image">
+                                <img src="assets/img/logo.png" class="rounded-circle img-border gradient-summer width-100" alt="Card image">
                             </a>
                         </div>
                     </div>
@@ -26,7 +26,8 @@
                 <div class="profile-cover-buttons">
                     <div class="media-body halfway-fab align-self-end">
                         <div class="text-right d-none d-sm-none d-md-none d-lg-block">
-                            <button (click)="openAddJob()" type="button" class="btn btn-primary btn-raised mr-2"><i class="fa fa-plus"></i> Add job</button>
+                            <button [translate]="'Add job'" (click)="openAddJob()" type="button" class="btn btn-primary btn-raised mr-2">
+                            </button>
                             <button (click)="openAddMessage()" type="button" class="btn btn-success btn-raised mr-3"><i class="fa fa-dashcube"></i> Message</button>
                         </div>
                         <div class="text-right d-block d-sm-block d-md-block d-lg-none">

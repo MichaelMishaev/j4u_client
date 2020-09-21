@@ -7,7 +7,7 @@
 
   </div>
   <div class="card-body">
-    <ng-container *ngIf="job.CompanyDescription">
+    <ng-container *ngIf="showCompanyDescription && job.CompanyDescription">
       <h4 [translate]="'Company details'"></h4>
       <div >{{job.CompanyDescription}}</div>
     </ng-container>

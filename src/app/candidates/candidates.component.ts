@@ -74,7 +74,7 @@ export class CandidatesComponent implements OnInit {
         filter:false,addable: false,editable: false
       },
       cvUpload: {
-        title: 'Upload visa',
+        title: 'Upload CV',
         type: 'custom',
         renderComponent: UploadCvComponent,
         valuePrepareFunction: (cell, row) => row,
@@ -87,7 +87,7 @@ export class CandidatesComponent implements OnInit {
         filter:false,addable: false,editable: false
       },
       cvDowload: {
-        title: 'Download visa',
+        title: 'Download CV',
         type: 'custom',
         renderComponent: DownloadCvComponent,
         valuePrepareFunction:(cell,row)=> row,
@@ -158,11 +158,12 @@ export class CandidatesComponent implements OnInit {
       this.addCandidateForm['HasCv'] = new FormControl(data.HasCv);
       this.addCandidateForm['FileExtension'] =  new FormControl(data.FileExtension);
      }
-     const modal = this.dialogService.open(dialog, {size:'lg'});
+     const modal = this.dialogService.open(dialog, {size:'lg', backdrop : 'static',
+     keyboard : false
+    });
     }
   
     onCreateConfirm(e){
-      
       if(!this.isFieldsValid()){
         return
       }
@@ -177,10 +178,13 @@ export class CandidatesComponent implements OnInit {
           this.insertedCandidateId = res.insertId;
           this.filteredCandidates.unshift(data)
           this.source.load(this.filteredCandidates);
-
-         // this.dialogService.dismissAll()
+         
         }
       })
+  }
+  onCvUploaded(){
+    this.toastr.success(this.translate.instant("Candidate Added Succesfully"))
+    this.dialogService.dismissAll()
   }
   onSaveConfirm(e){
     if(!this.isFieldsValid()){
@@ -219,8 +223,8 @@ export class CandidatesComponent implements OnInit {
           placement: "right"
         },
         {
-          title: this.translate.instant("Upload visa"),
-          content: this.translate.instant("You must upload Visa"),
+          title: this.translate.instant("Upload CV"),
+          content: this.translate.instant("You must upload CV"),
           target: "th.cvUpload",
           placement: "left"
         },

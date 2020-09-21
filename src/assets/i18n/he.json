@@ -25,7 +25,7 @@
     "Have to add cv before sbumitting a candidate":"חובה להוסיף קורות חיים",
     "Error downloading the file":"שגיאה בעת טעינת הקובץ",
     "That candidate is allready been added by you":"מועמד זה כבר קיים ברשימה שלכם",
-    "You must upload Visa":"חובה לעלות ויזה",
+    "You must upload CV":"חובה לעלות ויזה",
     "Invalid credentials, please try again":"פרטים שגויים, אנה נסו שוב",
   "Jobs page": "Jobs page",
     "Cities":"ערים",
@@ -67,8 +67,8 @@
     "Email":"Email",
     "PhoneNumber":"טלפון נייד",
     "Remarks":"הערות",
-    "Upload visa":"העלה קוח",
-    "Download visa":"הורד קוח",
+    "Upload CV":"העלה קוח",
+    "Download CV":"הורד קוח",
     "Watch jobs":"צפה במשרות",
     "Write your remark": "הערות",
     "Update": "רענן",
@@ -91,7 +91,7 @@
     "Updated at":"עודכן ב",
     "Deleted successfully": "נמחק בהצלחה",
   "Login page":"Login page",
-    "Visa due date":"Срок визы",
+    "CV due date":"Срок визы",
     "The best site to find jobs":"Единый сайт для поиска работы",
     "Start finding jobs and earn money today, its so simple!":"Начните искать работу и зарабатывать немедленно, это так просто!",
     "Get started":"התחל",
@@ -208,9 +208,16 @@
     "Weekend":"עבודה לסופש",
   "For any questions please call":"По любым вопросам звоните 0509311004",
   "Help":"עזרה",
+  "Send to all":"Send to all",
   "Incorrect candidates":"Incorrect candidates",
     "Amendment remarks": "מהות תיקון",
     "Job title": "שם משרה",
-    "Manager remark": "הערות מנהל"
+    "Manager remark": "הערות מנהל",
+  "Toastr messages": "Toastr messages",
+    "Candidate Added Succesfully":"Candidate Added Succesfully",
+
+  "Technical Support":"תמיכה טכנית (ווסטאפ)",
+  "Questions": "שאלות",
+  "Customers": "לקוחות"
   
 }

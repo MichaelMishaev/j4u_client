@@ -25,9 +25,28 @@
          </div>
      </div>
      <div class="col-lg-1">
-         <button id="btnStartTour" [translate]="'tour'" class="btn btn-primary btn-raised" (click)="startTour()"></button>
+     
+      <button  id="btnStartTour" [translate]="'tour'" class="btn btn-primary btn-raised" (click)="startTour()"></button>
      </div>
 
+  </div>
+  <div class="row" *ngIf="isCoordinator">
+    <div class="col-lg-3">
+      <button  [translate]="'Add job'" (click)="openAddJob()" type="button" class="btn btn-primary btn-raised mr-2">
+      </button>
+    </div>
+    <div class="col-lg-4">
+      <div style="display:flex">
+        <label style="align-self: center;" [translate]="'Customers'"> </label>
+        <ngx-select-dropdown class="customers-dd" (change)="customersChanged($event)" [config]="config" [options]="allCustomers"
+        [(ngModel)]="dataModelCustomers" [multiple]="true" ></ngx-select-dropdown>
+      </div>
+
+    </div>
+    <div class="col-lg-3">
+      <input type="checkbox" [(ngModel)]="isShowClosedJobs" (change)="showClosed()"
+      name="onlyClosed" >הצג סגורות
+    </div>
   </div>
 
 

@@ -3,6 +3,9 @@
     margin-right: 2px;
     align-self: center;
 }
+.card-img-top{
+    overflow-y: scroll;
+}
 @media(max-width:540px) {
     .messages-avatar{
         display: none;

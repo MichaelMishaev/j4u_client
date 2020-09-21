@@ -18,10 +18,12 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   currentLang = "en";
   toggleClass = "ft-maximize";
   placement = "bottom-right";
+  
   userType:any;
   public isCollapsed = true;
   layoutSub: Subscription;
   notifications: any =[];
+  searchShownPages = ['/jobs']
   @Output()
   toggleHideSidebar = new EventEmitter<Object>();
 
@@ -129,5 +131,8 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     
   clickSearchContainer(term){
     this.searchService.submitSearch(term.target.value);
+  }
+  isSearchShown(){
+    return this.searchShownPages.indexOf(this.router.url) > -1
   }
 }

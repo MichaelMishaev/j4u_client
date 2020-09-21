@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import * as hopscotch from 'hopscotch';
 import { NbSearchService } from '@nebular/theme';
 import { ConfigService } from 'app/shared/services/config.service';
+import { AddJobComponent } from './add-job/add-job.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class JobsComponent implements OnInit {
   dropDownTitles = ["Cities", "Areas", "Categories"]
 
   showDropdowns = true;
-  isTrusted = false;
+  isCoordinator = false;
   allLocations: any[];
   allCategories: any[];
   allAreas: any[];
@@ -58,7 +60,7 @@ export class JobsComponent implements OnInit {
   currentDialog: any;
   isFiltersExist = false;
 
-  constructor(private apiService: ApiService, private translate: TranslateService
+  constructor(private modalService: NgbModal,private apiService: ApiService, private translate: TranslateService
     , private searchService: NbSearchService, private configService: ConfigService, private userService: UserService) {
 
     this.getAllJobs();
@@ -88,7 +90,7 @@ export class JobsComponent implements OnInit {
 
     this.user = this.userService.getCurrentUser();
 
-    this.isTrusted = this.user.userType === 3 || this.user.id === 1;
+    this.isCoordinator = this.user.userType > 1 || this.user.id === 1;
 
   }
   getAllJobs(showClosed = false) {
@@ -111,7 +113,7 @@ export class JobsComponent implements OnInit {
         });
         this.allLocations = Array.from(new Set(allLoc)).map(x => ({ id: x, translated: this.translate.instant(x) })).sort((a, b) => { return ('' + a.id).localeCompare(b.id); });
         this.allCategories = Array.from(new Set(allCat)).map(x => ({ id: x, translated: this.translate.instant(x) })).sort((a, b) => { return ('' + a.id).localeCompare(b.id); });
-        this.allAreas = Array.from(new Set(allArea)).map(x => ({ id: x, translated: this.translate.instant(x) })).sort((a, b) => { return ('' + a.id).localeCompare(b.id); }).filter(y => y.id);
+        this.allAreas = Array.from(new Set(allArea.filter(x=>x))).map(x => ({ id: x, translated: this.translate.instant(x) })).sort((a, b) => { return ('' + a.id).localeCompare(b.id); });
         this.allCustomers = Array.from(new Set(data.map(x => x.CompanyDescription ? x.CompanyDescription.trim() : ''))).sort((a, b) => { return a.localeCompare(b) });
 
         this.filteredJobs = data;
@@ -248,7 +250,13 @@ export class JobsComponent implements OnInit {
       }
     }
   }
-
+  openAddJob(job = {}){
+    const modal = this.modalService.open(AddJobComponent, {
+        backdrop : 'static',
+        keyboard : false
+      })
+    modal.componentInstance.job = job
+}
   ngOnDestroy() {
     this.alive = false;
   }

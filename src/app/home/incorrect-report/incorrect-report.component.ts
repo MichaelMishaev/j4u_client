@@ -33,4 +33,7 @@ export class IncorrectReportComponent implements OnInit {
        // this.sentSuccessfulyText = "אירעה שגיאה. נא לנסות מאוחר יותר";
     });
   }
+  cancel(){
+    this.dialogService.dismissAll();
+  }
 }

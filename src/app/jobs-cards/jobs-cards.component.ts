@@ -51,8 +51,8 @@ export class JobsCardsComponent implements OnInit {
 
   }
   //todo move somewhere!!!
-  openAddJobModal(job:any = {}){
-   
+  openAddJobModal(e,job:any = {}){
+    e.stopPropagation();
     const addJobModalRef = this.modalService.open(AddJobComponent);
     addJobModalRef.componentInstance.job = job;
   }
