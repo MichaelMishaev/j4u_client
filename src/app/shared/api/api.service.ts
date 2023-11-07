@@ -181,6 +181,7 @@ export class ApiService {
       })
     });
   }
+  
   getJobCandidateHistory(jobCandidateId){
     return this.http.get(this.baseUrl + 'jobCandidateHistory?jobCandidateId='+jobCandidateId,{
       headers: new HttpHeaders({

@@ -24,6 +24,7 @@ export class DownloadCvComponent implements OnInit {
     this.id = this.id || this.rowData.OriginalCandidateId || this.rowData.Id;
   }
   downloadCv(e){
+    debugger;
     e.preventDefault()
     this.api.downloadCv(this.id).subscribe(data => {
       saveAs(data,`${this.id}.${this.fileExtension || this.rowData.FileExtension}`);

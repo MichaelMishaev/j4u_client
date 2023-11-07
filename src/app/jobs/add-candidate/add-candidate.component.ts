@@ -33,6 +33,7 @@ export class AddCandidateComponent implements OnInit {
   
   }
   candidateSelected(c){
+    debugger;
     this.candidateForJob = c;
   }
   getJobQuestions(){

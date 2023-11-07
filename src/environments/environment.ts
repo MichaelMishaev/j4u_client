@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
-  baseApiUrl : 'http://3.127.25.25:3001',
+  baseApiUrl : 'http://localhost:3001',
   defaultLang: "he"
 };
+
