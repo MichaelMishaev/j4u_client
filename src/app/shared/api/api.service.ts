@@ -310,7 +310,7 @@ export class ApiService {
       })
     });
   }
-  deleteJobCandidate(id){
+  deleteJobCandidate(id){rm package-lock.json
     return this.http.post(this.baseUrl + 'deleteJobCandidate',{id:id},{
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
