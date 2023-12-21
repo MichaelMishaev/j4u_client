@@ -125,6 +125,7 @@ export class GeneralReportTableComponent implements OnInit {
     this.isPageAllowed = user.userType > 1;
 
     this.api.getReportsTable().subscribe((data:any[]) =>{
+      debugger; 
       let allCandidateArr = {};
       data.forEach(i =>{
         i.IsCoordinatorTreatment = i.IsInternalReject == 2 ? 'Coordinator' : '';

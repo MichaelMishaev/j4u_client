@@ -79,7 +79,6 @@
     "screenfull": "4.2.0",
     "sweetalert2": "8.11.6",
     "tslib": "1.9.3",
-    "uuid": "^7.0.0",
     "videogular2": "6.4.0",
     "web-animations-js": "github:angular/web-animations-js#release_pr208",
     "zone.js": "~0.9.1"

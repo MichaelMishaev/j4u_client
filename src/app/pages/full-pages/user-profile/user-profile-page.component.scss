@@ -4,3 +4,23 @@
         margin-bottom: -2px;
     }
 }
+
+.chat-body {
+    height: 200px; /* Set your desired maximum height */
+    overflow-y: scroll !important; /* Enable vertical scrollbar when content overflows */
+   // border: 1px solid #ccc; /* Optional: Add a border to the scrollable area */
+    max-width: 100%;
+  }
+
+  .minimize-button {
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 5px;
+  }
+  
+  /* Style the minimized chat */
+  .minimized {
+    display: none;
+  }

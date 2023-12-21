@@ -5,6 +5,8 @@ import { AddJobComponent } from 'app/jobs/add-job/add-job.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormActionsComponent } from 'app/forms/layouts/form-actions/form-actions.component';
 import { UserMessageComponent } from './user-message/user-message.component';
+import { ApiService } from 'app/shared/api/api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-user-profile-page',
@@ -15,13 +17,19 @@ import { UserMessageComponent } from './user-message/user-message.component';
 export class UserProfilePageComponent implements OnInit {
     currentUser: any;
     constructor(private userService: UserService,private modalService: NgbModal,
-        private route: ActivatedRoute, private router:Router){
+        private route: ActivatedRoute, private router:Router, private apiService: ApiService,private toastrService: ToastrService){
 
     }
     //Variable Declaration
     currentPage: string = "CoordinatorsTable"
+    homeMessages = []
+    isMinimized: boolean = false;
 
+    toggleChat() {
+      this.isMinimized = !this.isMinimized;
+    }
     ngOnInit() {
+
         this.currentUser = this.userService.getCurrentUser()
         
         this.route.queryParams.subscribe(params => {
@@ -29,6 +37,10 @@ export class UserProfilePageComponent implements OnInit {
                 this.currentPage = params['p'];    
             }
           });
+          this.apiService.getGeneralMessagesForCoordinators().subscribe((res: []) => {
+            this.homeMessages = res;
+          })
+          
     }
 
     showPage(page: string) {

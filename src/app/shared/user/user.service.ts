@@ -7,6 +7,7 @@ export class UserService {
 
   private user:any;  
   public setCurrentUser(user){
+    console.log(user)
     this.user = user;
   }
   public getCurrentUser() {

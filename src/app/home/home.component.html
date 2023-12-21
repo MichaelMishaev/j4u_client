@@ -12,7 +12,11 @@
                           <img src="assets/img/portrait/small/avatar-s-1.png" class="width-50" alt="avatar" />
                         </a>
                       </div>
-                      <div class="chat-body">
+                      
+                    <button (click)="toggleChat()">
+                      {{ isMinimized ? 'Maximize' : 'Minimize' }}
+                    </button>
+                      <div class="chat-body" *ngIf="!isMinimized">
                         <div class="chat-content" *ngFor="let homeMessage of homeMessages">
                           <p style="font-size: 11px">  {{ homeMessage.Message }}</p>
                         </div>

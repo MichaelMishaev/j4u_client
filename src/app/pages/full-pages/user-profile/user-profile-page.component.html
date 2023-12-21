@@ -4,7 +4,29 @@
     <div class="row">
         <div class="col-12">
             <div class="card profile-with-cover">
-                <div class="card-img-top img-fluid bg-cover height-300" style="background: url('assets/img/photos/14.jpg') 50%;"></div>
+                <div class="card-img-top img-fluid bg-cover height-300" style="background: url('assets/img/photos/14.jpg') 50%;">
+
+                <div class="chat-application">
+                    <div class="chats">
+                        <div class="chat chat-left" >
+                            <div class="chat-avatar">
+                              <a class="avatar messages-avatar" data-toggle="tooltip" data-placement="right" title="" data-original-title="">
+                                <img src="assets/img/portrait/small/avatar-s-1.png" class="width-50" alt="avatar" />
+                              </a>
+                            </div>
+                            <button (click)="toggleChat()">
+                                {{ isMinimized ? 'Maximize' : 'Minimize' }}
+                              </button>
+                            <div class="chat-body" *ngIf="!isMinimized">
+                              <div class="chat-content" *ngFor="let homeMessage of homeMessages">
+                                <p style="font-size: 11px">  {{ homeMessage.Message }}</p>
+                              </div>
+                            </div>
+                          </div>
+                  </div>
+                </div>
+            </div>
+
                 <div class="media profil-cover-details row">
                     <div class="col-5">
                         <div class="align-self-start halfway-fab pl-3 pt-2">

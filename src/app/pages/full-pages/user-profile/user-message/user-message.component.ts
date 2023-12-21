@@ -11,11 +11,13 @@ export class UserMessageComponent implements OnInit {
   isSendToAll = false
   messageTxt: string;
   selectedCandidateId: any;
-  constructor(private apiService: ApiService,private toastrService: ToastrService) { }
 
+  constructor(private apiService: ApiService,private toastrService: ToastrService) { }
   ngOnInit() {
+   
   }
   selectCandidate(candidate){
+    debugger;
     this.selectedCandidateId = candidate.id;
   }
   sendToAllChecked(e){
@@ -24,6 +26,7 @@ export class UserMessageComponent implements OnInit {
     }
   }
   sendMessage(){
+    debugger;
     if(this.isSendToAll){
       this.apiService.addGeneralMessage({message:this.messageTxt}).subscribe(res=>{
         this.toastrService.success('Sent successfully');

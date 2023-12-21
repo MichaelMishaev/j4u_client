@@ -17,7 +17,8 @@ export class IncorrectReportComponent implements OnInit {
   ngOnInit() {
   }
 
-  openModal(dialog, jobCandidateId){
+  openModal(dialog, jobCandidateId, jobId){
+    debugger;
      this.jobCandidateId = jobCandidateId;
      this.dialogService.open(dialog, {size:'lg'});
   }

@@ -86,6 +86,16 @@ export class ApiService {
       })
     });
   }
+
+  getGeneralMessagesForCoordinators(){
+    return this.http.get(this.baseUrl + 'generalMessagesForCoordinators', {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' +  JSON.parse(localStorage.auth_app_token).value
+      })
+    });
+  }
+  
   addGeneralMessage(body){
     return this.http.post(this.baseUrl + 'generalMessages',body, {
       headers: new HttpHeaders({
@@ -103,6 +113,7 @@ export class ApiService {
     });
   }
   getUserMessages(){
+    
     return this.http.get(this.baseUrl + 'userMessages', {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
