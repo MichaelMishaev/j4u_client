@@ -150,6 +150,17 @@ export class ApiService {
       })
     });
   }
+
+
+  readNotification(notification: any){
+    return this.http.put(this.baseUrl + 'readNotifications',notification,{
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' +  JSON.parse(localStorage.auth_app_token).value
+      })
+    });
+  }
+
   getBonusesByUser(Id: any) {
     return this.http.get(this.baseUrl + 'bonusesByUser?u='+Id,{
       headers: new HttpHeaders({

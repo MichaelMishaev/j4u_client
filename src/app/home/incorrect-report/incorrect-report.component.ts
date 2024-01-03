@@ -18,7 +18,6 @@ export class IncorrectReportComponent implements OnInit {
   }
 
   openModal(dialog, jobCandidateId, jobId){
-    debugger;
      this.jobCandidateId = jobCandidateId;
      this.dialogService.open(dialog, {size:'lg'});
   }

@@ -69,13 +69,14 @@
             <div class="col-lg-5 col-md-5">
               <ul class="profile-menu no-list-style">
                 <li>
-                  <a [translate]="'Chat'" (click)="showPage('chat')"
-                    [ngClass]="currentPage === 'chat' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'"></a>
-                </li>
-                <li>
                   <a (click)="showPage('updates')"
                     [ngClass]="currentPage === 'updates' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">Updates</a>
                 </li>
+                <li >
+                  <!-- <a [translate]="'Chat'" (click)="showPage('chat')"
+                    [ngClass]="currentPage === 'chat' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'"></a> -->
+                </li>
+               
               </ul>
             </div>
           </div>

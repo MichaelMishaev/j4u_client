@@ -133,6 +133,7 @@ export class JobsComponent implements OnInit {
     this.filterByElement();
   }
   categoriesChanged(e) {
+    debugger;
     this.filterByElement();
   }
   customersChanged(e) {

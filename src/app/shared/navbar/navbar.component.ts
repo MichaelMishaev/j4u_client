@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   public isCollapsed = true;
   layoutSub: Subscription;
   notifications: any =[];
+  unreadNotificationsCount: any=[];
   searchShownPages = ['/jobs']
   @Output()
   toggleHideSidebar = new EventEmitter<Object>();
@@ -55,16 +56,30 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     const u = this.userService.getCurrentUser()
     this.userType = u && u.userType
-    this.apiService.getjobCandidateHistoryByUser().subscribe(res=>{
-      if(res.length){
-        this.notifications = this.notifications.concat(res);
-      }
-    })
+    // this.apiService.getjobCandidateHistoryByUser().subscribe(res=>{
+    //   if(res.length){
+    //     this.notifications = this.notifications.concat(res);
+    //   }
+    // })
     this.apiService.getNotifications().subscribe((res:any[])=>{
       if(res.length){
         this.notifications = this.notifications.concat(res);
+        this.unreadNotificationsCount = res.filter(notification => notification.IsRead === 0);
       }
     })
+    // this.unreadNotificationsCount = this.notifications.filter(notification => notification.IsRead === 0).length || 0;
+    //     debugger;
+    //     console.warn('num if unreadd: ' + this.unreadNotificationsCount.length)
+  }
+
+  // getReadNotificationsCount(): number {
+  //   return this.notificationsCount?.filter(notification => notification.isRead === 1).length || 0;
+  // }
+
+  getReadNotificationsCount(): number {
+    this.unreadNotificationsCount = this.notifications.filter(notification => notification.IsRead === 0).length || 0;;
+    
+    return this.unreadNotificationsCount;
   }
 
   ngAfterViewInit() {
@@ -95,6 +110,22 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this.translate.use(language);
     }
+  }
+
+  readMessage(notification: any){
+    this.apiService.readNotification(notification).subscribe((res:any[])=>{
+     this.apiService.getNotifications().subscribe((res:any[])=>{
+      debugger;
+      console.table({res})
+        this.notifications = this.notifications.concat(res);
+        this.unreadNotificationsCount = res.filter(notification => notification.IsRead === 0);
+      
+    })
+    })
+    // debugger;
+    // this.getReadNotificationsCount();
+    //this.getReadNotificationsCount();
+
   }
 
   ToggleClass() {

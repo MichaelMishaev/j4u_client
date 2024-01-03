@@ -11,9 +11,13 @@ export class UpdatesComponent implements OnInit {
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.apiService.getjobCandidateHistoryByUser().subscribe((res: any)=>{
-      this.updates = res
+    this.apiService.getjobCandidateHistoryByUser().subscribe((res: any[]) => {
+      this.updates = res.sort((a, b) => {
+        // Assuming 'date' is the field you want to sort by
+        return new Date(b.CreatedAt).getTime() - new Date(a.CreatedAt).getTime();
+      });
     });
+    
   }
 
 }

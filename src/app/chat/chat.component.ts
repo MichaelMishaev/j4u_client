@@ -57,7 +57,6 @@ export class ChatComponent implements OnInit {
   }
   
   initMessages(){
-    debugger;
     this.apiService.getUserMessages().subscribe((res: any)=>{
       this.allMessages = res;
       this.currentMessages = this.allMessages.filter(x=>x.FromUser === this.user.id || x.ToUser === this.user.id);
@@ -84,7 +83,6 @@ export class ChatComponent implements OnInit {
   }
   //send button function calls
   onAddMessage() {
-    debugger;
     if (this.messageInputRef.nativeElement.value != "") {
       this.messages.push(this.messageInputRef.nativeElement.value);
     }

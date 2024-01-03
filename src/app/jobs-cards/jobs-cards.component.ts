@@ -15,6 +15,7 @@ import { UserService } from 'app/shared/user/user.service';
 export class JobsCardsComponent implements OnInit {
 
   @Input() filteredJobs: any[]
+  debugger;
   @Input() isLoggedIn = false;
   @Output() addJobLoggedOut = new EventEmitter()
   job: any;

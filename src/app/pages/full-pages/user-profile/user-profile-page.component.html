@@ -18,9 +18,12 @@
                                 {{ isMinimized ? 'Maximize' : 'Minimize' }}
                               </button>
                             <div class="chat-body" *ngIf="!isMinimized">
-                              <div class="chat-content" *ngFor="let homeMessage of homeMessages">
-                                <p style="font-size: 11px">  {{ homeMessage.Message }}</p>
-                              </div>
+                                <div class="chat-content" *ngFor="let homeMessage of homeMessages; let i = index">
+                                    <!-- <p style="font-size: 11px; display: inline;">{{ homeMessage }}</p>  -->
+                                    <button (click)="handleSearchEvent(homeMessage)" style="font-size: 11px; display: inline;">{{ homeMessage }}</button>
+                                    --
+                                    <p style="font-size: 11px; color: #00b7ff; display: inline; ">{{ homeTimeMessages[i] }}</p>
+                                  </div>
                             </div>
                           </div>
                   </div>
@@ -98,7 +101,7 @@
             <div class="content-header" [translate]="'Coordinators table'"></div>
         </div>
     </div>
-   <coordinators-table></coordinators-table>
+   <coordinators-table (searchEvent)= "handleSearchEvent($event)"></coordinators-table>
 </section>
 <!--CoordinatorsTable section ends-->
 

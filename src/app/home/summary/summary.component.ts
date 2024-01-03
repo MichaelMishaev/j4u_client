@@ -29,7 +29,6 @@ export class SummaryComponent implements OnInit {
   }
 
   initCards(){
-    debugger;
 
     this.apiService.getCandidates().subscribe((data: any[])=>{
    
