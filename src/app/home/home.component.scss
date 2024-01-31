@@ -17,4 +17,17 @@
     .user-name{
         flex: 0 0 33%;
     }
+
+    .minimize-button {
+        background-color: #ccc;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 0 5px;
+      }
+      
+      /* Style the minimized chat */
+      .minimized {
+        display: none;
+      }
 }

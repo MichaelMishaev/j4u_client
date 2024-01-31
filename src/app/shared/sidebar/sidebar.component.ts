@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, OnDestroy, ElementRef, Renderer2, AfterViewInit } from "@angular/core";
 
-import { ROUTES } from './sidebar-routes.config';
+import { ADMIN_ROUTES, ROUTES } from './sidebar-routes.config';
 import { RouteInfo } from "./sidebar.metadata";
 import { Router, ActivatedRoute } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
@@ -8,6 +8,7 @@ import { customAnimations } from "../animations/custom-animations";
 import { ConfigService } from '../services/config.service';
 import { LayoutService } from '../services/layout.service';
 import { Subscription } from 'rxjs';
+import { UserService } from "../user/user.service";
 
 @Component({
   selector: "app-sidebar",
@@ -26,7 +27,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
   logoUrl = 'assets/img/logo.png';
   public config: any = {};
   layoutSub: Subscription;
-
+  userType:any;
 
   constructor(
     private elementRef: ElementRef,
@@ -35,7 +36,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     public translate: TranslateService,
     private configService: ConfigService,
-    private layoutService: LayoutService
+    private layoutService: LayoutService,
+    private userService: UserService
   ) {
     if (this.depth === undefined) {
       this.depth = 0;
@@ -74,9 +76,15 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngOnInit() {
-    this.config = this.configService.templateConf;
-    this.menuItems = ROUTES;
 
+//     const currentUser = this.userService.getCurrentUser();
+//     this.userType = currentUser ? currentUser.userType : null;
+
+//     this.config = this.configService.templateConf;
+// debugger;
+//     this.menuItems =this.userType > 1? ADMIN_ROUTES :  ROUTES ;
+
+   
 
 
     if (this.config.layout.sidebar.backgroundColor === 'white') {
@@ -90,6 +98,13 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+
+    const currentUser = this.userService.getCurrentUser();
+    this.userType = currentUser ? currentUser.userType : null;
+
+    this.config = this.configService.templateConf;
+debugger;
+    this.menuItems =this.userType > 1? ADMIN_ROUTES :  ROUTES ;
 
     setTimeout(() => {
       if (this.config.layout.sidebar.collapsed != undefined) {

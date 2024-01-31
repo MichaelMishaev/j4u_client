@@ -23,7 +23,6 @@ export class UploadCvComponent implements OnInit{
 
   }
   ngOnInit(): void {
-
     this.id = this.id || this.rowData.OriginalCandidateId || this.rowData.Id;
   }
   fileChange(element) {
@@ -38,14 +37,13 @@ export class UploadCvComponent implements OnInit{
     formData.append("uploads", file,this.id.toString() );
     
     this.loading = true;
-
     this.api.uploadCV(formData)
     .subscribe((response) => {
          this.toastrService.success('Uploaded successfully');
          this.loading = false;
          this.uploaded = true;
          this.ref.detectChanges()
-         if(this.rowData) // fast hack - if no rowData it means we are in quick apply
+         if(this.rowData !== 'undefined') // fast hack - if no rowData it means we are in quick apply
          {
           this.rowData.HasCV = 1;
           this.rowData.FileExtension = fileExt

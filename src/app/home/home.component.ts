@@ -15,6 +15,13 @@ export class HomeComponent implements OnInit {
   currentUser: any = {}
   jobCandidateByUser = []
   incorrectReportData = []
+
+  isMinimized: boolean = false;
+
+  toggleChat() {
+    this.isMinimized = !this.isMinimized;
+  }
+  
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if(params['p']){
@@ -28,6 +35,7 @@ export class HomeComponent implements OnInit {
     });
     this.apiService.getGeneralMessages().subscribe((res: []) => {
       this.homeMessages = res;
+      
     })
   }
 

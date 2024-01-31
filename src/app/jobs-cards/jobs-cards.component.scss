@@ -19,6 +19,10 @@
 }
 .copy-jobs{
 }
+.card:hover {
+    background-color: #e0e0f8;
+    cursor: pointer; /* Optional: Change cursor on hover */
+  }
 
 
 @media (max-width:540px) {

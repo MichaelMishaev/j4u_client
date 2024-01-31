@@ -15,6 +15,7 @@ export class SummaryComponent implements OnInit {
   hasInvalidRows: boolean
   bonusAmount: number;
   allCandidatesCount: number;
+   countData: number;
   @Input() data: any;
   ngOnInit() {
     this.initUserStatusMessages();
@@ -26,8 +27,13 @@ export class SummaryComponent implements OnInit {
       this.filterMessages = res.sort((a,b)=>{return new Date(b.CreatedAt).getTime()- new Date(a.CreatedAt).getTime()});
     });
   }
+
   initCards(){
-    this.allCandidatesCount = data.length;
+
+    this.apiService.getCandidates().subscribe((data: any[])=>{
+   
+      this.allCandidatesCount = data.length;
+      })
     this.hasInvalidRows = this.jobCandidateByUser.filter(x=>x.IsInternalReject === 1).length > 0;
     this.apiService.getBonusesByUser(this.userService.getCurrentUser().id).subscribe((res:any[]) =>{
       this.bonusAmount = res.reduce((sum, current) => sum + current.BonusAmount, 0)

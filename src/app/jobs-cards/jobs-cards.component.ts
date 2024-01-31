@@ -50,6 +50,10 @@ export class JobsCardsComponent implements OnInit {
     })
 
   }
+  setDefaultImage(event: any) {
+    event.target.src = 'assets/img/photos/default.png'; // Path to your default image
+  }
+
   //todo move somewhere!!!
   openAddJobModal(e,job:any = {}){
     e.stopPropagation();

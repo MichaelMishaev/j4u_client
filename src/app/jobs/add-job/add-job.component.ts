@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AddJobComponent implements OnInit {
   showNewJobCity = false;
-  jobOpenOptions = [{id: 1, description:'Open job'}, {id:0,description: 'Closed job'}]
+  jobOpenOptions = [{id: 1, description:'משרה פתוחה'}, {id:0,description: 'משרה סגורה'}]
   showNewJobSubCategory = false;
   job: any;
   questions: FormArray;
@@ -21,9 +21,11 @@ export class AddJobComponent implements OnInit {
   // addJobModalRef:any;
   lookupAreas: any;
   lookupCategories: any;
+  lookupSubCategories:any;
   lookupCities: any;
   lookupJobTypes: any;
   filteredLookupCities: any;
+  filteredLookupSubCategory:any;
   public config = {
     limitTo: 100,
     displayKey:"description", //if objects array passed which key to be displayed defaults to description
@@ -58,6 +60,19 @@ export class AddJobComponent implements OnInit {
     searchPlaceholder: string; // label thats displayed in search input,
     searchOnKey: string; // key on which search should be performed this will be selective search. if undefined this will be extensive search on all keys
   };
+  
+  subCategoryConfig: {
+    limitTo: number; displayKey: string; //if objects array passed which key to be displayed defaults to description
+      search: boolean; //true/false for the search functionlity defaults to false,
+      height: string; //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
+      placeholder: string; // text to be displayed when no item is selected defaults to Select,
+      customComparator: () => void; // a custom function using which user wants to sort the items. default is undefined and Array.sort() will be used in that case,
+      moreText: string; // text to be displayed whenmore than one items are selected like Option 1 + 5 more
+      noResultsFound: string; // text to be displayed when no items are found while searching
+      searchPlaceholder: string; // label thats displayed in search input,
+      searchOnKey: string; // key on which search should be performed this will be selective search. if undefined this will be extensive search on all keys
+    };
+
   userManagerConfig: any;
   cityConfig: {
   limitTo: number; displayKey: string; //if objects array passed which key to be displayed defaults to description
@@ -103,7 +118,7 @@ export class AddJobComponent implements OnInit {
       Area : new FormControl(this.job.Areas || '',[Validators.required]),
       City : new FormControl(this.job.Locations || '',[Validators.required]),
       Category: new FormControl(this.job.Categories || '',[Validators.required]),
-      //SubCategory: new FormControl(this.job.SubCategory || '',[Validators.required]),
+      SubCategory: new FormControl(this.job.SubCategory || '',[Validators.required]),
       Period: new FormControl(this.job.Period || '',[Validators.required]),
       PaymentPeriod: new FormControl(this.job.PaymentPeriod || '',[Validators.required]),
       Status: new FormControl(this.job.Status != undefined ? 
@@ -133,6 +148,9 @@ export class AddJobComponent implements OnInit {
     this.categoryConfig = Object.assign({}, this.config);
     this.userManagerConfig = Object.assign({}, this.config);
     this.jobTypeConfig = Object.assign({}, this.config);
+    this.subCategoryConfig = Object.assign({},this.config)
+    this.subCategoryConfig.placeholder = 'תת קטגוריה'; 
+    this.subCategoryConfig.displayKey = "Name";
     this.areaConfig.placeholder = "אזור";
     this.areaConfig.displayKey = "Name";
     this.cityConfig.placeholder = "עיר";
@@ -148,7 +166,7 @@ export class AddJobComponent implements OnInit {
     this.apiService.getLookups().subscribe((res:any)=>{
       this.lookupAreas = res.areas;
       this.lookupCategories = res.categories;
-      //this.lookupSubCategories = res.subCategories;
+      this.lookupSubCategories = res.subCategories;
       this.lookupCities = res.cities;
       this.lookupJobTypes = res.jobTypes;
       this.filteredLookupCities = this.lookupCities;
@@ -180,12 +198,13 @@ export class AddJobComponent implements OnInit {
       userId = this.newJobFormGroup.get('UserId').value.id;
     }
     var statusStr = typeof this.newJobFormGroup.get('Status').value === 'string' ? this.newJobFormGroup.get('Status').value : this.newJobFormGroup.get('Status').value.description
-
     job.Status = (this.jobOpenOptions.find((x: any) =>x.description === statusStr) as any).id;
+
+    console.log("job obj: " + job)
+    console.log("status is: : " + job.Status)
 
     job.Locations = typeof this.newJobFormGroup.get('City').value === 'string'
                         ? this.newJobFormGroup.get('City').value : this.newJobFormGroup.get('City').value.Name;
-
     job.JobType = typeof this.newJobFormGroup.get('JobType').value === 'string'
     ? this.newJobFormGroup.get('JobType').value
     : (this.newJobFormGroup.get('JobType').value as any).map(x => x.Name).join(",");
@@ -195,8 +214,8 @@ export class AddJobComponent implements OnInit {
                         ? this.newJobFormGroup.get('Area').value : this.newJobFormGroup.get('Area').value.Name;
     job.Categories =  typeof this.newJobFormGroup.get('Category').value === 'string'
                         ? this.newJobFormGroup.get('Category').value : this.newJobFormGroup.get('Category').value.Name;
-    // job.SubCategory = typeof this.newJobFormGroup.get('SubCategory').value === 'string'
-    //                     ? this.newJobFormGroup.get('SubCategory').value : this.newJobFormGroup.get('SubCategory').value.Name;
+    job.SubCategory = typeof this.newJobFormGroup.get('SubCategory').value === 'string'
+                        ? this.newJobFormGroup.get('SubCategory').value : this.newJobFormGroup.get('SubCategory').value.Name;
     job.UserId = userId;
     job.Questions = job.questions.map(x=>x.question).join(';');
     if(job.IsImportant.data){
@@ -214,19 +233,25 @@ export class AddJobComponent implements OnInit {
       }
 
     },(err)=>{
-      this.toastrService.error('job didnt save due to error or it allready exist');
+      debugger;
+      if(err.status == 400){
+        this.toastrService.error(err.error);
+      }
+      else{
+      this.toastrService.error('job didnt save due to error or it allready exist: ' + err);
+    }
 
     })
   }
-  // addJobCategoryChanged(area){
-  //   this.showNewJobSubCategory = false;
-  //   this.newJobFormGroup.patchValue({
-  //     SubCategory: '' });
-  //   this.filteredLookupSubCategory = this.lookupSubCategories.filter(x=>x.CategoryId == area.value.Id);
-  //   setTimeout(() => {
-  //     this.showNewJobSubCategory = true;
-  //   }, 0);
-  // }
+  addJobCategoryChanged(category){
+    this.showNewJobSubCategory = false;
+    this.newJobFormGroup.patchValue({
+      SubCategory: '' });
+    this.filteredLookupSubCategory = this.lookupSubCategories.filter(x=>x.CategoryId == category.value.Id);
+    setTimeout(() => {
+      this.showNewJobSubCategory = true;
+    }, 0);
+  }
   //TODO IMPLEMENT
   addJobAreaChanged(area){
     this.showNewJobCity = false;

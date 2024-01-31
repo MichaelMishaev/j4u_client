@@ -57,13 +57,13 @@
           </div>
 
           <div class="input-group" >
-              <ngx-select-dropdown style="width:100%" formControlName="Category"  [config]="categoryConfig" [options]="lookupCategories"
+              <ngx-select-dropdown style="width:100%" (change)="addJobCategoryChanged($event)" formControlName="Category"  [config]="categoryConfig" [options]="lookupCategories"
             ></ngx-select-dropdown>
           </div>
-          <!-- <div class="input-group" *ngIf="showNewJobSubCategory">
-              <ngx-select-dropdown style="width:100%" formControlName="SubCategory"  [config]="subCategoryConfig" [options]="filteredLookupSubCategory"
+          <div class="input-group" *ngIf="showNewJobSubCategory">
+              <ngx-select-dropdown style="width:100%"  formControlName="SubCategory"  [config]="subCategoryConfig" [options]="filteredLookupSubCategory"
             ></ngx-select-dropdown>
-          </div> -->
+          </div>
           <br>
           <label>שאלות למועמדים</label>
 

@@ -1,7 +1,7 @@
 
 
    <div class="btns-container">
-    <input class="form-control" [(ngModel)]="searchInput" (keyup)="filterRes()"
+    <input id="searchJob" class="form-control" [(ngModel)]="searchInput" (keyup)="filterRes()"
            [placeholder]="'Search by name or job id' | translate"/>
     <i [translate]="'Clear'" style="cursor: pointer" class="fa fa-eraser" (click)="clearFilter()">  </i>
  </div>
@@ -209,7 +209,7 @@
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let row of known">
+            <tr *ngFor="let row of knownCandidates">
                 <th scope="row"> {{row.CreateDate | date:'short'}}</th>
                 <th scope="row"> {{row.CandidateName}}</th>
                 <th scope="row"> {{row.Status | translate}}</th>

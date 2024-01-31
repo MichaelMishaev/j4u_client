@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'app/shared/api/api.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,8 +11,20 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './coordinators-table.component.html',
   styleUrls: ['./coordinators-table.component.scss'],
 })
+
 export class CoordinatorsTableComponent implements OnInit {
 
+  // @Input() selectedCandidate: string;
+  @Output() searchEvent = new EventEmitter<string>();
+  
+  
+
+  performSearch(searchTerm: string) {
+    console.warn('search emitted')
+    this.searchEvent.emit(searchTerm);
+    this.filterResWithParam(searchTerm)
+    // You can also implement internal search logic here if needed
+  }
   public statusConfig = {
     displayKey:"translated", //if objects array passed which key to be displayed defaults to description
     height: '350px', //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
@@ -35,6 +47,8 @@ export class CoordinatorsTableComponent implements OnInit {
   startWorkDate: any;
   questions: any;
   historyData: any;
+  knownCandidates:any;
+  jobAcceptData : any;
   public statusOptions = [];
   constructor(private apiService: ApiService,private route: ActivatedRoute, 
             public activeModal: NgbActiveModal, private translate: TranslateService,
@@ -53,8 +67,8 @@ export class CoordinatorsTableComponent implements OnInit {
     });
 }
 
-  ngOnInit() {
 
+  ngOnInit() {
     this.user = this.userService.getCurrentUser();
     this.isPageAllowed = this.user.userType > 1;
     if(this.user.userType === 3){
@@ -121,16 +135,21 @@ export class CoordinatorsTableComponent implements OnInit {
   saveRow(rowData,startDateDialog){
     if(this.isShowDatePopUp(rowData.Status)) {
       const modalRef = this.dialogService.open(startDateDialog);
+      this.jobAcceptData = rowData;
       modalRef.componentInstance.data = rowData
+     
 
     } else{
       this.updateJobCandidateStatus(rowData)
     }
-  }
+  }c
   isShowDatePopUp(status){
     return status && status.id && (status.id === 6 || status.id === 12)
   }
   updateJobCandidateStatus(rowData){
+    if(rowData.Status==undefined){
+      rowData = this.jobAcceptData;
+    }
     rowData.prevStatus = rowData.Status;
     rowData.prevStatusDescription = rowData.StatusDescription;
     rowData.prevInternalRemarks = rowData.InternalRemarks;
@@ -183,10 +202,32 @@ export class CoordinatorsTableComponent implements OnInit {
   }
   openIsKnownModal(knownDialog, candidateId){
     this.apiService.getKnownCandidateHistory(candidateId).subscribe(res=>{
-      
+      debugger;
+      this.knownCandidates = res;
       const modalRef = this.dialogService.open(knownDialog);
     })
   }
+
+  filterResWithPredicate(jobId: string){
+    console.log('insidePredicate')
+    if(jobId.length > 1){
+      this.filteredTableData = this.tableData.filter(x=>x.ExternalJobId == this.searchInput 
+        || x.Title.indexOf(this.searchInput) > -1
+        || x.CompanyDescription.indexOf(this.searchInput) > -1)
+
+    }
+  }
+
+  filterResWithParam(val:string){
+    this.searchInput = val;
+    if(this.searchInput.length > 1){
+      this.filteredTableData = this.tableData.filter(x=>x.ExternalJobId == this.searchInput 
+        || x.Title.indexOf(this.searchInput) > -1
+        || x.CompanyDescription.indexOf(this.searchInput) > -1)
+
+    }
+  }
+
 
   filterRes(){
     if(this.searchInput.length > 1){
@@ -210,10 +251,11 @@ export class CoordinatorsTableComponent implements OnInit {
   }
 
   isRelevantStatus(status){
-    return status === 'New' || status === 'Resume sent'
-    || status === 'Missing details' || status === 'An interview was scheduled'
-    || status === 'Waiting for work to begin'
-    || status === 'Waiting for reply from candidate'
+    var ee = this.translate.instant('Cooks');
+    return status === this.translate.instant('New')  || status === this.translate.instant('Resume sent')
+    || status === this.translate.instant('Missing details') || status === this.translate.instant('An interview was scheduled')
+    || status === this.translate.instant('Waiting for work to begin')
+    || status === this.translate.instant('Waiting for reply from candidate')
   }
   closeModal(){
     this.dialogService.dismissAll()

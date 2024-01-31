@@ -219,7 +219,7 @@ button {
     }
   }
 }
-/deep/
+::ng-deep 
 body{
   font-size: 1.2rem !important;
 }

@@ -1,8 +1,10 @@
 import { Component, ChangeDetectorRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { NbAuthService, NB_AUTH_OPTIONS, getDeepFromObject } from '@nebular/auth';
+import { NbAuthService, NB_AUTH_OPTIONS, getDeepFromObject, NbAuthJWTToken } from '@nebular/auth';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfigService } from 'app/shared/services/config.service';
+import { UserService } from 'app/shared/user/user.service';
 
 @Component({
   selector: 'app-login-card',
@@ -21,14 +23,20 @@ export class LoginCardComponent {
     submitted: boolean = false;
     //socialLinks: NbAuthSocialLink[] = [];
     rememberMe = false;
+    userType:any;
     
+    public config: any = {};
+
     constructor(@Inject(NB_AUTH_OPTIONS) protected options = {},
                 public dialogService: NgbModal,
                 protected service: NbAuthService,
                 private route: ActivatedRoute,
                 private translate: TranslateService,
                 protected cd: ChangeDetectorRef,
-                protected router: Router) {
+                protected router: Router,
+                private configService:ConfigService,
+                private auth: NbAuthService,
+                private userService: UserService) {
   
       this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
       this.showMessages = this.getConfigValue('forms.login.showMessages');
@@ -37,6 +45,19 @@ export class LoginCardComponent {
       this.rememberMe = this.getConfigValue('forms.login.rememberMe');
   
     }
+
+    ngOnInit() {
+      this.config = this.configService.templateConf;
+      this.auth.onTokenChange()
+      .subscribe((token: NbAuthJWTToken) => {
+        if (token.isValid()) {
+          this.userService.setCurrentUser(token.getPayload());
+        }
+  
+      })
+    };
+
+    
   
     login(provider = 'email'): void {
       this.errors = [];
@@ -59,7 +80,14 @@ export class LoginCardComponent {
           this.errors = [this.translate.instant("Invalid credentials, please try again")];
           return;
         }
-        const redirect = '/home';
+      // Assuming userService is already injected in the constructor
+        const currentUser = this.userService.getCurrentUser();
+        debugger;
+        this.userType = currentUser ? currentUser.userType : null;
+        // Set redirect based on userType using a ternary operator
+        const redirect = this.userType > 1 ? '/pages/profile'  :'/home' ;
+
+        // const redirect = '/home';  //'/pages/profile';
         if (redirect) {
           setTimeout(() => {
             

@@ -86,6 +86,16 @@ export class ApiService {
       })
     });
   }
+
+  getGeneralMessagesForCoordinators(){
+    return this.http.get(this.baseUrl + 'generalMessagesForCoordinators', {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' +  JSON.parse(localStorage.auth_app_token).value
+      })
+    });
+  }
+  
   addGeneralMessage(body){
     return this.http.post(this.baseUrl + 'generalMessages',body, {
       headers: new HttpHeaders({
@@ -103,6 +113,7 @@ export class ApiService {
     });
   }
   getUserMessages(){
+    
     return this.http.get(this.baseUrl + 'userMessages', {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -139,6 +150,17 @@ export class ApiService {
       })
     });
   }
+
+
+  readNotification(notification: any){
+    return this.http.put(this.baseUrl + 'readNotifications',notification,{
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' +  JSON.parse(localStorage.auth_app_token).value
+      })
+    });
+  }
+
   getBonusesByUser(Id: any) {
     return this.http.get(this.baseUrl + 'bonusesByUser?u='+Id,{
       headers: new HttpHeaders({
@@ -181,6 +203,7 @@ export class ApiService {
       })
     });
   }
+  
   getJobCandidateHistory(jobCandidateId){
     return this.http.get(this.baseUrl + 'jobCandidateHistory?jobCandidateId='+jobCandidateId,{
       headers: new HttpHeaders({
@@ -387,6 +410,7 @@ export class ApiService {
     });
   }
   addJob(job){
+    debugger;
     return this.http.post(this.baseUrl + 'job',job,{
       headers: new HttpHeaders({
       //  'Content-Type':  'application/json',

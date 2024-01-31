@@ -5,6 +5,8 @@
 
 export const environment = {
   production: false,
-  baseApiUrl : 'http://3.127.25.25:3001',
+  baseApiUrl : 'http://ec2-16-171-10-213.eu-north-1.compute.amazonaws.com/api',
+  // 'http://localhost:3001',
   defaultLang: "he"
 };
+

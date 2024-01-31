@@ -23,7 +23,9 @@
             <div class="card-body">
             <h4 class="card-title mb-0">{{t.StatusDescription}}</h4>
               <hr class="mt-0 mb-2">
-                 <p class="m-0">{{t.InternalRemarks}}</p>
+              <p class="m-0" *ngIf="t.InternalRemarks !== 'null'">{{ t.InternalRemarks }}</p>
+
+
             </div>
           </div>
         </div>

@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   public isCollapsed = true;
   layoutSub: Subscription;
   notifications: any =[];
+  unreadNotificationsCount: any=[];
   searchShownPages = ['/jobs']
   @Output()
   toggleHideSidebar = new EventEmitter<Object>();
@@ -55,19 +56,33 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     const u = this.userService.getCurrentUser()
     this.userType = u && u.userType
-    this.apiService.getjobCandidateHistoryByUser().subscribe(res=>{
-      if(res.length){
-        this.notifications = this.notifications.concat(res);
-      }
-    })
+    // this.apiService.getjobCandidateHistoryByUser().subscribe(res=>{
+    //   if(res.length){
+    //     this.notifications = this.notifications.concat(res);
+    //   }
+    // })
     this.apiService.getNotifications().subscribe((res:any[])=>{
       if(res.length){
         this.notifications = this.notifications.concat(res);
+        this.unreadNotificationsCount = res.filter(notification => notification.IsRead === 0);
       }
     })
+    // this.unreadNotificationsCount = this.notifications.filter(notification => notification.IsRead === 0).length || 0;
+    //     console.warn('num if unreadd: ' + this.unreadNotificationsCount.length)
+  }
+
+  // getReadNotificationsCount(): number {
+  //   return this.notificationsCount?.filter(notification => notification.isRead === 1).length || 0;
+  // }
+
+  getReadNotificationsCount(): number {
+    this.unreadNotificationsCount = this.notifications.filter(notification => notification.IsRead === 0).length || 0;;
+    
+    return this.unreadNotificationsCount;
   }
 
   ngAfterViewInit() {
+    debugger;
     if(this.config.layout.dir) {
       setTimeout(() => {
         const dir = this.config.layout.dir;
@@ -97,6 +112,20 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  readMessage(notification: any){
+    this.apiService.readNotification(notification).subscribe((res:any[])=>{
+     this.apiService.getNotifications().subscribe((res:any[])=>{
+      console.table({res})
+        this.notifications = this.notifications.concat(res);
+        this.unreadNotificationsCount = res.filter(notification => notification.IsRead === 0);
+      
+    })
+    })
+    // this.getReadNotificationsCount();
+    //this.getReadNotificationsCount();
+
+  }
+
   ToggleClass() {
     if (this.toggleClass === "ft-maximize") {
       this.toggleClass = "ft-minimize";
@@ -110,6 +139,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   toggleSidebar() {
+    debugger;
     const appSidebar = document.getElementsByClassName("app-sidebar")[0];
     if (appSidebar.classList.contains("hide-sidebar")) {
       this.toggleHideSidebar.emit(false);
@@ -118,6 +148,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   logout(strategy){
+    debugger;
     this.auth.logout(strategy).subscribe((result: NbAuthResult) => {
 
       const redirect = result.getRedirect();
