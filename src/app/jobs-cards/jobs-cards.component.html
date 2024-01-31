@@ -1,0 +1,54 @@
+<section id="groups">
+ 
+  <div class="row text-left">
+    <div class="col-12">
+      <div class="card-group" style="flex-flow:row wrap">
+        <div class="card" [ngClass]="isLoggedIn ? 'card-wrapper' : 'card-wrapper-wide'"
+         *ngFor="let job of filteredJobs">
+          <div class="card-content" style="height:80%;  cursor: pointer;" (click)="openJobDetailsModal(job)">
+            <img class="card-img-top img-fluid" src="assets/img/photos/{{job.Categories}}.png" alt="Card image cap" (error)="setDefaultImage($event)" />
+            
+            <div class="card-body" style="padding: 0.25rem !important; ">
+            <h4 style="height:75px" class="card-title">{{job.Title}}
+              <i style="margin-top:8px;color: #ffa100;" 
+              *ngIf="job.IsImportant && job.IsImportant.data && job.IsImportant.data[0] === 1"
+               class="fa fa-fire fa-lg"></i> </h4>
+            <div *ngIf="isLoggedIn">
+                <p class="card-text"> {{'Id' | translate}} : {{job.ID}}
+                  <!-- <i style="margin-top:8px;color: #ffa100;" 
+                  *ngIf="job.IsImportant && job.IsImportant.data && job.IsImportant.data[0] === 1"
+                   class="fa fa-fire fa-lg"></i> -->
+
+                </p>
+                <p class="card-text">{{'Commission' | translate}} : {{job.Commission}}</p>
+  
+            </div>
+        
+            </div>
+            <a id="copy-clipboard"  *ngIf="isLoggedIn" href="javascript:void(0)"  (click)="copyJobDetails($event, job)" 
+               class="btn btn-success mr-1 btn-fab copy-jobs">
+              <i class="fa fa-copy"></i>
+            </a>
+              <button *ngIf="isAllowedToEditJob" (click)="openAddJobModal($event,job)" class="btn btn-raised gradient-purple-bliss white">עדכון משרה</button> 
+              <a [translate]="'Add'" href="javascript:void(0)" (click)="openJobDetailsModal(job)" class="btn btn-raised gradient-purple-bliss white"></a>
+          </div>
+          <br/>
+          <div class="card-footer" style="padding: 0; margin-top: 10px">
+           
+              <!-- <div *ngIf="!isLoggedIn" class="flex-space-between mt-10" >
+                  <a [translate]="'Add'" id="add-job" href="javascript:void(0)" (click)="emitAddJobLoggedOut(job.Id)" class="btn btn-raised gradient-purple-bliss white"></a>
+                  <a [translate]="'Details'" href="javascript:void(0)" (click)="openJobDetailsModal(job)" class="btn btn-raised gradient-purple-bliss white"></a>
+                </div> -->
+                <!-- <div *ngIf="isLoggedIn" class="flex-space-between mt-10" >
+                    <a [translate]="'Add'" id="add-job" href="javascript:void(0)" (click)="openAddCandidateModal(job)" class="btn btn-raised gradient-purple-bliss white"></a>
+                    <a [translate]="'Details'" href="javascript:void(0)" (click)="openJobDetailsModal(job)" class="btn btn-raised gradient-purple-bliss white"></a>
+                  </div> -->
+          </div>
+        </div>
+       
+      
+        
+      </div>
+    </div>
+  </div>
+</section>

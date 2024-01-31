@@ -1,0 +1,76 @@
+<button class="btn btn-raised btn-primary" [translate]="'Applied jobs'"
+ type="button" (click)="openModal(dialog)"></button>
+  
+<ng-template #dialog let-jobs let-ref="dialogRef" >
+    <ng-container *ngIf="!showUpdateQuestions" style="padding:40px;">
+        <table class="table" *ngIf="jobsByUser.length > 0; else noResults">
+            <thead>
+              <tr>
+                <th scope="col" [translate]="'Job id'"></th>
+                <th scope="col" [translate]="'Title'"></th>
+                <th scope="col" [translate]="'Status'"></th>
+                <th scope="col" [translate]="'Description'"></th>
+                <th scope="col" [translate]="'Edit'"></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let job of jobsByUser">
+                <th scope="row">{{job.JobId}}</th>
+                <td>{{job.Title}}</td>
+                <td>{{job.Status | translate}}</td>
+                <td>{{job.StatusDescription}}</td>
+                <td><button [translate]="'Edit'"  class="btn btn-raised btn-primary" (click)="getCandidateJobQuestions(job.JobId)"></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ng-template #noResults>
+             <div class="no-results" [translate]="'Candidate wasnt applied for any job yet.'"></div>
+
+              </ng-template>
+
+    </ng-container>
+
+     <div *ngIf="showUpdateQuestions">
+
+      <form style="padding:3%" [formGroup]="jobQuestions" (ngSubmit)="updateJobCandidate();">
+
+        <label [translate]="'Filtering Questions'"></label>
+                  <div *ngFor="let question of questions; let i = index" >
+
+                    <label>{{question}}</label>
+
+                    <div class="input-group" >
+                    <input type="text" formControlName="{{i}}" placeholder="{{'Answer' | translate}}" class="form-control"/>
+                    </div>
+
+                  </div>
+                  <br>
+                  <label [translate]="'Agent Remarks'"></label>
+
+                  <div class="input-group">
+                      <textarea formControlName="agentRemarks" rows="5" class="form-control"></textarea>
+                    </div>
+                    <br>
+                    <div class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                        <input type="checkbox" formControlName="confirmCandidate" class="custom-control-input" checked id="customcheckbox1">
+                        <label class="custom-control-label" [translate]="'I approve I went through the job requirements with the user'" for="customcheckbox1" [translate]="'I approve I went through the job requirements with the user'" ></label>
+                      </div>
+
+                    <br>
+
+                    <div class="flex-center">
+                        <button [translate]="'Update'"  type="submit" [disabled]="!jobQuestions.valid || !jobQuestions.get('confirmCandidate').value" class="btn btn-raised btn-primary"></button>
+                    </div>
+
+      </form>
+     </div>
+ 
+
+ <div class="flex-center">
+    <button [translate]="'Back'" class="btn btn-raised btn-outline-primary" (click)="goBack()"></button>
+ </div>
+
+</ng-template>
+
+

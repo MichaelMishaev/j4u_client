@@ -1,0 +1,15 @@
+<div *ngIf="loading; else uploader" class="spinner-border">
+</div>
+
+<ng-template #uploader id="uploader">
+  <label [for]="id" class="custom-file-upload" [translate]="'Select a file'">
+      <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+          <div class="fonticon-wrap">
+                <i *ngIf="uploaded" class="ft-check"></i>
+              <i *ngIf="!uploaded" class="ft-upload"></i>
+
+          </div>
+      </div> 
+  </label>
+<input [id]="id" (change)="fileChange($event)" type="file" accept=".xlsx,.xls,image/*,.doc, .docx,.txt,.pdf"/>
+</ng-template>

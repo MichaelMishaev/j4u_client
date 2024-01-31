@@ -1,0 +1,20 @@
+<div class="form-body">
+  <h4 class="form-section" ><i class="ft-user" [translate]="'Select candidate'"></i></h4>
+  <div class="row">
+    <app-candidate-auto-complete [usersInsteadOfCandidates]="true" (onCandidateSelected)="selectCandidate($event)" [disabled]="isSendToAll" class="candidate-auto-complete"></app-candidate-auto-complete>
+ 
+    <div class="padding-5" >
+        <label [translate]="'Send to all'"></label>
+        <input type="checkbox" (change)="sendToAllChecked($event)" aria-label="Checkbox" [checked]="isSendToAll"
+        (change)="isSendToAll = !isSendToAll">
+    </div>
+    <div class="input-group padding-5">
+      <textarea rows="5"  [(ngModel)]="messageTxt" class="form-control"></textarea>
+    </div>
+    <div class="flex-center full-width">
+      <button [disabled]="!messageTxt || (!isSendToAll && !selectedCandidateId)" [translate]="'Send'" class="btn btn-raised btn-primary" (click)="sendMessage()">
+      </button>
+    </div>
+   
+  </div>
+</div>

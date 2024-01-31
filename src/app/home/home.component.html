@@ -1,0 +1,119 @@
+
+<section id="user-profile">
+  <div class="row">
+    <div class="col-12">
+      <!-- <button (click)="toggleChat()" style="margin-left: 100%;" class="btn-info"> -->
+        <button (click)="toggleChat()"  type="button" class="btn-info round " style="margin-left: 100%;">
+        {{ isMinimized ? 'Maximize' : 'Minimize' }}
+      </button>
+      <div class="card profile-with-cover"  >
+        <div class="card-img-top img-fluid bg-cover height-200" *ngIf="!isMinimized">
+          <div class="chat-application">
+              <div class="chats">
+                  <div class="chat chat-left" >
+                      <div class="chat-avatar">
+                        <a class="avatar messages-avatar" data-toggle="tooltip" data-placement="right" title="" data-original-title="">
+                          <img src="assets/img/portrait/small/avatar-s-1.png" class="width-50" alt="avatar" />
+                        </a>
+                      </div>
+                      
+                    
+                      <div class="chat-body">
+                        <div class="chat-content" *ngFor="let homeMessage of homeMessages">
+                          <p style="font-size: 11px">  {{ homeMessage.Message }}</p>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+          </div>
+        </div>
+        <div class="media profil-cover-details row">
+          <div class="col-5 user-name">
+            <div class="align-self-start halfway-fab pl-3 pchatt-2">
+              <div class="text-left">
+              <h3 class="card-title white"></h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="align-self-center halfway-fab text-center">
+              <a class="profile-image">
+                <img src="assets/img/logo.png"
+                  class="rounded-circle img-border gradient-summer width-100" alt="Card image">
+              </a>
+             
+            </div>
+          </div>
+          <div class="col-5">
+          </div>
+        </div>
+   
+        <div class="profile-section">
+          <div class="row">
+            <div class="col-lg-5 col-md-5 ">
+              <ul class="profile-menu no-list-style">
+                <li>
+                  <a [translate]="'Home'" (click)="showPage('home')"
+                    [ngClass]="currentPage === 'home' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'"></a>
+                </li>
+                <li style="display: flex;">
+                  <a [translate]="'Incorrect report'" (click)="showPage('incorrectReport')"
+                    [ngClass]="currentPage === 'incorrectReport' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">
+                  </a>
+                  <span class="incorrect-badge badge bg-warning float-right">{{incorrectReportData.length}}
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-2 col-md-2 text-center">
+              <span class="font-medium-2 text-uppercase">{{currentUser?.name}}</span>
+            </div>
+            <div class="col-lg-5 col-md-5">
+              <ul class="profile-menu no-list-style">
+                <li>
+                  <a [translate]="'Updates'" (click)="showPage('updates')"
+                    [ngClass]="currentPage === 'updates' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">Updates</a>
+                </li>
+                <li >
+                  <!-- <a [translate]="'Chat'" (click)="showPage('chat')"
+                    [ngClass]="currentPage === 'chat' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'"></a> -->
+                </li>
+               
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Basic User Details Ends-->
+
+<!--CoordinatorsTable section starts-->
+<section *ngIf="currentPage === 'home'" id="home">
+  <div class="row" style="margin-bottom: 5px">
+    <div class="col-12">
+      <app-summary [data]="jobCandidateByUser"></app-summary>
+    </div>
+  </div>
+</section>
+<!--CoordinatorsTable section ends-->
+
+<!--User GeneralReport section starts-->
+<section *ngIf="currentPage === 'incorrectReport'">
+  <app-incorrect-report [data]="incorrectReportData"></app-incorrect-report>
+</section>
+<!--User GeneralReport section ends-->
+
+<!--User's friend section starts-->
+<section id="chat" *ngIf="currentPage === 'chat'">
+  <app-user-chat></app-user-chat>
+</section>
+<!--User's friend section starts-->
+
+<!--User's uploaded FindJobCandidate section starts-->
+<section id="updates" *ngIf="currentPage === 'updates'">
+  <app-updates></app-updates>
+</section>
+<!--User's uploaded FindJobCandidate section starts-->
+<!--User Profile Starts-->

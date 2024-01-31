@@ -1,0 +1,33 @@
+.incorrect-badge {
+    margin-left: 2px;
+    margin-right: 2px;
+    align-self: center;
+}
+.card-img-top{
+    overflow-y: scroll;
+}
+@media(max-width:540px) {
+    .messages-avatar{
+        display: none;
+    }
+    .chat-body {
+        margin-left: 0 !important;
+        margin-right: 10px !important;
+    }
+    .user-name{
+        flex: 0 0 33%;
+    }
+
+    .minimize-button {
+        background-color: #ccc;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 0 5px;
+      }
+      
+      /* Style the minimized chat */
+      .minimized {
+        display: none;
+      }
+}

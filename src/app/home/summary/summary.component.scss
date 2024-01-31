@@ -1,0 +1,23 @@
+.explenation{
+    font-size: 0.8rem;
+    padding: 1px;
+    
+}
+.summary-container{
+    display: flex
+}
+.personal-board{
+    padding-left: 0;
+}
+
+
+@media(max-width: 768px) {
+    .summary-container{
+        flex-direction: column;
+    }
+  }
+
+  .chat-content[dir="rtl"] {
+    text-align: right;
+  }
+  

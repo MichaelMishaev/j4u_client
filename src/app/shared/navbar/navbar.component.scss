@@ -1,0 +1,24 @@
+.socials{
+    img{
+        width: 30px;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+}
+.contacts{
+    align-self: center;
+    span{
+        font-weight: bold;
+        font-size: 16px;
+        margin-right: 3px;
+        margin-left: 3px;
+        @media(max-width:540px) {
+          font-size: 13px;
+        }
+    }
+  }
+
+  .notification-unread {
+    color: red;
+}

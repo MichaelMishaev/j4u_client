@@ -1,0 +1,15 @@
+.card-header{
+    display: flex;
+    justify-content: space-between;
+}
+.add-candidate-modal{
+    h3{
+        margin: 10px;
+    }
+    .addCandidateForm{
+        padding: 10px;
+        input{
+            margin-bottom: 10px;
+        }
+    }
+}

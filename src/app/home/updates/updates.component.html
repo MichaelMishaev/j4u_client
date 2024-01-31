@@ -1,0 +1,40 @@
+<h2 class="text-center py-4">Company Timeline</h2>
+<!--Vertical Timeline Starts-->
+<section id="vertical-timeline-center" class="timeline-center timeline-wrapper col-sm-10 col-12 offset-sm-1">
+  
+  
+  <div *ngFor="let t of updates">
+    <ul class="timeline">
+      <li class="timeline-line mt-4"></li>
+        <li class="timeline-group">
+        <h5><span class="badge badge-primary cursor-default">{{t.CreatedAt | date:'short'}}</span></h5>
+        </li>
+    </ul>
+    <ul class="timeline">
+      <li class="timeline-line"></li>
+      <li class="timeline-item" style="width: 100%">
+        <div class="timeline-card card shadow-z-1">
+          <div class="card-header" >
+            <p class="candidate-name" [translate]="'Candidate'">
+            </p>
+            <span>{{t.CandidateName}}</span>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+            <h4 class="card-title mb-0">{{t.StatusDescription}}</h4>
+              <hr class="mt-0 mb-2">
+              <p class="m-0" *ngIf="t.InternalRemarks !== 'null'">{{ t.InternalRemarks }}</p>
+
+
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  
+  
+  </div>
+
+
+
+</section>

@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">
+        <h3>{{job.Title}}</h3>
+        <i class="ft-x" (click)="activeModal.close('success')"></i>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <ng-container *ngIf="showCompanyDescription && job.CompanyDescription">
+      <h4 [translate]="'Company details'"></h4>
+      <div >{{job.CompanyDescription}}</div>
+    </ng-container>
+
+    <br>
+    <ng-container *ngIf="job.Description">
+        <h4 [translate]="'Job details'"></h4>
+        <div [innerHTML]="job.Description"></div>
+    </ng-container>
+
+    <br>
+    <ng-container *ngIf="job.AgentDescription">
+        <h4 [translate]="'Agent remarks'"></h4>
+        <div >{{job.AgentDescription}}</div>
+    </ng-container>
+   
+  </div>
+
+  <div class="card-footer">
+    <button class="btn btn-raised btn-primary" (click)="activeModal.close('success')" [translate]="'Close'"></button>
+    <a [translate]="'Add'" id="add-job" href="javascript:void(0)" (click)="onAddCandidateClicked.emit($event)" class="btn btn-raised gradient-purple-bliss white"></a>
+  </div>
+</div>

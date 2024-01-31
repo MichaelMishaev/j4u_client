@@ -1,0 +1,52 @@
+
+<div class="card">
+    <div class="card-header">
+    <h4 class="card-title" [translate]="'Your candidates'"></h4>
+    <div class="col-lg-1">
+      <button id="btnStartTour" [translate]="'tour'" class="btn btn-primary btn-raised"
+       (click)="startTour()"></button>
+  </div>
+    </div>
+    <div class="card-content">
+      <div class="card-body">
+        <div class="table-responsive">
+            <ng2-smart-table (create)="onAddSelect(dialog)" (edit)="onAddSelect(dialog, $event)" *ngIf="renderTable" [settings]="settings" [source]="source"
+            (createConfirm)="onCreateConfirm($event)" (editConfirm)="onSaveConfirm($event)">
+            </ng2-smart-table>
+                    </div>
+      </div>
+    </div>
+  </div>
+
+ <ng-template #dialog>
+    <i class="ft-x" (click)="dialogService.dismissAll()"></i>
+    <div class="row" class="add-candidate-modal" >
+        <h3 [translate]="'Add candidate'"></h3>
+      <form class="addCandidateForm" [formGroup]="addCandidateForm" (ngSubmit)="onCreateConfirm($event)">
+        <input type="text" formControlName="FirstName"  
+            [placeholder]="'FirstName' | translate" class="form-control"/>
+        <input type="text" formControlName="LastName"  
+        [placeholder]="'LastName' | translate" class="form-control"/>
+        <input type="text" formControlName="City"  
+        [placeholder]="'City' | translate" class="form-control"/>
+        <input type="text" formControlName="PhoneNumber"  
+        [placeholder]="'PhoneNumber' | translate" class="form-control"/>
+        <input type="text" formControlName="Email"  
+        [placeholder]="'Email' | translate" class="form-control"/>
+        <ng-container *ngIf="insertedCandidateId" >
+            <div [translate]="'Upload cv'"></div>
+            <upload-cv (updateResult)="onCvUploaded($event)" class="upload-cv" [id]="insertedCandidateId"></upload-cv>
+        </ng-container>
+        <!-- <button type="submit" class="btn btn-raised btn-primary px-4" 
+        (click)="data ? onUpdateConfirm($event) : onCreateConfirm($event)" 
+        [translate]="'Add'"> -->
+        <ng-container *ngIf="data">
+          <button type="button" class="btn btn-raised btn-primary px-4" (click)="onUpdateConfirm($event)" [translate]="'Update'"></button>
+        </ng-container>
+        <ng-container *ngIf="!data">
+          <button type="submit" class="btn btn-raised btn-primary px-4" [translate]="'Add'"></button>
+        </ng-container>
+      </form>
+    </div>
+ </ng-template>
+

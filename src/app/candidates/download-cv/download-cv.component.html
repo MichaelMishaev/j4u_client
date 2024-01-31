@@ -1,0 +1,9 @@
+<div [ngClass]="{ 'red': rowData && !rowData.HasCV }"
+     style="cursor:pointer" title="{{'Download'}}" (click)="downloadCv($event)" >
+     <div class="col-md-4 col-sm-6 col-12 fonticon-container" 
+     style="margin-bottom: -10px;">
+        <div class="fonticon-wrap">
+            <i class="ft-download"></i>
+        </div>
+    </div>
+</div>

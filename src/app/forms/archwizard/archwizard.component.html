@@ -1,0 +1,182 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="content-header">
+            {{desiredJob.Title}}
+        </div>
+    </div>
+
+</div>
+<section id="ngx">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <aw-wizard #wizard navBarLayout="large-empty-symbols">
+                    <aw-wizard-step [stepTitle]="'Job questions'"
+                        [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+                        <form [formGroup]="jobQuestions">
+                            <div *ngFor="let question of jobsQuestionsArr; let i = index">
+
+                                <label>{{question}}</label>
+
+                                <div class="input-group">
+                                    <input type="text" formControlName="{{i}}" placeholder="{{'Answer' | translate}}"
+                                        class="form-control" />
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="form-group text-center">
+                                <button type="button" uiSref="work" class="btn btn-info btn-raised"
+                                    [disabled]="!jobQuestions.valid" awNextStep>
+                                    Next
+                                    <span style="margin-left:10px;">
+                                        <i class="ft-chevron-right"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </aw-wizard-step>
+                    <aw-wizard-step [stepTitle]="'General details'"
+                        [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+
+                        <form [formGroup]="candidateDetails" class="editForm" novalidate>
+                            <h4 class="head text-center">Please tell us about yourself.</h4>
+                            <br />
+                            <div class="row">
+                                <div class='col-12 col-sm-6'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="FirstName"
+                                            [translate]="'First name'"></label>
+                                        <input class="form-control input-md" formControlName="FirstName" required
+                                            id="FirstName" name="FirstName" type="text">
+                                        <small class="form-text text-muted danger"
+                                            [translate]="'This field is required!'"
+                                            *ngIf="!candidateDetails.get('FirstName').valid && (candidateDetails.get('FirstName').dirty || candidateDetails.get('FirstName').touched)"></small>
+                                    </div>
+                                </div>
+                                <div class='col-12 col-sm-6'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="LastName"
+                                            [translate]="'Last name'"></label>
+                                        <input class="form-control input-md" formControlName="LastName" required
+                                            id="LastName" name="LastName" type="text">
+                                        <small class="form-text text-muted danger"
+                                            [translate]="'This field is required!'"
+                                            *ngIf="!candidateDetails.get('LastName').valid && (candidateDetails.get('LastName').dirty || candidateDetails.get('LastName').touched)"></small>
+                                    </div>
+                                </div>
+                                <div class='col-12'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="PhoneNumber"
+                                            [translate]="'PhoneNumber'"></label>
+                                        <input class="form-control input-md" formControlName="PhoneNumber" required
+                                            id="PhoneNumber" name="PhoneNumber" type="text">
+                                        <small class="form-text text-muted danger"
+                                            [translate]="'This field is required!'"
+                                            *ngIf="!candidateDetails.get('PhoneNumber').valid && (candidateDetails.get('PhoneNumber').dirty || candidateDetails.get('PhoneNumber').touched)"></small>
+                                    </div>
+                                </div>
+                                <div class='col-12'>
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="City" [translate]="'City'"></label>
+                                            <input class="form-control input-md" formControlName="City" required id="City"
+                                                name="City" type="text">
+                                            <small class="form-text text-muted danger" [translate]="'This field is required!'"
+                                                *ngIf="!candidateDetails.get('City').valid && (candidateDetails.get('City').dirty || candidateDetails.get('City').touched)"></small>
+                                        </div>
+                                    </div>
+                            <div class='col-12'>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="Email" [translate]="'Email'"></label>
+                                    <input class="form-control input-md" formControlName="Email" required id="Email"
+                                        name="Email" type="text">
+                                    <small class="form-text text-muted danger" [translate]="'This field is required!'"
+                                        *ngIf="!candidateDetails.get('Email').valid && (candidateDetails.get('Email').dirty || candidateDetails.get('Email').touched)"></small>
+                                </div>
+                            </div>
+                           
+                            <div class='col-12'>
+                                    <div class="input-group">
+                                            <label style="margin-right: 10px;margin-top: 7px;"
+                                                 class="form-control-label" for="CVDueDate"
+                                            [translate]="'CV due date'"></label>
+                                            <input (click)="datePicker.toggle()"
+                                              class="form-control"
+                                              name="CVDueDate"
+                                              formControlName="CVDueDate"
+                                              ngbDatepicker
+                                              #datePicker="ngbDatepicker">
+                                              <div class="input-group-append">
+                                                <div class="input-group-text" (click)="datePicker.toggle()" >
+                                                  <i class="fa fa-calendar"></i>
+                                                </div>
+                                              </div>
+                                          </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="country" [translate]="'Country'"></label>
+
+                                        <ng-template #rt let-r="result" let-t="term">
+
+                                            <img src="https://www.countryflags.io/{{r.code}}/flat/24.png" width="16">
+                                            {{ r.name}}
+                                        </ng-template>
+                                        <div class="form-group">
+                                            <input id="country" formControlName="Country" type="text"
+                                                class="form-control mb-3" [ngbTypeahead]="searchFlags"
+                                                [resultTemplate]="rt" [inputFormatter]="formatter1"
+                                                placeholder="Search" />
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        </form>
+                        <div class="form-group text-center">
+                            <button uiSref="personal" type="button" class="btn btn-raised btn-secondary mr-1" awPreviousStep>
+                                        <span style="margin-right:10px;">
+                                            <i class="ft-chevron-left"></i>
+                                        </span> Previous</button>
+                            <button (click)="applyCandidate()" type="button" uiSref="work"
+                                class="btn btn-info btn-raised" [disabled]="!candidateDetails.valid" awNextStep>
+                                next
+                                <span style="margin-left:10px;">
+                                    <i class="ft-chevron-right"></i>
+                                </span>
+                            </button>
+                        </div>
+
+
+                    </aw-wizard-step>
+                    <aw-wizard-step [stepTitle]="'CV upload'">
+                        <div class='col-12 candidate-details'>
+                                <div class="form-group">
+                                    <label class="form-control-label upload-CV-label" for="uploadCv"
+                                        [translate]="'Upload CV'"></label>
+                                    <upload-cv *ngIf="insertedCandidateId" class="upload-cv"
+                                        (updateResult)="onCvUploaded($event)" [id]="insertedCandidateId"></upload-cv>
+                                </div>
+                            </div>
+                            <div class="form-group text-center">
+                                    <button uiSref="personal" type="button" class="btn btn-raised btn-secondary mr-1" awPreviousStep>
+                                                <span style="margin-right:10px;">
+                                                    <i class="ft-chevron-left"></i>
+                                                </span> Previous</button>
+                                    <button (click)="finishQuickApply()" type="button" uiSref="work"
+                                        class="btn btn-info btn-raised" [disabled]="!cvUploaded" awNextStep>
+                                        Apply
+                                        <span style="margin-left:10px;">
+                                            <i class="ft-chevron-right"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                    </aw-wizard-step>
+
+                </aw-wizard>
+
+
+            </div>
+        </div>
+    </div>
+</section>
