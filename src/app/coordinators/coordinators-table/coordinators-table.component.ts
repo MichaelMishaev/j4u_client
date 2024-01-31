@@ -47,6 +47,7 @@ export class CoordinatorsTableComponent implements OnInit {
   startWorkDate: any;
   questions: any;
   historyData: any;
+  knownCandidates:any;
   jobAcceptData : any;
   public statusOptions = [];
   constructor(private apiService: ApiService,private route: ActivatedRoute, 
@@ -68,9 +69,6 @@ export class CoordinatorsTableComponent implements OnInit {
 
 
   ngOnInit() {
-
-    console.log('asdasd')
-
     this.user = this.userService.getCurrentUser();
     this.isPageAllowed = this.user.userType > 1;
     if(this.user.userType === 3){
@@ -204,7 +202,8 @@ export class CoordinatorsTableComponent implements OnInit {
   }
   openIsKnownModal(knownDialog, candidateId){
     this.apiService.getKnownCandidateHistory(candidateId).subscribe(res=>{
-      
+      debugger;
+      this.knownCandidates = res;
       const modalRef = this.dialogService.open(knownDialog);
     })
   }
@@ -220,7 +219,6 @@ export class CoordinatorsTableComponent implements OnInit {
   }
 
   filterResWithParam(val:string){
-    debugger;
     this.searchInput = val;
     if(this.searchInput.length > 1){
       this.filteredTableData = this.tableData.filter(x=>x.ExternalJobId == this.searchInput 
@@ -253,7 +251,6 @@ export class CoordinatorsTableComponent implements OnInit {
   }
 
   isRelevantStatus(status){
-    debugger;
     var ee = this.translate.instant('Cooks');
     return status === this.translate.instant('New')  || status === this.translate.instant('Resume sent')
     || status === this.translate.instant('Missing details') || status === this.translate.instant('An interview was scheduled')

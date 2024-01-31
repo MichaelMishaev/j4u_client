@@ -31,15 +31,17 @@ export class CandidatesComponent implements OnInit {
       createButtonContent: '<i class="ft-save info font-medium-1 mr-2"></i>',
       cancelButtonContent: '<i class="ft-delete info font-medium-1 mr-2"></i>',
     },
-    edit: {
-      confirmSave: true,
-      editButtonContent: '<i class="ft-edit-2 info font-medium-1 mr-2"></i>',
-      saveButtonContent: '<i class="ft-save info font-medium-1 mr-2"></i>',
-      cancelButtonContent: '<i class="ft-delete info font-medium-1 mr-2"></i>',
-    },
+    // edit: {
+    //   confirmSave: true,
+    //   editButtonContent: '<i class="ft-edit-2 info font-medium-1 mr-2"></i>',
+    //   saveButtonContent: '<i class="ft-save info font-medium-1 mr-2"></i>',
+    //   cancelButtonContent: '<i class="ft-delete info font-medium-1 mr-2"></i>',
+      
+    // },
     actions:{
       delete: false,
-      columnTitle: "Actions"
+      columnTitle: "פעולות",
+      edit: false
     },
 
     columns: {
@@ -143,6 +145,7 @@ export class CandidatesComponent implements OnInit {
     }) 
    }
    onAddSelect(dialog,obj) { 
+    debugger;
     const data = obj ? obj.data : {}
     this.addCandidateForm  = new FormGroup({
   
@@ -164,6 +167,7 @@ export class CandidatesComponent implements OnInit {
     }
   
     onCreateConfirm(e){
+      debugger;
       if(!this.isFieldsValid()){
         return
       }
@@ -182,6 +186,18 @@ export class CandidatesComponent implements OnInit {
         }
       })
   }
+
+  onUpdateConfirm(e){
+    debugger
+    if(!this.isFieldsValid()){
+      return
+    }
+    const data = this.addCandidateForm.value
+    data.PhoneNumber = data.PhoneNumber.replace(/-/gi,'');
+
+  console.warn('yoooooooooooooooo')
+}
+  
   onCvUploaded(){
     this.toastr.success(this.translate.instant("Candidate Added Succesfully"))
     this.dialogService.dismissAll()

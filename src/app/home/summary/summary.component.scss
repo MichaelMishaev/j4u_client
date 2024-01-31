@@ -16,4 +16,8 @@
         flex-direction: column;
     }
   }
+
+  .chat-content[dir="rtl"] {
+    text-align: right;
+  }
   

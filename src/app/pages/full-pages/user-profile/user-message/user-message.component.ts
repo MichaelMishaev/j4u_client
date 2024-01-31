@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'app/shared/api/api.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-message',
@@ -12,12 +13,11 @@ export class UserMessageComponent implements OnInit {
   messageTxt: string;
   selectedCandidateId: any;
 
-  constructor(private apiService: ApiService,private toastrService: ToastrService) { }
+  constructor(private apiService: ApiService,private toastrService: ToastrService, public activeModal: NgbActiveModal) { }
   ngOnInit() {
    
   }
   selectCandidate(candidate){
-    debugger;
     this.selectedCandidateId = candidate.id;
   }
   sendToAllChecked(e){
@@ -26,16 +26,15 @@ export class UserMessageComponent implements OnInit {
     }
   }
   sendMessage(){
-    debugger;
     if(this.isSendToAll){
       this.apiService.addGeneralMessage({message:this.messageTxt}).subscribe(res=>{
         this.toastrService.success('Sent successfully');
-        //todo close
+        this.activeModal.close('Close click');// Close modal that opend in UserProfilePageComponent
       })
     } else{
       this.apiService.addNotifications({message:this.messageTxt, userId:this.selectedCandidateId}).subscribe(res=>{
         this.toastrService.success('Sent successfully');
-        //todo close
+        this.activeModal.close('Close click'); // Close modal that opend in UserProfilePageComponent
       })
     }
   }

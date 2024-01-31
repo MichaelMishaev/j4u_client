@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'app/shared/user/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddJobComponent } from 'app/jobs/add-job/add-job.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal,NgbActiveModal ,ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormActionsComponent } from 'app/forms/layouts/form-actions/form-actions.component';
 import { UserMessageComponent } from './user-message/user-message.component';
 import { ApiService } from 'app/shared/api/api.service';
@@ -15,13 +15,17 @@ import{CoordinatorsTableComponent} from 'app/coordinators/coordinators-table/coo
     styleUrls: ['./user-profile-page.component.scss']
 })
 
+
 export class UserProfilePageComponent implements OnInit {
   @ViewChild(CoordinatorsTableComponent, { static: false }) coordinatorsTable: CoordinatorsTableComponent;
+
+
+  modalReference: any;
+  closeResult: string;
 
   handleSearchEvent(searchTerm: string) {
     console.log('Search term from child component:', searchTerm);
     let searchValue= this.extractNumberAfterWord(searchTerm,'למשרה')
-    debugger;
     if (searchValue === null || searchValue === undefined || searchValue.trim() === '') return; //dont go to child if no search condition
 
     this.coordinatorsTable.performSearch(searchValue);
@@ -33,7 +37,7 @@ export class UserProfilePageComponent implements OnInit {
   //   this.onMessageClick('sds')
   // }
     currentUser: any;
-    constructor(private userService: UserService,private modalService: NgbModal,
+    constructor(private userService: UserService,private modalService: NgbModal ,
         private route: ActivatedRoute, private router:Router, private apiService: ApiService,private toastrService: ToastrService){
 
     }
@@ -77,7 +81,6 @@ export class UserProfilePageComponent implements OnInit {
   }
 
    extractNumberAfterWord(inputStr: string, word: string): string | null {
-    debugger;
     const regex = new RegExp(`${word}\\s+(\\d+)`, 'u');  // 'u' flag for Unicode cos the brackets
     const match = inputStr.match(regex);
     return match ? match[1] : null;
@@ -96,13 +99,25 @@ export class UserProfilePageComponent implements OnInit {
     }
 
     openAddJob(job = {}){
-        const modal = this.modalService.open(AddJobComponent, {
+        this.modalReference= this.modalService.open(AddJobComponent, {
             backdrop : 'static',
             keyboard : false
           })
-        modal.componentInstance.job = job
+          this.modalReference.componentInstance.job = job
+          debugger;
     }
     openAddMessage(){
-        const modal = this.modalService.open(UserMessageComponent)
-    }
+      
+        this.modalReference= this.modalService.open(UserMessageComponent);
+        this.modalReference.result.then((result) => {
+          console.log(`Closed with: ${result}`);
+          // Handle the result if needed
+        }, (reason) => {
+          // Handle the dismissal reason if needed
+        });
+  }
+
+
+       
+    
 }

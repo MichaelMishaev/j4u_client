@@ -15,7 +15,6 @@ import { UserService } from 'app/shared/user/user.service';
 export class JobsCardsComponent implements OnInit {
 
   @Input() filteredJobs: any[]
-  debugger;
   @Input() isLoggedIn = false;
   @Output() addJobLoggedOut = new EventEmitter()
   job: any;
@@ -51,6 +50,10 @@ export class JobsCardsComponent implements OnInit {
     })
 
   }
+  setDefaultImage(event: any) {
+    event.target.src = 'assets/img/photos/default.png'; // Path to your default image
+  }
+
   //todo move somewhere!!!
   openAddJobModal(e,job:any = {}){
     e.stopPropagation();

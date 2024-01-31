@@ -6,6 +6,7 @@ import { UserService } from 'app/shared/user/user.service';
 import { ReportsTableLinkComponent } from '../general-report-table/reports-table-link/reports-table-link.component';
 import { TranslateService } from '@ngx-translate/core';
 
+
 @Component({
   selector: 'completed-report-table',
   templateUrl: './completed-report-table.component.html',
@@ -81,18 +82,19 @@ export class CompletedReportTableComponent implements OnInit {
         title: 'תאריך עדכון',
         type: 'date',
         filter: false,
-        valuePrepareFunction: (date) => {
-          if (date) {
-          return new DatePipe('he-IL').transform(date, 'dd/MM/yyyy hh:mm');
-          }
-          return null;
-          },
+        // valuePrepareFunction: (date) => {
+        //   if (date) {
+        //   return new DatePipe('he-IL').transform(date, 'dd/MM/yyyy hh:mm');
+        //   }
+        //   return null;
+        //   },
       },
       StartWorkDate: {
         title: 'תאריך תחילת עבודה',
         type: 'date',
         filter: false,
         valuePrepareFunction: (date) => {
+          debugger;
           if (date) {
           return new DatePipe('he-IL').transform(date, 'dd/MM/yyyy');
           }

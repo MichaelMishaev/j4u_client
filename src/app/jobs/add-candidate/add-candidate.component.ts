@@ -67,8 +67,9 @@ submitAddCandidate(){
   this.apiService.addJobCandidate(model).subscribe(() =>{
     
       this.toastr.success(this.translate.instant('Candidate submitted'))
-    
+    debugger;
     this.addCandidateCompleted.emit("done");
+    this.activeModal.close();
   }, (err)=>{
     if(err.error && err.error.code === 'ER_DUP_ENTRY' ){
         this.toastr.error(this.translate.instant('Cant add the same candidate twice to the same job'))

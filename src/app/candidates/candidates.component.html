@@ -37,7 +37,15 @@
             <div [translate]="'Upload cv'"></div>
             <upload-cv (updateResult)="onCvUploaded($event)" class="upload-cv" [id]="insertedCandidateId"></upload-cv>
         </ng-container>
-        <button type="submit" class="btn btn-raised btn-primary px-4" [translate]="'Add'"></button>
+        <!-- <button type="submit" class="btn btn-raised btn-primary px-4" 
+        (click)="data ? onUpdateConfirm($event) : onCreateConfirm($event)" 
+        [translate]="'Add'"> -->
+        <ng-container *ngIf="data">
+          <button type="button" class="btn btn-raised btn-primary px-4" (click)="onUpdateConfirm($event)" [translate]="'Update'"></button>
+        </ng-container>
+        <ng-container *ngIf="!data">
+          <button type="submit" class="btn btn-raised btn-primary px-4" [translate]="'Add'"></button>
+        </ng-container>
       </form>
     </div>
  </ng-template>

@@ -2,8 +2,12 @@
 <section id="user-profile">
   <div class="row">
     <div class="col-12">
-      <div class="card profile-with-cover">
-        <div class="card-img-top img-fluid bg-cover height-200">
+      <!-- <button (click)="toggleChat()" style="margin-left: 100%;" class="btn-info"> -->
+        <button (click)="toggleChat()"  type="button" class="btn-info round " style="margin-left: 100%;">
+        {{ isMinimized ? 'Maximize' : 'Minimize' }}
+      </button>
+      <div class="card profile-with-cover"  >
+        <div class="card-img-top img-fluid bg-cover height-200" *ngIf="!isMinimized">
           <div class="chat-application">
               <div class="chats">
                   <div class="chat chat-left" >
@@ -13,10 +17,8 @@
                         </a>
                       </div>
                       
-                    <button (click)="toggleChat()">
-                      {{ isMinimized ? 'Maximize' : 'Minimize' }}
-                    </button>
-                      <div class="chat-body" *ngIf="!isMinimized">
+                    
+                      <div class="chat-body">
                         <div class="chat-content" *ngFor="let homeMessage of homeMessages">
                           <p style="font-size: 11px">  {{ homeMessage.Message }}</p>
                         </div>
@@ -69,7 +71,7 @@
             <div class="col-lg-5 col-md-5">
               <ul class="profile-menu no-list-style">
                 <li>
-                  <a (click)="showPage('updates')"
+                  <a [translate]="'Updates'" (click)="showPage('updates')"
                     [ngClass]="currentPage === 'updates' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">Updates</a>
                 </li>
                 <li >

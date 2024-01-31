@@ -1,5 +1,10 @@
 import { RouteInfo } from './sidebar.metadata';
 
+
+export const ADMIN_ROUTES: RouteInfo[] = [
+    { path: '/pages/profile', title: 'home', icon: 'ft-file-text', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: '/jobs', title: 'Jobs', icon: 'ft-file-text', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+];
 //Sidebar menu Routes and data
 export const ROUTES: RouteInfo[] = [
 

@@ -205,7 +205,6 @@ export class AddJobComponent implements OnInit {
 
     job.Locations = typeof this.newJobFormGroup.get('City').value === 'string'
                         ? this.newJobFormGroup.get('City').value : this.newJobFormGroup.get('City').value.Name;
-
     job.JobType = typeof this.newJobFormGroup.get('JobType').value === 'string'
     ? this.newJobFormGroup.get('JobType').value
     : (this.newJobFormGroup.get('JobType').value as any).map(x => x.Name).join(",");
@@ -234,7 +233,13 @@ export class AddJobComponent implements OnInit {
       }
 
     },(err)=>{
-      this.toastrService.error('job didnt save due to error or it allready exist');
+      debugger;
+      if(err.status == 400){
+        this.toastrService.error(err.error);
+      }
+      else{
+      this.toastrService.error('job didnt save due to error or it allready exist: ' + err);
+    }
 
     })
   }

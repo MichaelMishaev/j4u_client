@@ -9,7 +9,7 @@
         (change)="isSendToAll = !isSendToAll">
     </div>
     <div class="input-group padding-5">
-      <textarea rows="5" [(ngModel)]="messageTxt" class="form-control"></textarea>
+      <textarea rows="5"  [(ngModel)]="messageTxt" class="form-control"></textarea>
     </div>
     <div class="flex-center full-width">
       <button [disabled]="!messageTxt || (!isSendToAll && !selectedCandidateId)" [translate]="'Send'" class="btn btn-raised btn-primary" (click)="sendMessage()">

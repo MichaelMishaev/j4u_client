@@ -68,7 +68,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     })
     // this.unreadNotificationsCount = this.notifications.filter(notification => notification.IsRead === 0).length || 0;
-    //     debugger;
     //     console.warn('num if unreadd: ' + this.unreadNotificationsCount.length)
   }
 
@@ -83,6 +82,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    debugger;
     if(this.config.layout.dir) {
       setTimeout(() => {
         const dir = this.config.layout.dir;
@@ -115,14 +115,12 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   readMessage(notification: any){
     this.apiService.readNotification(notification).subscribe((res:any[])=>{
      this.apiService.getNotifications().subscribe((res:any[])=>{
-      debugger;
       console.table({res})
         this.notifications = this.notifications.concat(res);
         this.unreadNotificationsCount = res.filter(notification => notification.IsRead === 0);
       
     })
     })
-    // debugger;
     // this.getReadNotificationsCount();
     //this.getReadNotificationsCount();
 
@@ -141,6 +139,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   toggleSidebar() {
+    debugger;
     const appSidebar = document.getElementsByClassName("app-sidebar")[0];
     if (appSidebar.classList.contains("hide-sidebar")) {
       this.toggleHideSidebar.emit(false);
@@ -149,6 +148,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   logout(strategy){
+    debugger;
     this.auth.logout(strategy).subscribe((result: NbAuthResult) => {
 
       const redirect = result.getRedirect();
