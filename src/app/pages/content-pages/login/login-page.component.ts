@@ -4,7 +4,7 @@ import { ApiService } from 'app/shared/api/api.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NbSpinnerService } from '@nebular/theme';
 import * as AOS from 'aos';
-import { DeviceDetectorService } from 'ngx-device-detector';
+//import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
     selector: 'app-login-page',
@@ -18,11 +18,12 @@ export class LoginPageComponent implements OnInit {
   isContactFormSent = false;
   isMobile = false;
   @ViewChild('loginModal', {static: false}) loginModal: TemplateRef<any>;
-  constructor(private spinner$: NbSpinnerService,private api: ApiService, private deviceService: DeviceDetectorService,
+  constructor(private spinner$: NbSpinnerService,private api: ApiService,// private deviceService: DeviceDetectorService,
               private formBuilder: FormBuilder, private dialogService: NgbModal) { }
 
   ngOnInit() {
-    this.isMobile = this.deviceService.isMobile();
+    //TODO: mishaev, not supported anymore FUCK!
+ //   this.isMobile = this.deviceService.isMobile();
 
     AOS.init();
     this.spinner$.load();
