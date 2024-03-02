@@ -94,7 +94,6 @@ export class CompletedReportTableComponent implements OnInit {
         type: 'date',
         filter: false,
         valuePrepareFunction: (date) => {
-          debugger;
           if (date) {
           return new DatePipe('he-IL').transform(date, 'dd/MM/yyyy');
           }

@@ -145,7 +145,6 @@ export class CandidatesComponent implements OnInit {
     }) 
    }
    onAddSelect(dialog,obj) { 
-    debugger;
     const data = obj ? obj.data : {}
     this.addCandidateForm  = new FormGroup({
   
@@ -167,7 +166,6 @@ export class CandidatesComponent implements OnInit {
     }
   
     onCreateConfirm(e){
-      debugger;
       if(!this.isFieldsValid()){
         return
       }

@@ -5,14 +5,14 @@
       <div class="card-group" style="flex-flow:row wrap">
         <div class="card" [ngClass]="isLoggedIn ? 'card-wrapper' : 'card-wrapper-wide'"
          *ngFor="let job of filteredJobs">
-          <div class="card-content" style="height:80%;  cursor: pointer;" (click)="openJobDetailsModal(job)">
+          <div class="card-content" style="height:80%;  cursor: pointer;"  (click)="openJobDetailsModal(job)">
             <img class="card-img-top img-fluid" src="assets/img/photos/{{job.Categories}}.png" alt="Card image cap" (error)="setDefaultImage($event)" />
             
             <div class="card-body" style="padding: 0.25rem !important; ">
             <h4 style="height:75px" class="card-title">{{job.Title}}
               <i style="margin-top:8px;color: #ffa100;" 
               *ngIf="job.IsImportant && job.IsImportant.data && job.IsImportant.data[0] === 1"
-               class="fa fa-fire fa-lg"></i> </h4>
+               class="fa fa-fire fa-lg" ></i> </h4>
             <div *ngIf="isLoggedIn">
                 <p class="card-text"> {{'Id' | translate}} : {{job.ID}}
                   <!-- <i style="margin-top:8px;color: #ffa100;" 

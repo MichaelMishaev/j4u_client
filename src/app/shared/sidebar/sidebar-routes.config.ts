@@ -19,6 +19,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/jobs', title: 'Jobs', icon: 'ft-file-text', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/candidates', title: 'Candidates', icon: 'ft-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/applied-candidates', title: 'Applied Candidates', icon: 'ft-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+     {path: '/learn-room', title: 'Learnning room', icon: 'ft-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+   
 /*
     { path: '/colorpalettes', title: 'Color Palette', icon: 'ft-droplet', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/inbox', title: 'Inbox', icon: 'ft-mail', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

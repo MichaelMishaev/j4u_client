@@ -82,7 +82,6 @@ export class LoginCardComponent {
         }
       // Assuming userService is already injected in the constructor
         const currentUser = this.userService.getCurrentUser();
-        debugger;
         this.userType = currentUser ? currentUser.userType : null;
         // Set redirect based on userType using a ternary operator
         const redirect = this.userType > 1 ? '/pages/profile'  :'/home' ;

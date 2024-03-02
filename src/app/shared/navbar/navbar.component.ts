@@ -139,7 +139,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   toggleSidebar() {
-    debugger;
     const appSidebar = document.getElementsByClassName("app-sidebar")[0];
     if (appSidebar.classList.contains("hide-sidebar")) {
       this.toggleHideSidebar.emit(false);
@@ -148,7 +147,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   logout(strategy){
-    debugger;
     this.auth.logout(strategy).subscribe((result: NbAuthResult) => {
 
       const redirect = result.getRedirect();

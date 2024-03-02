@@ -86,7 +86,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
 
    
 
-
+debugger;
     if (this.config.layout.sidebar.backgroundColor === 'white') {
       this.logoUrl = 'assets/img/logo-dark.png';
     }
@@ -103,7 +103,6 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.userType = currentUser ? currentUser.userType : null;
 
     this.config = this.configService.templateConf;
-debugger;
     this.menuItems =this.userType > 1? ADMIN_ROUTES :  ROUTES ;
 
     setTimeout(() => {

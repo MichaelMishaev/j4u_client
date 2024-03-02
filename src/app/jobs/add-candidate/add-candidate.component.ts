@@ -67,7 +67,6 @@ submitAddCandidate(){
   this.apiService.addJobCandidate(model).subscribe(() =>{
     
       this.toastr.success(this.translate.instant('Candidate submitted'))
-    debugger;
     this.addCandidateCompleted.emit("done");
     this.activeModal.close();
   }, (err)=>{

@@ -12,6 +12,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     SharedModule,
     AppliedCandidatesRoutingModule,
     Ng2SmartTableModule
-  ]
+  ],
+  entryComponents: []
 })
 export class AppliedCandidatesModule { }

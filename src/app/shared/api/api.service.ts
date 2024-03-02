@@ -410,7 +410,6 @@ export class ApiService {
     });
   }
   addJob(job){
-    debugger;
     return this.http.post(this.baseUrl + 'job',job,{
       headers: new HttpHeaders({
       //  'Content-Type':  'application/json',
